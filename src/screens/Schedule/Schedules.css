@@ -1,0 +1,163 @@
+.Schedules01{
+    position: absolute;
+    width: 376px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+    background: #308CE1;
+}
+
+.Schedules01 h1{
+    position: absolute;
+    width: 236px;
+    height: 61px;
+    left: 36px;
+    top: 93px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+    color: #FFFFFF;
+}
+
+.Schedules01 h2{
+    position: absolute;
+    width: 60px;
+    height: 51px;
+    left: 170px;
+    top: 88px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FFFFFF;
+
+}
+
+.Schedules01 h3{
+    position: absolute;
+    width: 908px;
+    height: 50px;
+    left: 411px;
+    top: 113px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.b1{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 288px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+    
+    
+}
+
+.b2{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 348px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+
+}
+
+.b3{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 409px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+}
+
+.b4{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 469px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+}
+
+.b5{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 529px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+}
+
+.b6{
+    position: absolute;
+    width: 260px;
+    height: 46px;
+    left: 90px;
+    top: 589px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border-color: #308CE1;
+
+}
+
+.b7{
+    position: absolute;
+    width: 233px;
+    height: 40px;
+    left: 1080px;
+    top: 125px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border: #308CE1;
+   
+}
