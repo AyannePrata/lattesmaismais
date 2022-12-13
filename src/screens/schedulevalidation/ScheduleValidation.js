@@ -5,7 +5,7 @@ export default class ScheduleValidation extends React.Component {
 
     render() {
         return(
-            <div className= "Schedules01">
+            <div className= "ScheduleValidation01">
                 <h1>Lattes</h1>
                 <h2>++</h2>
                 <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>
