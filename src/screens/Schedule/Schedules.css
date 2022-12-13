@@ -36,19 +36,6 @@
 
 }
 
-.Schedules01 h3{
-    position: absolute;
-    width: 908px;
-    height: 50px;
-    left: 411px;
-    top: 113px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
-}
 
 .b1{
     position: absolute;
@@ -150,14 +137,3 @@
 
 }
 
-.b7{
-    position: absolute;
-    width: 233px;
-    height: 40px;
-    left: 1080px;
-    top: 125px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border: #308CE1;
-   
-}
