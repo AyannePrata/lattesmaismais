@@ -12,11 +12,11 @@ export default class Schedules extends React.Component {
 
                 <button type="importresume" class="b1">Importar currículo</button>
                 <button type="schedulevalidation" class="b2">Agendar validação</button>
-                <button type="Schedule" class="b3">Agendamento</button>
+                <button type="Schedules" class="b3">Agendamentos</button>
                 <button type="versions" class="b4">Versões</button>
                 <button type="export" class="b5">Exportar</button>
                 <button type="goout" class="b6">Sair</button>
-                <button type="Schedules" class="b7">Agendamentos</button>
+                <button type="toschedule" class="b7">Agendar</button>
                 
 
 
