@@ -1,7 +1,7 @@
 import React from 'react';
-import './Schedules.css';
+import './ScheduleValidation.css';
 
-export default class Schedules extends React.Component {
+export default class ScheduleValidation extends React.Component {
 
     render() {
         return(

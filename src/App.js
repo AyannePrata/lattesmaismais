@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 
-import Schedules from './screens/schedules/Schedules';
+import ScheduleValidation from './screens/schedulevalidation/ScheduleValidation';
 
 export default class App extends React.Component {
   render() {
     return(
       <div>
-        <Schedules />
+        <ScheduleValidation />
       </div>
     )
   }
