@@ -161,3 +161,24 @@
     border: #308CE1;
    
 }
+
+.Principal {
+    display: flex;
+    flex-direction: column;
+}
+
+.ScheduleValidation01 {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+}
+
+.Fields {
+    width: 75%;
+    display: inline-block;
+    margin-right: 0vw;
+    margin-left: 10vw;
+    padding: 5vw 0vw 5vw 0vw;
+    text-align: center;
+    float: right;
+}
