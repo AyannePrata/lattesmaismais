@@ -4,8 +4,9 @@ import './ScheduleValidation.css';
 import FormGroup from "../../components/FormGroup/FormGroup";
 import LeftMenu from '../../components/Menu/LeftMenu';
 import SchedulingService from "../../services/SchedulingService";
+import { withRouter } from 'react-router';
 
-export default class ScheduleValidation extends React.Component {
+class ScheduleValidation extends React.Component {
 
     state = {
         version:"",
@@ -48,8 +49,11 @@ export default class ScheduleValidation extends React.Component {
         return(
             <div className= "Principal">
                 <div className="Fields">
-                    <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>
-                    <button onClick={this.post} type="toschedule" className="b7">Agendar</button>
+                    <div className='header'>
+                        <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>
+                        <button onClick={this.post} type="toschedule" className="b7">Agendar</button>
+                    </div>
+                    <div>
                     <FormGroup label='Versão ' htmlFor='lab01'>
                         <input className="form-control" type="text" id="lab01" placeholder='É atributo "único" no DB'
                         onChange={(e) => {this.setState({version: e.target.value})}}/>
@@ -67,16 +71,19 @@ export default class ScheduleValidation extends React.Component {
                         onChange={(e) => {this.setState({address: e.target.value})}}/>
                     </FormGroup>
                     <FormGroup label='Data ' htmlFor='lab05'>
-                        <input className="form-control noMargin" type="date" id="lab05"
+                        <input className="form-control" type="date" id="lab05"
                         onChange={(e) => {this.setState({date: e.target.value})}}/>
                     </FormGroup>
                     <FormGroup label='Horário ' htmlFor='lab06'>
                         <input className="form-control noMargin" type="time" id="lab06"
                         onChange={(e) => {this.setState({time: e.target.value})}}/>
                     </FormGroup>
+                    </div>
                 </div>
             </div>
         )
         
     }
 }
+
+export default withRouter(ScheduleValidation);

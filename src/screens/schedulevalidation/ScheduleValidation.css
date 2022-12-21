@@ -41,140 +41,30 @@
 }
 
 .ScheduleValidation01 h3{
-    position: absolute;
     width: 908px;
     height: 50px;
-    left: 411px;
-    top: 113px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
     color: #000000;
-}
-
-.b1{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 288px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-    
-    
-}
-
-.b2{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 348px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-
-}
-
-.b3{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 409px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-}
-
-.b4{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 469px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-}
-
-.b5{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 529px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-}
-
-.b6{
-    position: absolute;
-    width: 260px;
-    height: 46px;
-    left: 90px;
-    top: 589px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border-color: #308CE1;
-
+    margin-left: 24px;
 }
 
 .b7{
-    position: absolute;
     width: 233px;
     height: 40px;
-    left: 1080px;
-    top: 125px;
     color: #FFFFFF;
     background: #308CE1;
     border: #308CE1;
-   
+    margin: 0px 24px;
+    cursor: pointer;
 }
 
 .Principal {
     display: flex;
     flex-direction: column;
-}
-
-.ScheduleValidation01 {
-    width: 25%;
-    display: inline-block;
-    text-align: center;
 }
 
 .Fields {
@@ -184,5 +74,22 @@
     margin-left: 10vw;
     padding: 5vw 0vw 5vw 0vw;
     text-align: center;
-    float: right;
+}
+
+.Fields input {
+    background-color: #FFF;
+    width: 25%;
+    font-size: 18px;
+    padding: 6px;
+    box-sizing: border-box;
+    margin-top: 24px;
+    margin-left: 24px;
+}
+
+.header {
+    display: inline-block;
+    margin-right: 0vw;
+    margin-left: 10vw;
+    padding: 5vw 0vw 5vw 0vw;
+    justify-content: space-around;
 }

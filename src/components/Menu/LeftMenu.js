@@ -1,4 +1,5 @@
 import React from "react";
+import './LeftMenu.css';
 import { withRouter } from 'react-router-dom';
 
 class LeftMenu extends React.Component {
