@@ -1,79 +1,6 @@
-.Underline {
-    text-decoration: underline;
-}
-
-.ScheduleValidation01{
-    position: absolute;
-    width: 376px;
-    height: 1024px;
-    left: 0px;
-    top: 0px;
-    background: #308CE1;
-}
-
-.ScheduleValidation01 h1{
-    position: absolute;
-    width: 236px;
-    height: 61px;
-    left: 36px;
-    top: 93px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 58px;
-    color: #FFFFFF;
-}
-
-.ScheduleValidation01 h2{
-    position: absolute;
-    width: 60px;
-    height: 51px;
-    left: 220px;
-    top: 88px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 44px;
-    color: #FFFFFF;
-
-}
-
-.ScheduleValidation01 h3{
-    width: 908px;
-    height: 50px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
-    margin-left: 24px;
-}
-
-.b7{
-    width: 233px;
-    height: 40px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border: #308CE1;
-    margin: 0px 24px;
-    cursor: pointer;
-}
-
 .Principal {
     display: flex;
     flex-direction: column;
-}
-
-.Fields {
-    width: 75%;
-    display: inline-block;
-    margin-right: 0vw;
-    margin-left: 10vw;
-    padding: 5vw 0vw 5vw 0vw;
-    text-align: center;
 }
 
 .Fields input {
@@ -89,7 +16,5 @@
 .header {
     display: inline-block;
     margin-right: 0vw;
-    margin-left: 10vw;
-    padding: 5vw 0vw 5vw 0vw;
     justify-content: space-around;
 }

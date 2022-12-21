@@ -1,41 +1,6 @@
-.Schedules01{
-    position: absolute;
-    width: 376px;
-    height: 1024px;
-    left: 0px;
-    top: 0px;
-    background: #308CE1;
+.table {
+    text-align: center;
 }
-
-.Schedules01 h1{
-    position: absolute;
-    width: 236px;
-    height: 61px;
-    left: 36px;
-    top: 93px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 58px;
-    color: #FFFFFF;
-}
-
-.Schedules01 h2{
-    position: absolute;
-    width: 60px;
-    height: 51px;
-    left: 170px;
-    top: 88px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 44px;
-    color: #FFFFFF;
-
-}
-
 
 .b1{
     position: absolute;
