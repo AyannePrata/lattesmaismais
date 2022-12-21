@@ -1,7 +1,7 @@
 import React from 'react';
 import './Schedules.css';
 
-import SchedulingTable from "../../components/SchedulingTable";
+import SchedulingTable from "../../components/SchedulingTable/SchedulingTable";
 import SchedulingService from "../../services/SchedulingService";
 
 export default class Schedules extends React.Component {

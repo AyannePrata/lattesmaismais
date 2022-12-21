@@ -1,3 +1,7 @@
+.Underline {
+    text-decoration: underline;
+}
+
 .ScheduleValidation01{
     position: absolute;
     width: 376px;
@@ -25,7 +29,7 @@
     position: absolute;
     width: 60px;
     height: 51px;
-    left: 170px;
+    left: 220px;
     top: 88px;
     font-family: 'Inter';
     font-style: normal;
