@@ -1,11 +1,12 @@
 import React from "react";
+import './LeftMenu.css';
 import { withRouter } from 'react-router-dom';
 
 export default class LeftMenu extends React.Component {
     
     print = () => {
         console.log("ok");
-        //this.props.history.push("/scheduling");
+        this.props.history.push("/scheduling");
     }
 
     render() {

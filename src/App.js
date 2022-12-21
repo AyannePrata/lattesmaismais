@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
+import AppRoutes from './main/AppRoutes';
 
-import ScheduleValidation from './screens/schedulevalidation/ScheduleValidation';
-import Schedules from './screens/Schedule/Schedules';
 export default class App extends React.Component {
   render() {
     return(
       <div>
-        <ScheduleValidation />
+        <AppRoutes/>
       </div>
     )
   }
