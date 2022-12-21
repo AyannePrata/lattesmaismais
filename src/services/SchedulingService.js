@@ -14,8 +14,10 @@ export default class SchedulingService extends ApiService {
         return super.delete(`/${id}`);
     }
 
-    find(id) {
+    findById(id) {
         return this.get(`/${id}`);
     }
-    
+    findAll(){
+        return this.getAll();
+    }
 }

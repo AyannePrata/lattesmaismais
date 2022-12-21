@@ -26,6 +26,10 @@ export default class ApiService {
         return httpClient.get(url);
     }
 
+    getAll() {
+        return httpClient.get(this.endpoint);
+    }
+
     getWithFilter(url) {
        url = this.builderUrl(url);
        return httpClient.get(url);

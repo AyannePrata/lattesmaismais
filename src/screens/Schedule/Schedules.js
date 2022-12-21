@@ -18,7 +18,7 @@ class Schedules extends React.Component {
     }
 
     find = () => {
-        this.service.find('')
+        this.service.findAll()
         .then( Response => {
             const scheduling = Response.data;
             this.setState({scheduling: scheduling});
