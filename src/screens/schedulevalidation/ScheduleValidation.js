@@ -21,11 +21,6 @@ export default class ScheduleValidation extends React.Component {
         this.service = new SchedulingService();
     }
 
-    viewScheduling = () => {
-        console.log("funcionou")
-        //this.props.history.push("/scheduling");
-    }
-
     post = () => {
         this.service.create(
             {
@@ -37,24 +32,21 @@ export default class ScheduleValidation extends React.Component {
                 address:this.state.address,
                 status:"OPEN"
             }
-            ) .then( response =>
-                {
-                    // Adicionar mensagem de sucesso
-                    console.log("Cadastrado com sucesso!!");
-                }
-                ).catch(error =>
-                    {
-                        console.log(error.response);
-                    }
-                    );
+        ) .then( response =>
+            {
+                // Adicionar mensagem de sucesso
+                console.log("Cadastrado com sucesso!!");
+            }
+        ).catch(error =>
+            {
+                console.log(error.response);
+            }
+        );
     }
 
     render() {
         return(
             <div className= "Principal">
-                
-                <LeftMenu></LeftMenu>
-
                 <div className="Fields">
                     <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>
                     <button onClick={this.post} type="toschedule" className="b7">Agendar</button>

@@ -51,12 +51,12 @@ export default class Schedules extends React.Component {
                     <h1>Lattes</h1>
                     <h2>++</h2>
 
-                    <button type="importresume" class="b1">Importar currículo</button>
-                    <button onClick={this.scheduleValidation} type="schedulevalidation" class="b2">Agendar validação</button>
-                    <button type="Schedules" class="b3">Agendamentos</button>
-                    <button type="versions" class="b4">Versões</button>
-                    <button type="export" class="b5">Exportar</button>
-                    <button type="goout" class="b6">Sair</button>
+                    <button type="importresume" className="b1">Importar currículo</button>
+                    <button onClick={this.scheduleValidation} type="schedulevalidation" className="b2">Agendar validação</button>
+                    <button type="Schedules" className="b3">Agendamentos</button>
+                    <button type="versions" className="b4">Versões</button>
+                    <button type="export" className="b5">Exportar</button>
+                    <button type="goout" className="b6">Sair</button>
                 </div>
 
                 <div className="Fields">

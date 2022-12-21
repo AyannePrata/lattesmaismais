@@ -6,8 +6,8 @@ import ScheduleValidation from "../screens/schedulevalidation/ScheduleValidation
 function AppRoutes() {
     return (
         <BrowserRouter>
-            <Route component = { Schedules } path="/scheduling"/>
-            <Route component = { ScheduleValidation } path="/scheduling/create" />
+            <Route component = { ScheduleValidation } path="/" exact/>
+            <Route component = { Schedules } path="/scheduling/"/>
         </BrowserRouter>
     );
 }

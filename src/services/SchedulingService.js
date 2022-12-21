@@ -3,7 +3,7 @@ import ApiService from './ApiService';
 export default class SchedulingService extends ApiService {
     
     constructor() {
-        super('/solicitedsheduling')
+        super('/solicitedscheduling')
     }
 
     create(object) {
