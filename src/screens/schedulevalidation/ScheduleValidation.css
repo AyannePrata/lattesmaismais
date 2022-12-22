@@ -18,3 +18,13 @@
     margin-right: 0vw;
     justify-content: space-around;
 }
+
+.b7{
+    width: 233px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #308CE1;
+    border: #308CE1;
+    margin: 0px 24px;
+    cursor: pointer;
+}

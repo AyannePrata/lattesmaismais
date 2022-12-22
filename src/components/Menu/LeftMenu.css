@@ -31,6 +31,7 @@
     font-size: 48px;
     line-height: 58px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .ScheduleValidation01 h2{
@@ -60,12 +61,6 @@
     margin-left: 24px;
 }
 
-.b7{
-    width: 233px;
-    height: 40px;
-    color: #FFFFFF;
-    background: #308CE1;
-    border: #308CE1;
-    margin: 0px 24px;
+.ScheduleValidation01 button {
     cursor: pointer;
 }
