@@ -6,6 +6,25 @@
     padding: 5vw 0vw 5vw 0vw;
 }
 
+.Area {
+    background-color: rgb(238, 238, 238);
+    position: fixed;
+    z-index: -1;
+    top: 2%;
+    left: -1%;
+    height: 96%;
+    width: 77.8%;
+}
+
+.Image{
+    position: fixed;
+    z-index: -2;
+    background-image: url('../../assets/images/back.png');
+    left: -3%;
+    height: 100%;
+    width: 81%;
+}
+
 .Underline {
     text-decoration: underline;
 }
@@ -13,7 +32,7 @@
 .ScheduleValidation01{
     position: absolute;
     width: 376px;
-    height: 1024px;
+    height: 100%;
     left: 0px;
     top: 0px;
     background: #308CE1;
@@ -24,7 +43,7 @@
     width: 236px;
     height: 61px;
     left: 36px;
-    top: 93px;
+    top: 40px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -39,7 +58,7 @@
     width: 60px;
     height: 51px;
     left: 171px;
-    top: 88px;
+    top: 30px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;

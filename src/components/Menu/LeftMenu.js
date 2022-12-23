@@ -35,13 +35,15 @@ class LeftMenu extends React.Component {
         return(
             <div className= "ScheduleValidation01">
                     <h1 onClick={this.home}>Lattes</h1>
-                    <h2>++</h2>
+                    <h2>+ +</h2>
                     <button type="importresume" className="b1" onClick={this.impCurPage}>Importar currículo</button>
                     <button type="schedulevalidation" className="b2" onClick={this.schedValidPage}>Agendar validação</button>
                     <button type="Schedulings" className="b3" onClick={this.schedPage}>Agendamentos</button>
                     <button type="versions" className="b4" onClick={this.versionsPage}>Versões</button>
                     <button type="export" className="b5" onClick={this.exportPage}>Exportar</button>
                     <button type="goout" className="b6" onClick={this.logout}>Sair</button>
+                    <div className="Fields Area"></div>
+                    <div className="Fields Image"></div>
                 </div>
         )
     }

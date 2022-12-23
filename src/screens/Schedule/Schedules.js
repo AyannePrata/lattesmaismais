@@ -3,7 +3,6 @@ import './Schedules.css';
 
 import SchedulingTable from "../../components/SchedulingTable/SchedulingTable";
 import SchedulingService from "../../services/SchedulingService";
-import LeftMenu from '../../components/Menu/LeftMenu';
 import { withRouter } from 'react-router';
 
 class Schedules extends React.Component {
@@ -19,22 +18,22 @@ class Schedules extends React.Component {
 
     find = () => {
         this.service.findAll()
-        .then( Response => {
-            const scheduling = Response.data;
-            this.setState({scheduling: scheduling});
-            console.log(scheduling);
-        }).catch( error => {
-            console.log(error.Response)
-        });
+            .then(Response => {
+                const scheduling = Response.data;
+                this.setState({ scheduling: scheduling });
+                console.log(scheduling);
+            }).catch(error => {
+                console.log(error.Response)
+            });
     }
 
     delete = (schedulingId) => {
         this.service.delete(schedulingId)
-        .then( Response => {
-            this.find();
-        }).catch( error => {
-            console.log(error.Response)
-        });
+            .then(Response => {
+                this.find();
+            }).catch(error => {
+                console.log(error.Response)
+            });
     }
 
     scheduleValidation = () => {
@@ -46,11 +45,11 @@ class Schedules extends React.Component {
     }
 
     render() {
-        return(
+        return (
 
-            <div className= "Principal">
+            <div className="Principal">
                 <div className="Fields">
-                    <SchedulingTable schedulings={this.state.scheduling} delete={this.delete}/>
+                    <SchedulingTable schedulings={this.state.scheduling} delete={this.delete} />
                 </div>
             </div>
         )
