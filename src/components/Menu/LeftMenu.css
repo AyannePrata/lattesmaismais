@@ -1,8 +1,7 @@
 .Fields {
-    width: 75%;
     display: inline-block;
     margin-right: 0vw;
-    margin-left: 22vw;
+    margin-left: 28vw;
     padding: 5vw 0vw 5vw 0vw;
 }
 
@@ -13,16 +12,17 @@
     top: 2%;
     left: -1%;
     height: 96%;
-    width: 77.8%;
+    width: 71vw;
 }
 
 .Image{
     position: fixed;
     z-index: -2;
     background-image: url('../../assets/images/back.png');
-    left: -3%;
+    top: 0vh;
+    left: -21vw;
     height: 100%;
-    width: 81%;
+    width: 95vw;
 }
 
 .Underline {
@@ -31,7 +31,7 @@
 
 .ScheduleValidation01{
     position: absolute;
-    width: 376px;
+    width: 25%;
     height: 100%;
     left: 0px;
     top: 0px;
@@ -81,5 +81,13 @@
 }
 
 .ScheduleValidation01 button {
-    cursor: pointer;
+    display: inline-block;
+    position: initial;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 10%;
+}
+
+.AllButtons{
+    margin-top: 45%;
 }

@@ -3,16 +3,6 @@
     flex-direction: column;
 }
 
-.Fields input {
-    background-color: #FFF;
-    width: 25%;
-    font-size: 18px;
-    padding: 6px;
-    box-sizing: border-box;
-    margin-top: 24px;
-    margin-left: 24px;
-}
-
 .header {
     display: inline-block;
     margin-right: 0vw;
@@ -27,4 +17,8 @@
     border: #308CE1;
     margin: 0px 24px;
     cursor: pointer;
+}
+
+.FormG{
+    width: 18vw;
 }
