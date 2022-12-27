@@ -3,6 +3,17 @@ import './LeftMenu.css';
 import { withRouter } from 'react-router-dom';
 
 class LeftMenu extends React.Component {
+
+    componentDidMount() {
+        switch (window.location.href) {
+            case 'http://localhost:3000/':
+                break;
+            case 'http://localhost:3000/scheduling':
+                this.schedulingButton.classList.add('Underline');
+                break;
+        }
+    }
+
     home = () => {
         this.props.history.push("/");
     }
@@ -16,6 +27,8 @@ class LeftMenu extends React.Component {
     }
 
     schedPage = () => {
+        /*
+        */
         this.props.history.push("/scheduling");
     }
 
@@ -37,12 +50,18 @@ class LeftMenu extends React.Component {
                 <h1 onClick={this.home}>Lattes</h1>
                 <h2>+ +</h2>
                 <div className="AllButtons">
-                    <button type="importresume" className="b1" onClick={this.impCurPage}>Importar currículo</button>
-                    <button type="schedulevalidation" className="b2" onClick={this.schedValidPage}>Agendar validação</button>
-                    <button type="Schedulings" className="b3" onClick={this.schedPage}>Agendamentos</button>
-                    <button type="versions" className="b4" onClick={this.versionsPage}>Versões</button>
-                    <button type="export" className="b5" onClick={this.exportPage}>Exportar</button>
-                    <button type="goout" className="b6" onClick={this.logout}>Sair</button>
+                    <button type="importresume" ref={(button) => { this.impButton = button }}
+                        className="b1" onClick={this.impCurPage}>Importar currículo</button>
+                    <button type="schedulevalidation" ref={(button) => { this.doScheduling = button }}
+                        className="b2" onClick={this.schedValidPage}>Agendar validação</button>
+                    <button type="Schedulings" ref={(button) => { this.schedulingButton = button }}
+                        className="b3" onClick={this.schedPage}>Agendamentos</button>
+                    <button type="versions" ref={(button) => { this.versionsButton = button }}
+                        className="b4" onClick={this.versionsPage}>Versões</button>
+                    <button type="export" ref={(button) => { this.exportButton = button }}
+                        className="b5" onClick={this.exportPage}>Exportar</button>
+                    <button type="goout" ref={(button) => { this.exitButton = button }}
+                        className="b6" onClick={this.logout}>Sair</button>
                 </div>
                 <div className="Fields Area"></div>
                 <div className="Fields Image"></div>

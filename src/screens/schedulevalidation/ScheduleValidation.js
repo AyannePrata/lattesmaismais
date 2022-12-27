@@ -2,7 +2,6 @@ import React from 'react';
 import './ScheduleValidation.css';
 
 import FormGroup from "../../components/FormGroup/FormGroup";
-import LeftMenu from '../../components/Menu/LeftMenu';
 import SchedulingService from "../../services/SchedulingService";
 import { withRouter } from 'react-router';
 
