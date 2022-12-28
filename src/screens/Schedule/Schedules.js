@@ -1,9 +1,11 @@
 import React from 'react';
 import './Schedules.css';
 
-import SchedulingTable from "../../components/SchedulingTable/SchedulingTable";
 import SchedulingService from "../../services/SchedulingService";
 import { withRouter } from 'react-router';
+import SchedTableRS from '../../components/SchedulingTable/SchedTableRS';
+import { Button } from 'reactstrap';
+
 
 class Schedules extends React.Component {
 
@@ -46,14 +48,21 @@ class Schedules extends React.Component {
 
     render() {
         return (
-
             <div className="Principal">
                 <div className="Fields">
-                    <SchedulingTable schedulings={this.state.scheduling} delete={this.delete} />
+                    <div className='Tabs'>
+                        <Button color='primary' id='tabButton01'>ABERTO</Button>
+                        <Button color='secondary' id='tabButton02'>ACEITOS(0)</Button>
+                        <Button color='secondary' id='tabButton03'>RECUSADOS(0)</Button>
+                        <Button color='secondary' id='tabButton04'>CONCLUÍDOS(0)</Button>
+                    </div>
+                    <div id='border01'/>
+                    <SchedTableRS id='tbl01'
+                        delete={this.delete} schedulings={this.state.scheduling}>
+                    </SchedTableRS>
                 </div>
             </div>
         )
-
     }
 }
 

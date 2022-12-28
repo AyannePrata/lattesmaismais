@@ -1,3 +1,31 @@
+#tbl01 {
+    border-color: #6c757d;
+}
+
+#border01 {
+    border: #087ae4;
+    border-style: solid;
+}
+
+#tabButton01 {
+    border-radius: 0%;
+    margin-left: 1vw;
+}
+
+#tabButton02 {
+    border-radius: 0%;
+    margin-left: 1px;
+}
+
+#tabButton03 {
+    border-radius: 0%;
+    margin-left: 1px;
+}
+
+#tabButton04 {
+    border-radius: 0%;
+    margin-left: 1px;
+}
 .table {
     text-align: center;
 }
