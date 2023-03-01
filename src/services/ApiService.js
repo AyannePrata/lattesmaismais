@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 
 export const httpClient = axios.create ({
     baseURL:'http://localhost:8080/api',
@@ -14,6 +14,14 @@ export default class ApiService {
     post(url, params) {
         url = this.builderUrl(url);
         return httpClient.post(url, params);
+    }
+
+    postWithHeaders(params) {
+        return httpClient.post(this.endpoint, params, {
+            headers:{
+                'Content-type': 'multipart/form-data'
+            },
+        })
     }
 
     put(url, params) {

@@ -11,6 +11,9 @@ class LeftMenu extends React.Component {
             case 'http://localhost:3000/scheduling':
                 this.schedulingButton.classList.add('Underline');
                 break;
+            case 'http://localhost:3000/shedulingvalidation':
+                this.doSchedulingButton.classList.add('Underline');
+                break;
         }
     }
 
@@ -22,13 +25,11 @@ class LeftMenu extends React.Component {
 
     }
 
-    schedValidPage = () => {
-
+    toSchedValidation = () => {
+        this.props.history.push("/shedulingvalidation")
     }
-
-    schedPage = () => {
-        /*
-        */
+    // listagem de agendamentos
+    schedulings = () => {
         this.props.history.push("/scheduling");
     }
 
@@ -52,10 +53,10 @@ class LeftMenu extends React.Component {
                 <div className="AllButtons">
                     <button type="importresume" ref={(button) => { this.impButton = button }}
                         className="b1" onClick={this.impCurPage}>Importar currículo</button>
-                    <button type="schedulevalidation" ref={(button) => { this.doScheduling = button }}
-                        className="b2" onClick={this.schedValidPage}>Agendar validação</button>
+                    <button type="schedulevalidation" ref={(button) => { this.doSchedulingButton = button }}
+                        className="b2" onClick={this.toSchedValidation}>Agendar validação</button>
                     <button type="Schedulings" ref={(button) => { this.schedulingButton = button }}
-                        className="b3" onClick={this.schedPage}>Agendamentos</button>
+                        className="b3" onClick={this.schedulings}>Agendamentos</button>
                     <button type="versions" ref={(button) => { this.versionsButton = button }}
                         className="b4" onClick={this.versionsPage}>Versões</button>
                     <button type="export" ref={(button) => { this.exportButton = button }}
