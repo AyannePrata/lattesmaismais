@@ -7,6 +7,7 @@ class LeftMenu extends React.Component {
     componentDidMount() {
         switch (window.location.href) {
             case 'http://localhost:3000/':
+                this.impButton.classList.add('Underline');
                 break;
             case 'http://localhost:3000/scheduling':
                 this.schedulingButton.classList.add('Underline');
@@ -22,7 +23,7 @@ class LeftMenu extends React.Component {
     }
 
     impCurPage = () => {
-
+        this.props.history.push("/");
     }
 
     toSchedValidation = () => {

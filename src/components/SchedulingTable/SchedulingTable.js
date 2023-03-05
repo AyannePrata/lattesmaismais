@@ -17,7 +17,7 @@ export default props => {
                 <td>
                     <button type="button" title="Exclude" className="btn btn-danger"
                         onClick={e => props.delete(scheduling.id)}>
-                            Excluir
+                        Excluir
                     </button>
                 </td>
             </tr>

@@ -7,3 +7,10 @@
     box-shadow: 0 10px 0 #003c86;
 }
 
+.File-upload .btn-lg {
+    padding: 0;
+}
+
+.Button-icon {
+    margin-right: 0.5vw;
+}

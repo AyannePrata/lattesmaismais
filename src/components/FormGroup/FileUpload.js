@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button } from 'reactstrap';
 import './FileUpload.css';
+import img1 from '../../assets/images/import.svg';
 
 function FileUpload(props) {
     // valor inicial nulo - quardamos o input aqui.
@@ -15,7 +16,10 @@ function FileUpload(props) {
             <input type="file" accept={props.accept} ref={inputRef}
                 onChange={e => sendAttribute(e.target.files[0])}/>
             <Button color="primary" size="lg" className="Button-up"
-                onClick={() => inputRef.current.click()}>IMPORTAR</Button>
+                onClick={() => inputRef.current.click()}>
+                <img className="Button-icon" border="0" src={img1} width="50" height="50" />
+                IMPORTAR
+            </Button>
         </div>
     );
 
