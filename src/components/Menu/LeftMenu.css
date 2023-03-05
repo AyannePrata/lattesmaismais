@@ -51,13 +51,14 @@
     line-height: 58px;
     color: #FFFFFF;
     cursor: pointer;
+    font-family: sans-serif;
 }
 
 .ScheduleValidation01 h2{
     position: absolute;
     width: 60px;
     height: 51px;
-    left: 171px;
+    left: 178px;
     top: 30px;
     font-family: 'Inter';
     font-style: normal;
@@ -80,19 +81,49 @@
     margin-left: 24px;
 }
 
-.ScheduleValidation01 button {
+.AllButtons button {
     display: inline-block;
     position: initial;
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 4%;
     margin-left: 10%;
     background: none;
     text-transform: uppercase;
     font-family: sans-serif;
     font-size: 21px;
     font-weight: 700;
+    width: 315px;
 }
 
 .AllButtons{
     margin-top: 45%;
+}
+
+#ico-menu-01 {
+    margin-left: -5px;
+}
+
+#ico-menu-02 {
+    margin-right: 6px;
+    margin-bottom: 7px;
+}
+
+#ico-menu-03 {
+    margin-left: -5px;
+    margin-right: 2px;
+    margin-bottom: 7px;
+}
+
+#ico-menu-04 {
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
+
+#ico-menu-05 {
+    margin-bottom: 2px;
+}
+
+#ico-menu-06 {
+    margin-right: 7px;
+    margin-bottom: 2px;
 }
