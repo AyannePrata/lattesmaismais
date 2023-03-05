@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Button } from 'reactstrap';
-import './FormGroup.css';
+import './FileUpload.css';
 
 function FileUpload(props) {
     // valor inicial nulo - quardamos o input aqui.

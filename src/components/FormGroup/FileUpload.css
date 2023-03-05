@@ -1,0 +1,9 @@
+.File-upload input {
+    display: none;
+}
+
+.Button-up {
+    width: 10vw;
+    box-shadow: 0 10px 0 #003c86;
+}
+
