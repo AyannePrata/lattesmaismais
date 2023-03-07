@@ -14,7 +14,11 @@ function FileUpload(props) {
     return (
         <div className="File-upload">
             <input type="file" accept={props.accept} ref={inputRef}
-                onChange={e => sendAttribute(e.target.files[0])}/>
+                onChange={e => {
+                    if(e.target.files[0] != null){
+                        sendAttribute(e.target.files[0])
+                    }
+                }}/>
             <Button color="primary" size="lg" className="Button-up"
                 onClick={() => inputRef.current.click()}>
                 <img className="Button-icon" border="0" src={img1} width="50" height="50" />
