@@ -127,3 +127,15 @@
     margin-right: 7px;
     margin-bottom: 2px;
 }
+
+#name-owner {
+    background-color: whitesmoke;
+    width: 14vw;
+    height: 2.8vh;
+    text-align: center;
+    position: absolute;
+    margin-top: 11vh;
+    margin-left: 2vw;
+    margin-bottom: 0;
+    font-weight: 700;
+}

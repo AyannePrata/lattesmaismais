@@ -60,6 +60,7 @@ class LeftMenu extends React.Component {
             <div className="ScheduleValidation01">
                 <h1 onClick={this.home}>Lattes</h1>
                 <h2>+ +</h2>
+                <h5 id="name-owner">DANILO DE SOUSA COSTA</h5>
                 <div className="AllButtons">
                     <button type="importresume" ref={(button) => { this.impButton = button }}
                         className="b1" onClick={this.impCurPage}>
