@@ -7,3 +7,95 @@
 #p-final {
     margin-bottom: 20vh;
 }
+
+.Popup-confirmacao {
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.Popup {
+    width: 100%;
+    max-width: 700px;
+    margin: 12% auto;
+    margin-left: 45%;
+    padding: 180px;
+    max-block-size: 180px;
+    background: #c2c4c5;
+    position: absolute;
+}
+.Popup-content h2 {
+    position: absolute;
+    width: 622px;
+    height: 56px;
+    left: 45px;
+    top: 40px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: -0.05em;
+    color: #000000;
+}
+
+.Popup-content h3 {
+    position: absolute;
+    width: 622px;
+    height: 56px;
+    left: 164px;
+    top: 130px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: -0.05em;
+    color: #007afb;
+
+
+}
+
+.Popup-content h4 {
+    position: absolute;
+    width: 622px;
+    height: 56px;
+    left: 280px;
+    top: 200px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: -0.05em;
+    color: #000000;
+}
+
+
+.Confirmation {
+    width: 10vw;
+    left: 80px;
+    height: 58px;
+    top: 250px;
+    box-shadow: 0 10px 0 #003c86;
+    position: absolute;
+
+
+}
+
+.Popup-content .ImportAnother {
+    width: 10vw;
+    left: 410px;
+    height: 58px;
+    top: 250px;
+    position: absolute;
+    box-shadow: 0 10px 0 #910303;
+
+}
+
+
+

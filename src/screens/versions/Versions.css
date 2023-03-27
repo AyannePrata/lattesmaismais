@@ -1,0 +1,186 @@
+
+.boxExperiences {
+    overflow-y: scroll;
+    width: 25%;
+    max-width: 700px;
+    max-block-size: 500px;
+    padding: 30px 30px;
+    margin: 230px auto;
+    margin-left: 600px;
+    background: #dbe0e4;
+    
+}
+
+
+.Versions01 h1 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 600px;
+    top: 40px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 50px;
+    color: #000000;
+
+
+
+}
+
+.Versions01 h2 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 970px;
+    top: 40px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 50px;
+    color: #312f2f;
+
+}
+
+
+.Versions01 h3 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 1650px;
+    top: 70px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 50px;
+    color: #312f2f;
+
+}
+
+.Versions01 h4 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 670px;
+    top: 890px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    color: #111010;
+
+}
+
+.Versions01 h5 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 990px;
+    top: 890px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    color: #111010;
+
+}
+
+.Versions01 h6 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 1350px;
+    top: 890px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    color: #111010;
+
+}
+
+.Versions01 h7 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 1750px;
+    top: 890px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    color: #111010;
+
+}
+
+.Versions01 h8 {
+    position: absolute;
+    width: 444px;
+    height: 52px;
+    left: 1750px;
+    top: 40px;
+    font-family: 'arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    color: #007afb;
+
+}
+
+.Versions01 .ComeBack {
+    width: 100px;
+    left: 600px;
+    height: 58px;
+    top: 100px;
+    box-shadow: 0 10px 0 #003c86;
+    position: absolute;
+
+}
+
+.Versions01 .Save {
+    width: 100px;
+    left: 740px;
+    height: 58px;
+    top: 100px;
+    box-shadow: 0 10px 0 #003c86;
+    position: absolute;
+
+}
+
+.Versions01 .Validator-authentication {
+    width: 250px;
+    left: 1140px;
+    height: 58px;
+    top: 180px;
+    box-shadow: 0 10px 0 #003c86;
+    position: absolute;
+
+}
+
+.Versions01 .Electronic-authentication {
+    width: 250px;
+    left: 1730px;
+    height: 58px;
+    top: 180px;
+    box-shadow: 0 10px 0 #003c86;
+    position: absolute;
+
+}
+
+.Versions01 .btn-lg {
+    padding: 0;
+}
+
+
+
+
+
+
