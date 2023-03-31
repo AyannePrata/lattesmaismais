@@ -24,9 +24,14 @@ class Home extends React.Component {
 
         this.service.postWithHeaders(data)
             .then(response => {
-                console.log('resposta');
-                console.log(response.data);
-                sessionStorage.setItem('entryList', response.data.entryList);
+                // testando a resposta
+                setTimeout(() => {
+                    console.log("Id do currículo: " + response.data.id); // esse ID vai no push abaixo
+                    console.log('resposta:');
+                    console.log(response.data);
+                }, 1000);
+
+                this.props.history.push(`/updateversions/1`); // teste com "1" no lugar do ID acima
             }).catch(erro => {
                 console.log(erro.response);
             });

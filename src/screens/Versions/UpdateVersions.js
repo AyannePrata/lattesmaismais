@@ -1,5 +1,6 @@
 import React from 'react';
-import './Versions.css';
+import './UpdateVersions.css';
+import VersionService from '../../services/VersionsService';
 import img7 from '../../assets/images/ComeBack.svg';
 import img8 from '../../assets/images/WithoutProof.svg';
 import img9 from '../../assets/images/Waiting.svg';
@@ -13,65 +14,53 @@ import { withRouter } from 'react-router';
 class Versions extends React.Component {
 
     state = {
-       mapEntries: "",
+        id: "",
+        entryCount: "",
+        ownerName: "",
+        ownerId: "",
+        entryList: "",
     }
 
-    home = () => {
-        this.props.history.push("/");
+    constructor() {
+        super();
+        this.service = new VersionService();
     }
+    
+    findById = (curriculumId) => {
+        this.service.find(curriculumId)
+        .then(response => {
+            const curriculum = response.data;
 
-    toHashMap = () => {
-        const entries = sessionStorage.getItem("entryList");
-        const hashMap = new Map(); // mudar por var caso dê errado
-
-        entries.map(entry => {
-            if (hashMap.get(entry.group) != undefined) {
-                const group = hashMap.get(entry.group); // mudar por var caso dê errado
-                group.push(entry);
-            } else {
-                hashMap.set(entry.group, [entry]); // colchetes - mudar caso dê errado
-            }
-        
+            this.setState({
+                id: curriculum.id,
+                entryCount: curriculum.entryCount,
+                ownerName: curriculum.ownerName,
+                ownerId: curriculum.ownerId,
+                entryList: curriculum.entryList
+            });
+        }).catch(error => {
+            console.log(error.response);
         });
-
-        this.setState({mapEntries: hashMap});
     }
-
-   // nomeAlternativo = () => {
-
-   //     const entriesByGroup = this.state.mapEntries.map(groupOfEntries => {
-    //        return (
-                
-   //         )
-    //    })
     
-
-   // }
-
-    
-   
-
     componentDidMount() {
-        // Adicionar funções
+        // const params = this.props.match.params;
+        // this.findById(id);
     }
-
 
     render() {
-
         
         return (
             <div className="Versions01">
                 <h1>Danilo de Sousa Costa</h1>
                 <h2>(0 Competências)</h2>
                 <h3>Primeira Versão do Currículo</h3>
+                {/* 
                 <h4>Sem Comprovante</h4>
                 <h5>Aguardando Validação</h5>
                 <h6>Comprovado por Validador</h6>
                 <h7>Invalidado</h7>
                 <h8>V_12345</h8>
-                
-                    
-                
 
                 <Button onClick={this.home}  color="primary" size="lg" className="ComeBack">
                     <img id="ico-comeBack" className="Button-ComeBack" border="0" src={img7} width="70" height="70" />
@@ -85,8 +74,6 @@ class Versions extends React.Component {
                 <Button color="primary" size="lg" className="Electronic-authentication">
                     (+) Auten. Eletrônica
                 </Button>
-                
-    
                 
                 <div className="boxExperiences">
                     <p> aggdhgdkfgkfdgkjdkafkj</p>
@@ -107,18 +94,12 @@ class Versions extends React.Component {
                     <p> aggdhgdkfgkfdgkjdkafkj</p>
                     <p>khfgehgfiikefh</p>
                     <p>jeufhejiwhfjeigf</p>
-                   
-                   
-                    
-
-
                 </div>
-                
+
                 <img id="ico-WithoutProof" className="Button-WithoutProof" border="0" src={img8} width="40" height="40" />
                 <img id="ico-Waiting" className="Button-Waiting" border="0" src={img9} width="40" height="40" />
                 <img id="ico-Proven" className="Button-Proven" border="0" src={img10} width="40" height="40" />
-                <img id="ico-Invalidated" className="Button-Invalidated" border="0" src={img11} width="30" height="30" />
-                
+                <img id="ico-Invalidated" className="Button-Invalidated" border="0" src={img11} width="30" height="30" /> */}
             </div>
 
                

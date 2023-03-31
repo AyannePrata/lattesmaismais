@@ -21,7 +21,7 @@ class LeftMenu extends React.Component {
             case 'http://localhost:3000/scheduling':
                 this.schedulingButton.classList.add('Underline');
                 break;
-            case 'http://localhost:3000/shedulingvalidation':
+            case 'http://localhost:3000/shedulingvalidation' || 'http://localhost:3000/updateVersions':
                 this.doSchedulingButton.classList.add('Underline');
                 break;
             case 'http://localhost:3000/versions':
@@ -49,7 +49,8 @@ class LeftMenu extends React.Component {
     }
 
     versionsPage = () => {
-        this.props.history.push("/versions");
+        // this.props.history.push("/versions"); // Habilitar após testes e amostra da 1ª itereação
+        this.props.history.push("/updateVersions/1"); //teste - excluir linha após teste mostrado na 1ª iteração
     }
 
     exportPage = () => {
