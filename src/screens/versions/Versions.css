@@ -145,6 +145,28 @@
 
 }
 
+
+#ico-WithoutProof{
+    margin-left: 620px;
+    margin-top: -130px;
+}
+
+#ico-Waiting{
+    margin-left: 280px;
+    margin-top: -130px;
+}
+
+#ico-Proven{
+    margin-left: 325px;
+    margin-top: -130px;
+}
+
+#ico-Invalidated{
+    margin-left: 365px;
+    margin-top: -130px;
+}
+
+
 .Versions01 .Save {
     width: 100px;
     left: 740px;

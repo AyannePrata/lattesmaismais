@@ -26,6 +26,7 @@ class Home extends React.Component {
             .then(response => {
                 console.log('resposta');
                 console.log(response.data);
+                sessionStorage.setItem('entryList', response.data.entryList);
             }).catch(erro => {
                 console.log(erro.response);
             });

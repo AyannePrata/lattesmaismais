@@ -27,6 +27,7 @@ class LeftMenu extends React.Component {
             case 'http://localhost:3000/versions':
                 this.versionsButton.classList.add('Underline');
                 break;
+        
 
         }
     }
@@ -84,7 +85,7 @@ class LeftMenu extends React.Component {
                     <button type="versions" ref={(button) => { this.versionsButton = button }}
                         className="b4" onClick={this.versionsPage}>
                         <img id="ico-menu-04" className="Button-icon" border="0" src={img4} width="40" height="40" />
-                        Versões
+                        Versões 
                     </button>
                     <button type="export" ref={(button) => { this.exportButton = button }}
                         className="b5" onClick={this.exportPage}>
