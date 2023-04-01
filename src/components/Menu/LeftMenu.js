@@ -21,10 +21,10 @@ class LeftMenu extends React.Component {
             case 'http://localhost:3000/scheduling':
                 this.schedulingButton.classList.add('Underline');
                 break;
-            case 'http://localhost:3000/shedulingvalidation' || 'http://localhost:3000/updateVersions':
+            case 'http://localhost:3000/shedulingvalidation':
                 this.doSchedulingButton.classList.add('Underline');
                 break;
-            case 'http://localhost:3000/versions':
+            case 'http://localhost:3000/updateVersions':
                 this.versionsButton.classList.add('Underline');
                 break;
         
