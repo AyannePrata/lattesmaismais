@@ -1,6 +1,8 @@
 import React from 'react';
 import './UpdateVersions.css';
 import VersionService from '../../services/VersionsService';
+import EntriesMap from '../../components/Curriculum/EntriesMap';
+
 import img7 from '../../assets/images/ComeBack.svg';
 import img8 from '../../assets/images/WithoutProof.svg';
 import img9 from '../../assets/images/Waiting.svg';
@@ -18,12 +20,61 @@ class Versions extends React.Component {
         entryCount: "",
         ownerName: "",
         ownerId: "",
-        entryList: "",
+        entryList: [
+            {
+                "id": 1,
+                "group": "Formação Acadêmica",
+                "name": "> Instituto Federal de Educa��o, Ci�ncia e Tecnologia da Para�ba - IFPB> An�lise e Desenvolvimento de Sistemas> EM_ANDAMENTO> 2020> --",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            },
+            {
+                "id": 2,
+                "group": "Formação Acadêmica",
+                "name": "> Universidade Federal de Campina Grande> Interdisciplinar em Educa��o No Campo> CONCLUIDO> 2010> 2014",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            },
+            {
+                "id": 3,
+                "group": "Formação Acadêmica",
+                "name": "> Instituto Butantan> Controle de pragas e doenças> CONCLUIDO> 2015> 2017",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            },
+            {
+                "id": 4,
+                "group": "Atuação Profissional",
+                "name": "> UMEIF Jos� Bonif�cio Barbosa de Andrade> 2013> 2014> --> Professor",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            },
+            {
+                "id": 5,
+                "group": "Atuação Profissional",
+                "name": "> E.E.E.F.M. M�rio de Oliveira Chaves> 2016> 2016> --> Professor",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            },
+            {
+                "id": 6,
+                "group": "Atuação Profissional",
+                "name": "> Centro Água Azul> 2018> 2019> --> Professor",
+                "receipts": null,
+                "status": "WITHOUT_RECEIPT"
+            }
+        ]
     }
 
     constructor() {
         super();
         this.service = new VersionService();
+    }
+
+    componentDidMount() {
+        //TODO 
+        // const params = this.props.match.params;
+        // this.findById(id);
     }
 
     findById = (curriculumId) => {
@@ -41,11 +92,6 @@ class Versions extends React.Component {
             }).catch(error => {
                 console.log(error.response);
             });
-    }
-
-    componentDidMount() {
-        // const params = this.props.match.params;
-        // this.findById(id);
     }
 
     render() {
@@ -80,25 +126,12 @@ class Versions extends React.Component {
                 </div>
 
                 <div className="boxExperiences">
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
-                    <p> aggdhgdkfgkfdgkjdkafkj</p>
-                    <p>khfgehgfiikefh</p>
-                    <p>jeufhejiwhfjeigf</p>
+                    <EntriesMap
+                        Entries={this.state.entryList}
+                        iconWithoutReceipt={img8}
+                    ></EntriesMap>
                 </div>
+
                 <div className='Bottom-icons'>
                     <div className='Icons-flex'>
                         <img id="ico-WithoutProof" className="Button-WithoutProof" border="0" src={img8} width="40" height="40" />
@@ -117,7 +150,7 @@ class Versions extends React.Component {
                         <h6>Invalidado</h6>
                     </div>
                 </div>
-                    
+
             </div>
 
 

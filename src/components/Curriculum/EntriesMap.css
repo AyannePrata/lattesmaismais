@@ -1,0 +1,13 @@
+.Entries-maped h4 {
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+.Entries-maped p {
+    margin-left: 2vw;
+}
+
+.Entries-maped .Icons {
+    margin-left: -2vw;
+    padding: 3px;
+}
