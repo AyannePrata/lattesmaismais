@@ -5,13 +5,21 @@ function EntriesMap(props) {
 
     var groupIdentified = "";
 
-    const entries = props.Entries.map((entry) => {
+    const entries = props.entries.map((entry) => {
 
         var icon = "";
 
         switch (entry.status) {
-            case "value":
-                // TODO colocar casos onde já foi enviado comprovação da entry (aguardando/comprovado/inválido)
+            case "WAITING_VALIDATION":
+                icon = props.iconWaiting;
+                break;
+
+            case "CHECKED_BY_VALIDATOR":
+                icon = props.iconChecked;
+                break;
+                
+            case "INVALID":
+                icon = props.iconInvalid;
                 break;
         
             default:

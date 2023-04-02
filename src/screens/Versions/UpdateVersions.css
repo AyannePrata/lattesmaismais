@@ -5,6 +5,7 @@
 
 .Name-and-entries {
     display: flex;
+    width: 27.5vw;
 }
 
 .Name-and-entries h2 {
@@ -12,7 +13,7 @@
 }
 
 .Name-and-entries h4 {
-    margin-top: 0.3vw;
+    margin-top: 0.3vw;    
 }
 
 .Version-and-comment {
@@ -23,7 +24,7 @@
     text-align: right;
 }
 
-#versao-curriculo {
+#versionCurriculum {
     color: #2a7ae1;
 }
 

@@ -20,18 +20,11 @@ class Home extends React.Component {
         // com o arquivo do campo input, passamos para um formData que é o tipo usado para multipart
         const data = new FormData();
         data.append('file', file);
-        data.append('userId', 1); // "1" para exemplo.
+        data.append('userId', 1); // "1" para exemplo. //TODO implementar lógica de pegar o ID do usuário
 
         this.service.postWithHeaders(data)
             .then(response => {
-                // testando a resposta
-                setTimeout(() => {
-                    console.log("Id do currículo: " + response.data.id); // esse ID vai no push abaixo
-                    console.log('resposta:');
-                    console.log(response.data);
-                }, 1000);
-
-                this.props.history.push(`/updateversions/1`); // teste com "1" no lugar do ID acima
+                this.props.history.push(`/updateversions/${response.data.id}`);
             }).catch(erro => {
                 console.log(erro.response);
             });

@@ -20,50 +20,10 @@ class Versions extends React.Component {
         entryCount: "",
         ownerName: "",
         ownerId: "",
-        entryList: [
-            {
-                "id": 1,
-                "group": "Formação Acadêmica",
-                "name": "> Instituto Federal de Educa��o, Ci�ncia e Tecnologia da Para�ba - IFPB> An�lise e Desenvolvimento de Sistemas> EM_ANDAMENTO> 2020> --",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            },
-            {
-                "id": 2,
-                "group": "Formação Acadêmica",
-                "name": "> Universidade Federal de Campina Grande> Interdisciplinar em Educa��o No Campo> CONCLUIDO> 2010> 2014",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            },
-            {
-                "id": 3,
-                "group": "Formação Acadêmica",
-                "name": "> Instituto Butantan> Controle de pragas e doenças> CONCLUIDO> 2015> 2017",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            },
-            {
-                "id": 4,
-                "group": "Atuação Profissional",
-                "name": "> UMEIF Jos� Bonif�cio Barbosa de Andrade> 2013> 2014> --> Professor",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            },
-            {
-                "id": 5,
-                "group": "Atuação Profissional",
-                "name": "> E.E.E.F.M. M�rio de Oliveira Chaves> 2016> 2016> --> Professor",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            },
-            {
-                "id": 6,
-                "group": "Atuação Profissional",
-                "name": "> Centro Água Azul> 2018> 2019> --> Professor",
-                "receipts": null,
-                "status": "WITHOUT_RECEIPT"
-            }
-        ]
+        status: "",
+        description: "",
+        version: "",
+        entryList: []
     }
 
     constructor() {
@@ -72,21 +32,22 @@ class Versions extends React.Component {
     }
 
     componentDidMount() {
-        //TODO 
-        // const params = this.props.match.params;
-        // this.findById(id);
+        const id = this.props.match.params.id;
+        this.findById(id);
     }
 
     findById = (curriculumId) => {
-        this.service.find(curriculumId)
+        this.service.findById(curriculumId)
             .then(response => {
                 const curriculum = response.data;
-
                 this.setState({
                     id: curriculum.id,
                     entryCount: curriculum.entryCount,
                     ownerName: curriculum.ownerName,
                     ownerId: curriculum.ownerId,
+                    status: curriculum.status,
+                    description: curriculum.description,
+                    version: curriculum.version,
                     entryList: curriculum.entryList
                 });
             }).catch(error => {
@@ -99,12 +60,14 @@ class Versions extends React.Component {
         return (
             <div className='Fields F-update'>
                 <div className='Name-and-entries'>
-                    <h2>Danilo de Sousa Costa</h2>
-                    <h4>(0 Competências)</h4>
+                    {/* <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
+                    <h4 id='countEntry'>{this.state.entryCount}</h4> */}
+                    <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
+                    <h4 id='countEntry'>(Entradas identificadas: {this.state.entryCount})</h4>
                 </div>
                 <div className='Version-and-comment'>
-                    <h2 id='versao-curriculo'>V_05112022_182432</h2>
-                    <h4>Primeira Versão do Currículo</h4>
+                    <h2 id='versionCurriculum'>{this.state.version}</h2>
+                    <h4 id='descriptionCurriculum'>{this.state.description}</h4>
                 </div>
 
                 <div className='Save-return-buttons'>
@@ -126,10 +89,7 @@ class Versions extends React.Component {
                 </div>
 
                 <div className="boxExperiences">
-                    <EntriesMap
-                        Entries={this.state.entryList}
-                        iconWithoutReceipt={img8}
-                    ></EntriesMap>
+                    <EntriesMap entries={this.state.entryList} iconWithoutReceipt={img8} iconWaiting={img9} iconChecked={img10} iconInvalid={img11}></EntriesMap>
                 </div>
 
                 <div className='Bottom-icons'>
@@ -152,15 +112,8 @@ class Versions extends React.Component {
                 </div>
 
             </div>
-
-
-
-
-
-
         )
     }
-
 }
 
 export default withRouter(Versions);
