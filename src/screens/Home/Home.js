@@ -15,6 +15,9 @@ class Home extends React.Component {
     schedulings = () => {
         this.props.history.push("/scheduling");
     }
+    home = () => {
+        this.props.history.push("/");
+    }
 
     sendFile = async (file) => {
         // com o arquivo do campo input, passamos para um formData que é o tipo usado para multipart
@@ -41,7 +44,7 @@ class Home extends React.Component {
                 </div>
                 <FileUpload accept=".xml" toSendAttribute={this.sendFile}/>
 
-                <div className='Popup-confirmacao'>
+                <div className='Popup-confirmation'>
                     <div className='Popup'>
                         <div className='Popup-content' >
                             <h2>Confirmação de Identidade do Currículo Importado</h2>
@@ -51,8 +54,8 @@ class Home extends React.Component {
                              <Button onClick={this.schedulings} color="primary" size="lg" className="Confirmation">
                                 Sim, sou eu
                             </Button>
-                            <Button color="danger" size="lg" className="ImportAnother">
-                                Importar outro
+                            <Button onClick={this.home} color="danger" size="lg" className="ImportAnother">
+                                Cancelar
                             </Button>
 
 
