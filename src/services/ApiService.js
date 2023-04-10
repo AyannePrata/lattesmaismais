@@ -1,8 +1,13 @@
 import axios, { AxiosHeaders } from "axios";
 
+import StorageService from "./StorageService";
+
+export const LOGGED_USER = 'loggedUser';
+export const TOKEN = 'token';
+
 export const httpClient = axios.create ({
     baseURL:'http://localhost:8080/api',
-    withCredentials: false,
+    withCredentials: true,
 });
 
 export default class ApiService {
