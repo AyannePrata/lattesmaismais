@@ -15,7 +15,8 @@ class LeftMenu extends React.Component {
 
     componentDidMount() {
         switch (window.location.href) {
-            case 'http://localhost:3000/':
+
+            case 'http://localhost:3000/home':
                 this.impButton.classList.add('Underline');
                 break;
             case 'http://localhost:3000/scheduling':
@@ -27,17 +28,16 @@ class LeftMenu extends React.Component {
             case 'http://localhost:3000/updateVersions':
                 this.versionsButton.classList.add('Underline');
                 break;
-        
 
         }
     }
 
     home = () => {
-        this.props.history.push("/");
+        this.props.history.push("/home");
     }
 
     impCurPage = () => {
-        this.props.history.push("/");
+        this.props.history.push("/home");
     }
 
     toSchedValidation = () => {
@@ -54,7 +54,7 @@ class LeftMenu extends React.Component {
     }
 
     exportPage = () => {
-
+       
     }
 
     logout = () => {
