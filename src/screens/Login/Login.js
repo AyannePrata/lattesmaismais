@@ -6,6 +6,11 @@ import { withRouter } from 'react-router';
 
 class Login extends React.Component {
 
+    state = {
+        email: "",
+        password: "",
+    }
+
    
 
     render() {
@@ -14,8 +19,8 @@ class Login extends React.Component {
             <div className='Login-Screen'>
                  <h1>Login</h1>
                  <h2>E-mail</h2>
-                 <div> className='labels' 
-                 <label> email </label>
+                 <div className='labels'>
+                    <label> email </label>
                  </div>
            
             </div>
