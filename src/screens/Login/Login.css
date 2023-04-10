@@ -24,18 +24,19 @@
 
 }
 
-.Login-Screen h2 {
-    position: absolute;
-    width: 146px;
-    height: 42px;
-    left: 72%;
-    top: 33%;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 34px;
-    color: rgba(0, 0, 0, 0.53);
+
+.labels {
+    width: 18vw;
+    margin-left: 72%;
+    margin-top: 14%;
+    color: rgb(18, 19, 20);
+}
+
+.button {
+    width: 100px;
+    margin-left: 72%;
+    margin-top: 1%;
+
 }
 
 

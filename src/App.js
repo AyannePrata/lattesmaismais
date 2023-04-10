@@ -10,10 +10,11 @@ export default class App extends React.Component {
       <div>
         <AppRoutes/>
         <Router forceRefresh={true}>
-          <LeftMenu/>
+        <LeftMenu/>
         </Router>
       </div>
     )
   }
 }
 
+//<LeftMenu/>

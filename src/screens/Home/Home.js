@@ -40,7 +40,7 @@ class Home extends React.Component {
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
                     <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>
                     <p>OU</p>
-                    <p id='p-final'>- Escolha uma versão no histórico de "Versões"</p>
+                    //
                 </div>
                 <FileUpload accept=".xml" toSendAttribute={this.sendFile}/>
 
@@ -72,3 +72,5 @@ class Home extends React.Component {
 }
 
 export default withRouter(Home);
+
+//<p id='p-final'>- Escolha uma versão no histórico de "Versões"</p>
