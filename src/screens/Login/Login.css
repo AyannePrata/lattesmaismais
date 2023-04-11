@@ -28,16 +28,38 @@
 .labels {
     width: 18vw;
     margin-left: 72%;
-    margin-top: 14%;
+    margin-top: 17%;
     color: rgb(18, 19, 20);
 }
 
-.button {
-    width: 100px;
+.button .Login{
+    width: 18vw;
     margin-left: 72%;
-    margin-top: 1%;
+    margin-top: 2%;
+    
+}
+
+.button .Register {
+    width: 18vw;
+    margin-left: 72%;
+    margin-top: -34%;
+    text-align: left;
+    color: rgb(37, 38, 51);
+    border-color: rgb(228, 231, 238);
+    background-color: rgb(228, 231, 238);
+}
+
+.button .RedefinePassword {
+    width: 18vw;
+    margin-left: 72%;
+    margin-top: -11%;
+    text-align: left;
+    color: rgb(37, 38, 51);
+    border-color: rgb(228, 231, 238);
+    background-color: rgb(228, 231, 238);
 
 }
+
 
 
 

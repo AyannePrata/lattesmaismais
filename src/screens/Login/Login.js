@@ -34,7 +34,13 @@ class Login extends React.Component {
                     <Button color="primary" className="Login">
                         Login
                     </Button>
-
+                    <Button  className="Register">
+                        Ainda não possui cadastro?
+                    </Button>
+                    <Button  className="RedefinePassword">
+                        Esqueceu a senha?
+                    </Button>
+           
                  </div>
            
             </div>
