@@ -28,14 +28,14 @@ function RestrictedRoute( {component: Component, show, ...props} ) {
 function AppRoutes(props) {
     return (
         <BrowserRouter>
-            <Switch>
+          <Switch>
             <Route component = { Login } path="/" exact/>
             <Route component = { Register } path="/register/" />
             <RestrictedRoute show={props.isAuthenticated} component = { Home } path="/home/" />
             <RestrictedRoute show={props.isAuthenticated} component = { Schedules } path="/scheduling/" />
             <RestrictedRoute show={props.isAuthenticated} component = { ScheduleValidation } path="/shedulingvalidation" />
             <RestrictedRoute show={props.isAuthenticated} component = { UpdateVersions } path="/updateversions/:id" />
-            </Switch> 
+           </Switch> 
         </BrowserRouter>
 
 

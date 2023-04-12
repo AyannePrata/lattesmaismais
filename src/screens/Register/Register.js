@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import ApiService from '../../services/ApiService';
+import UserApiService from '../../services/UserApiService';
 import FormGroup from "../../components/FormGroup/FormGroup";
 import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 
@@ -18,7 +18,7 @@ class Register extends React.Component {
     
     constructor(){
         super();
-        this.service = new ApiService();
+        this.service = new UserApiService();
     }
 
     login = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-import ApiService from '../../services/ApiService';
+import UserApiService from '../../services/UserApiService';
 import FormGroup from "../../components/FormGroup/FormGroup";
 import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 import { AuthContext } from '../../main/SessionProvider';
@@ -16,7 +16,7 @@ class Login extends React.Component {
 
     constructor(){
         super();
-        this.service = new ApiService();
+        this.service = new UserApiService();
     }
 
     register = () => {
