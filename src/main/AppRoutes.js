@@ -17,7 +17,7 @@ function RestrictedRoute( {component: Component, show, ...props} ) {
                 )
             }else{
                 return(
-                    <Redirect to={ {pathname : '/login', state : { from: componentProps.location}}} />
+                    <Redirect to={ {pathname : '/', state : { from: componentProps.location}}} />
                 )
             }
         }} />
