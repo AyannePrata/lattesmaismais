@@ -24,41 +24,39 @@
 
 }
 
+.Login-Screen h2 {
+    position: relative;
+    width: 400px;
+    height: 60px;
+    left: 72%;
+    top: 25%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    color: #007afb;
 
-.labels {
+}
+
+
+.Login-Screen .labels {
     width: 18vw;
     margin-left: 72%;
-    margin-top: 17%;
-    color: rgb(18, 19, 20);
+    margin-top: 14%;
 }
 
 .button .Login{
     width: 18vw;
     margin-left: 72%;
-    margin-top: 2%;
+    margin-top: 0%;
+    background-color: #007afb;
     
 }
 
-.button .Register {
-    width: 18vw;
-    margin-left: 72%;
-    margin-top: -34%;
-    text-align: left;
-    color: rgb(37, 38, 51);
-    border-color: rgb(228, 231, 238);
-    background-color: rgb(228, 231, 238);
-}
 
-.button .RedefinePassword {
-    width: 18vw;
-    margin-left: 72%;
-    margin-top: -11%;
-    text-align: left;
-    color: rgb(37, 38, 51);
-    border-color: rgb(228, 231, 238);
-    background-color: rgb(228, 231, 238);
 
-}
+
 
 
 

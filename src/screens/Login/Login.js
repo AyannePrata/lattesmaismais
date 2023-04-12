@@ -1,7 +1,9 @@
 import React from 'react';
 import './Login.css';
-
+import ApiService from '../../services/ApiService';
 import FormGroup from "../../components/FormGroup/FormGroup";
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+import { AuthContext } from '../../main/SessionProvider';
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 
@@ -9,19 +11,64 @@ class Login extends React.Component {
 
     state = {
         email: "",
-        password: "",
+        password: ""
     }
 
-   
+    constructor(){
+        super();
+        this.service = new ApiService();
+    }
+
+    register = () => {
+        this.props.history.push("/register");
+    }
+
+    validate = () =>{
+        const errors = [];
+        if(!this.state.email){
+            errors.push('Por favor, informe o seu e-mail!')
+        }
+        if(!this.state.password){
+            errors.push('Por favor, digite a sua senha!')
+        }
+        
+        return errors;
+    };
+
+    login = ()=>{
+        const errors = this.validate();
+        if(errors.length>0){
+            errors.forEach((message,index)=>{
+                showErrorMessage(message)
+            });
+            return false;
+        }
+        this.context.login(
+            this.state.email,
+            this.state.password
+        ).then(user=>
+            {
+                if(user){
+                    showSuccessMessage(`Usuário ${user.name}, logado!`)
+                    this.props.history.push('/home');
+                }else{
+                    showErrorMessage('Login inválido!')
+                }
+            }).catch(error =>{
+                showErrorMessage('Erro na autenticação:', error);
+            })
+    }
 
     render() {
 
         return (
             <div className='Login-Screen'>
-                 <h1>Login</h1>
+                <h1>Login</h1>
+                <h2>Já possui uma conta? <a href="http://localhost:3000/register">clique aqui</a> para fazer o seu cadastro</h2>
+
                  <div className='labels'>
                     <FormGroup label='E-mail ' htmlFor='lab01'>
-                        <input className="form-control" type="text" id="lab04"
+                        <input className="form-control" type="email" id="lab04"
                         onChange={(e) => { this.setState({ email: e.target.value }) }} />
                     </FormGroup>
                     <FormGroup label='Senha' htmlFor='lab02'>
@@ -31,14 +78,9 @@ class Login extends React.Component {
                  </div>
 
                  <div className='button'>
-                    <Button color="primary" className="Login">
+                
+                    <Button  className="Login" onClick={this.login}>
                         Login
-                    </Button>
-                    <Button  className="Register">
-                        Ainda não possui cadastro?
-                    </Button>
-                    <Button  className="RedefinePassword">
-                        Esqueceu a senha?
                     </Button>
            
                  </div>
@@ -51,4 +93,5 @@ class Login extends React.Component {
     }
 }
 
+Login.contexType = AuthContext;
 export default withRouter(Login);

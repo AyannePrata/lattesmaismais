@@ -4,12 +4,15 @@ import Schedules from "../screens/Schedule/Schedules";
 import ScheduleValidation from "../screens/schedulevalidation/ScheduleValidation";
 import UpdateVersions from "../screens/Versions/UpdateVersions";
 import Login from "../screens/Login/Login";
+import Register from "../screens/Register/Register";
+
 import Home from "../screens/Home/Home";
 
 function AppRoutes() {
     return (
         <BrowserRouter>
             <Route component = { Login } path="/" exact/>
+            <Route component = { Register } path="/register/" />
             <Route component = { Home } path="/home/" />
             <Route component = { Schedules } path="/scheduling/" />
             <Route component = { ScheduleValidation } path="/shedulingvalidation" />
