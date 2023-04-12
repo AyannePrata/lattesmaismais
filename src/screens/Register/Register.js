@@ -10,9 +10,9 @@ import { withRouter } from 'react-router';
 class Register extends React.Component {
 
     state={
-        nameUser:'',
-        emailUser:'',
-        passwordUser:''
+        name:'',
+        email:'',
+        password:''
        
     }
     
@@ -53,9 +53,9 @@ class Register extends React.Component {
             return false;
         }
         await this.service.create({
-      name: this.state.nameUser,
-      email:this.state.emailUser,
-      password: this.state.passwordUser,
+      name: this.state.name,
+      email:this.state.email,
+      password: this.state.password,
 
 
     }).then(response =>{
@@ -80,15 +80,15 @@ class Register extends React.Component {
                  <div className='labels'>
                    <FormGroup label='Nome ' htmlFor='lab01'>
                         <input className="form-control" type="text" id="lab01"
-                        onChange={(e) => { this.setState({nameUser: e.target.value }) }} />
+                        onChange={(e) => { this.setState({name: e.target.value }) }} />
                     </FormGroup>
                     <FormGroup label='E-mail ' htmlFor='lab02'>
                         <input className="form-control" type="email" id="lab02"
-                        onChange={(e) => { this.setState({ emailUser: e.target.value }) }} />
+                        onChange={(e) => { this.setState({ email: e.target.value }) }} />
                     </FormGroup>
                     <FormGroup label='Senha' htmlFor='lab03'>
                         <input className="form-control" type="password" id="lab03"
-                        onChange={(e) => { this.setState({ passwordUser: e.target.value }) }} />
+                        onChange={(e) => { this.setState({ password: e.target.value }) }} />
                     </FormGroup>
                  </div>
 
