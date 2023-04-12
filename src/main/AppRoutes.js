@@ -1,25 +1,49 @@
 import React from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import {Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
+import { AuthConsumer } from "./SessionProvider";
 import Schedules from "../screens/Schedule/Schedules";
 import ScheduleValidation from "../screens/schedulevalidation/ScheduleValidation";
 import UpdateVersions from "../screens/Versions/UpdateVersions";
 import Login from "../screens/Login/Login";
 import Register from "../screens/Register/Register";
-
 import Home from "../screens/Home/Home";
 
-function AppRoutes() {
+function RestrictedRoute( {component: Component, show, ...props} ) {
+    return(
+        <Route exact {...props} render={ (componentProps) => {
+            if(show){
+                return (
+                    <Component {...componentProps} />
+                )
+            }else{
+                return(
+                    <Redirect to={ {pathname : '/login', state : { from: componentProps.location}}} />
+                )
+            }
+        }} />
+    )
+
+}
+
+function AppRoutes(props) {
     return (
         <BrowserRouter>
+            <Switch>
             <Route component = { Login } path="/" exact/>
             <Route component = { Register } path="/register/" />
-            <Route component = { Home } path="/home/" />
-            <Route component = { Schedules } path="/scheduling/" />
-            <Route component = { ScheduleValidation } path="/shedulingvalidation" />
-            <Route component = { UpdateVersions } path="/updateversions/:id" />
-            
+            <RestrictedRoute show={props.isAuthenticated} component = { Home } path="/home/" />
+            <RestrictedRoute show={props.isAuthenticated} component = { Schedules } path="/scheduling/" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ScheduleValidation } path="/shedulingvalidation" />
+            <RestrictedRoute show={props.isAuthenticated} component = { UpdateVersions } path="/updateversions/:id" />
+            </Switch> 
         </BrowserRouter>
+
+
     );
 }
 
-export default AppRoutes;
+export default () => (
+    <AuthConsumer>
+        { (context) => (<AppRoutes isAuthenticated={context.isAuthenticated} />) }
+    </AuthConsumer>
+)
