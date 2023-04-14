@@ -5,6 +5,7 @@ import SchedulingService from "../../services/SchedulingService";
 import { withRouter } from 'react-router';
 import SchedTableRS from '../../components/SchedulingTable/SchedTableRS';
 import { Button } from 'reactstrap';
+import LeftMenu from '../../components/Menu/LeftMenu';
 
 
 class Schedules extends React.Component {
@@ -49,6 +50,7 @@ class Schedules extends React.Component {
     render() {
         return (
             <div className="Principal">
+                <LeftMenu/>
                 <div className="Fields">
                     <div className='Tabs'>
                         <Button color='primary' id='tabButton01'>ABERTO</Button>

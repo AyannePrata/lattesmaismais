@@ -31,10 +31,10 @@ function AppRoutes(props) {
           <Switch>
             <Route component = { Login } path="/" exact/>
             <Route component = { Register } path="/register/" />
-            <RestrictedRoute show={props.isAuthenticated} component = { Home } path="/home/" />
-            <RestrictedRoute show={props.isAuthenticated} component = { Schedules } path="/scheduling/" />
-            <RestrictedRoute show={props.isAuthenticated} component = { ScheduleValidation } path="/shedulingvalidation" />
-            <RestrictedRoute show={props.isAuthenticated} component = { UpdateVersions } path="/updateversions/:id" />
+            <Route component = { Home } path="/home/" />
+            <Route component = { Schedules } path="/scheduling/" />
+            <Route component = { ScheduleValidation } path="/shedulingvalidation" />
+            <Route component = { UpdateVersions } path="/updateversions/:id" />
            </Switch> 
         </BrowserRouter>
 
@@ -47,3 +47,5 @@ export default () => (
         { (context) => (<AppRoutes isAuthenticated={context.isAuthenticated} />) }
     </AuthConsumer>
 )
+
+//RestrictedRoute show={props.isAuthenticated} 

@@ -5,6 +5,8 @@ import FormGroup from "../../components/FormGroup/FormGroup";
 import SchedulingService from "../../services/SchedulingService";
 import { withRouter } from 'react-router';
 
+import LeftMenu from '../../components/Menu/LeftMenu';
+
 class ScheduleValidation extends React.Component {
 
     state = {
@@ -45,6 +47,7 @@ class ScheduleValidation extends React.Component {
     render() {
         return (
             <div className="Principal">
+                <LeftMenu/>
                 <div className="Fields">
                     <div className='header'>
                         <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>

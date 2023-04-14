@@ -12,6 +12,7 @@ import img12 from '../../assets/images/Save.svg';
 
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
+import LeftMenu from '../../components/Menu/LeftMenu';
 
 class Versions extends React.Component {
 
@@ -59,6 +60,7 @@ class Versions extends React.Component {
 
         return (
             <div className='Fields F-update'>
+                <LeftMenu/>
                 <div className='Name-and-entries'>
                     {/* <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
                     <h4 id='countEntry'>{this.state.entryCount}</h4> */}

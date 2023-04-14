@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import LeftMenu from './components/Menu/LeftMenu';
-
+import Home from './screens/Home/Home';
+import Login from './screens/Login/Login';
 import 'toastr/build/toastr.css';
 import 'toastr/build/toastr.min.js';
 import SessionProvider from './main/SessionProvider';
@@ -13,11 +14,16 @@ export default class App extends React.Component {
     return(
       <div>
         <SessionProvider>
-        <Router forceRefresh={true}/>
-        <LeftMenu/>
+          <AppRoutes/>
+        <Router forceRefresh={true}>
+          
+
+        </Router>
         </SessionProvider>
+        
       </div>
     )
   }
 }
 
+//<LeftMenu/>

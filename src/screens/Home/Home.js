@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import FileUpload from '../../components/FormGroup/FileUpload';
 import HomeService from '../../services/HomeService';
 
+import LeftMenu from '../../components/Menu/LeftMenu';
+
 class Home extends React.Component {
     
     constructor() {
@@ -36,6 +38,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className='Principal Fields'>
+                <LeftMenu/>
                 <div className='Text-Home'>
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
                     <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>
