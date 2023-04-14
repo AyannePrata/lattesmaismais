@@ -29,7 +29,7 @@ class Home extends React.Component {
 
         this.service.postWithHeaders(data)
             .then(response => {
-                this.props.history.push(`/updateversions/${response.data.id}`);
+                this.props.history.push(`/updateversions/${response.data}`);
             }).catch(erro => {
                 console.log(erro.response);
             });
