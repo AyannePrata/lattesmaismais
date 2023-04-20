@@ -6,7 +6,6 @@ export default class AuthenticationApiService extends ApiService {
     constructor(){
         super('');
         this.storageService = new StorageService();
-
     }
 
     async login(email, password){
@@ -16,7 +15,7 @@ export default class AuthenticationApiService extends ApiService {
         };
 
         try{
-            const response = await this.post('/', loginDTO);
+            const response = await this.post('/login', loginDTO);
 
             const user = response.data.user;
             const token = response.data.token;
@@ -32,14 +31,14 @@ export default class AuthenticationApiService extends ApiService {
     }
 
     isTokenValid(token){
-        return this.post('/isTokenValid', token);
+        return this.post('/login/verifytoken', token);
     }
 
     logout(){
         this.storageService.removeItem(LOGGED_USER);
         this.storageService.removeItem(TOKEN);
 
-        return this.post('/logout');
+        return this.post('/api/logout');
     }
 
     getLoggedUser(){

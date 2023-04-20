@@ -6,6 +6,7 @@ import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/To
 import { AuthContext } from '../../main/SessionProvider';
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
+import AuthApiService from '../../services/AuthenticationApiService';
 
 class Login extends React.Component {
 
@@ -17,10 +18,7 @@ class Login extends React.Component {
     constructor(){
         super();
         this.service = new UserApiService();
-    }
-
-    register = () => {
-        this.props.history.push("/register");
+        this.loginService = new AuthApiService();
     }
 
     validate = () =>{
@@ -37,19 +35,22 @@ class Login extends React.Component {
 
     login = ()=>{
         const errors = this.validate();
+
         if(errors.length>0){
             errors.forEach((message,index)=>{
                 showErrorMessage(message)
             });
             return false;
         }
-        this.context.login(
+        
+        this.loginService.login(
             this.state.email,
             this.state.password
         ).then(user=>
             {
                 if(user){
-                    showSuccessMessage(`Usuário ${user.name}, logado!`)
+                    alert("Login realizado!");
+                    //showSuccessMessage(`Usuário ${user.name}, logado!`);
                     this.props.history.push('/home');
                 }else{
                     showErrorMessage('Login inválido!')
