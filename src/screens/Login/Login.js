@@ -13,44 +13,45 @@ class Login extends React.Component {
         password: ""
     }
 
-    validate = () =>{
+    validate = () => {
         const errors = [];
-        if(!this.state.email){
+        if (!this.state.email) {
             errors.push('Por favor, informe o seu e-mail!')
         }
-        if(!this.state.password){
+        if (!this.state.password) {
             errors.push('Por favor, digite a sua senha!')
         }
-        
+
         return errors;
     };
 
     login = () => {
         const errors = this.validate();
 
-        if(errors.length>0){
-            errors.forEach((message,index)=>{
+        if (errors.length > 0) {
+            errors.forEach((message, index) => {
                 showErrorMessage(message)
             });
             return false;
         }
-        
+        //TODO reorganizar mensagens mostradas em casos de sucessoe  erro
         const context = this.context;
         context.login(
             this.state.email,
             this.state.password
-        ).then(user=>
-            {
-                if(user){
-                    alert("Login realizado!");
-                    //showSuccessMessage(`Usuário ${user.name}, logado!`);
-                    this.props.history.push('/home');
-                }else{
-                    showErrorMessage('Login inválido!')
-                }
-            }).catch(error =>{
-                showErrorMessage('Erro na autenticação:', error);
-            })
+        ).then(user => {
+            if (user) {
+                alert("Login realizado!");
+                //showSuccessMessage(`Usuário ${user.name}, logado!`);
+                this.props.history.push('/home');
+            } else {
+                alert("Credenciais inválidas");
+                //showErrorMessage('Login inválido!')
+            }
+        }).catch(error => {
+            console.log(error);
+            //showErrorMessage('Erro na autenticação:', error);
+        })
     }
 
     render() {
@@ -60,32 +61,32 @@ class Login extends React.Component {
                 <h1>Login</h1>
                 <h2>Já possui uma conta? <a href="http://localhost:3000/register">clique aqui</a> para fazer o seu cadastro</h2>
 
-                 <div className='labels'>
+                <div className='labels'>
                     <FormGroup label='E-mail ' htmlFor='lab01'>
                         <input className="form-control" type="email" id="lab04"
-                        onChange={(e) => { this.setState({ email: e.target.value }) }} />
+                            onChange={(e) => { this.setState({ email: e.target.value }) }} />
                     </FormGroup>
                     <FormGroup label='Senha' htmlFor='lab02'>
                         <input className="form-control" type="password" id="lab05"
-                        onChange={(e) => { this.setState({ password: e.target.value }) }} />
+                            onChange={(e) => { this.setState({ password: e.target.value }) }} />
                     </FormGroup>
-                 </div>
+                </div>
 
-                 <div className='button'>
-                
-                    <Button  className="Login" onClick={this.login}>
+                <div className='button'>
+
+                    <Button className="Login" onClick={this.login}>
                         Login
                     </Button>
-           
-                 </div>
 
-                 
-           
+                </div>
+
+
+
             </div>
-            
+
         )
 
-           
+
     }
 }
 

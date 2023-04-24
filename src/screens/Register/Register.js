@@ -1,29 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+import { Button } from 'reactstrap';
+import FormGroup from "../../components/FormGroup/FormGroup";
+import { showErrorMessage } from "../../components/Toastr/Toastr";
 import './Register.css';
 import UserApiService from '../../services/UserApiService';
-import FormGroup from "../../components/FormGroup/FormGroup";
-import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
-import { Button } from 'reactstrap';
-import { withRouter } from 'react-router';
-import AuthApiService from '../../services/AuthenticationApiService';
+import { AuthContext } from '../../main/SessionProvider';
 
 class Register extends React.Component {
+    
+    constructor() {
+        super();
+        this.service = new UserApiService();
+    }
 
     state = {
         name: '',
         email: '',
         password: ''
-
-    }
-
-    constructor() {
-        super();
-        this.service = new UserApiService();
-        this.loginService = new AuthApiService();
-    }
-
-    login = () => {
-        this.props.history.push("/");
     }
 
     validate = () => {
@@ -47,9 +41,11 @@ class Register extends React.Component {
 
     submit = async () => {
         const errors = this.validate();
+        //TODO reorganizar mensagens mostradas em casos de erro e sucesso
         if (errors.length > 0) {
             errors.forEach((message, index) => {
-                showErrorMessage(message)
+                alert("Credenciais fornecidas contêm erros e não podem ser enviadas!")
+                //showErrorMessage(message)
             });
             return false;
         }
@@ -65,14 +61,19 @@ class Register extends React.Component {
             console.log(error.response)
         });
         
-        this.loginService.login(
+        const context = this.context;
+        context.login(
             this.state.email,
             this.state.password
-        ).then(
-            this.props.history.push(`/home/`)
-        ).catch(error => {
+        ).then(user => {
+            if (user) {
+                this.props.history.push('/home');
+            } else {
+                alert("Credenciais inválidas");
+            }
+        }).catch(error => {
             console.log(error);
-        });
+        })
     }
 
 
@@ -112,5 +113,5 @@ class Register extends React.Component {
 
     }
 }
-
+Register.contextType = AuthContext;
 export default withRouter(Register);
