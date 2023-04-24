@@ -1,24 +1,16 @@
 import React from 'react';
 import './Login.css';
-import UserApiService from '../../services/UserApiService';
 import FormGroup from "../../components/FormGroup/FormGroup";
 import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 import { AuthContext } from '../../main/SessionProvider';
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
-import AuthApiService from '../../services/AuthenticationApiService';
 
 class Login extends React.Component {
 
     state = {
         email: "",
         password: ""
-    }
-
-    constructor(){
-        super();
-        this.service = new UserApiService();
-        this.loginService = new AuthApiService();
     }
 
     validate = () =>{
@@ -33,7 +25,7 @@ class Login extends React.Component {
         return errors;
     };
 
-    login = ()=>{
+    login = () => {
         const errors = this.validate();
 
         if(errors.length>0){
@@ -43,7 +35,8 @@ class Login extends React.Component {
             return false;
         }
         
-        this.loginService.login(
+        const context = this.context;
+        context.login(
             this.state.email,
             this.state.password
         ).then(user=>
@@ -96,5 +89,5 @@ class Login extends React.Component {
     }
 }
 
-Login.contexType = AuthContext;
+Login.contextType = AuthContext;
 export default withRouter(Login);
