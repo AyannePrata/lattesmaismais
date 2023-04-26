@@ -9,6 +9,7 @@ import img9 from '../../assets/images/Waiting.svg';
 import img10 from '../../assets/images/Proven.svg';
 import img11 from '../../assets/images/Invalidated.svg';
 import img12 from '../../assets/images/Save.svg';
+import img13 from '../../assets/images/createNewCurriculum.svg';
 
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
@@ -55,15 +56,18 @@ class Versions extends React.Component {
                 console.log(error.response);
             });
     }
+    //TODO construir lógica de carregamento de cards de comprovantes.
+    showReceipts = (receipts) => {
+        console.log(receipts);
+    }
 
+    //TODO alterar a hora do botão de voltar para a tela de listagem de currículos
     render() {
 
         return (
             <div className='Fields F-update'>
                 <LeftMenu/>
                 <div className='Name-and-entries'>
-                    {/* <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
-                    <h4 id='countEntry'>{this.state.entryCount}</h4> */}
                     <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
                     <h4 id='countEntry'>(Entradas identificadas: {this.state.entryCount})</h4>
                 </div>
@@ -73,11 +77,15 @@ class Versions extends React.Component {
                 </div>
 
                 <div className='Save-return-buttons'>
-                    <Button onClick={this.home} color="primary" size="lg" className="Bt-ComeBack-update">
-                        <img id="ico-comeBack" className="Button-ComeBack" border="0" src={img7} width="80" height="30" />
+                    {/** TODO */}
+                    <Button onClick={this.home} color="primary" size="lg" className="Bt-space-between">
+                        <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>
-                    <Button color="primary" size="lg" className="Save">
-                        <img id="ico-Save" className="Button-Save" border="0" src={img12} width="80" height="30" />
+                    <Button color="primary" size="lg" className="Bt-space-between">
+                        <img id="ico-Save" className="Button-Save Bt-size1-updateC" border="0" src={img12} />
+                    </Button>
+                    <Button color="primary" size="lg" className="Save Save-new-version">
+                        <img id="ico-Save" className="Button-Save Bt-size1-updateC" border="0" src={img13} />
                     </Button>
                 </div>
 
@@ -91,7 +99,11 @@ class Versions extends React.Component {
                 </div>
 
                 <div className="boxExperiences">
-                    <EntriesMap entries={this.state.entryList} iconWithoutReceipt={img8} iconWaiting={img9} iconChecked={img10} iconInvalid={img11}></EntriesMap>
+                    <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} iconWithoutReceipt={img8} iconWaiting={img9} iconChecked={img10} iconInvalid={img11}></EntriesMap>
+                </div>
+
+                <div className='Entry-Receipts'>
+
                 </div>
 
                 <div className='Bottom-icons'>

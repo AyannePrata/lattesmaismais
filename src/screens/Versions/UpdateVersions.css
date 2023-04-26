@@ -28,33 +28,42 @@
     color: #2a7ae1;
 }
 
-.Bt-ComeBack-update {
+.Bt-space-between {
     margin-right: 3vw;
 }
 
 .Validation-update-curriculum {
     position: relative;
     top: 9vh;
-    left: 10vw;
+    left: 7.5vw;
 }
 
 .Electronic-authentication {
-    margin-left: 21.5vw;
+    margin-left: 12.5vw;
 }
 
 .boxExperiences {
     position: relative;
     top: 9vh;
     overflow-y: scroll;
-    width: 33%;
-    max-width: 700px;
-    max-block-size: 500px;
+    width: 23.5vw;
+    height: 52vh;
     background: #eeeeee;
     border-style: solid;
     border-color: #606060;
     border-width: 2px;
     padding-top: 8vh;
-    padding-left: 2vw;
+    padding-left: 4vw;
+}
+
+.Entry-Receipts {
+    border: solid;
+    border-color: black;
+    position: relative;
+    top: 9vh;
+    left: 4.5vw;
+    width: 40vw;
+    height: 52vh;
 }
 
 .Bottom-icons {
@@ -73,4 +82,9 @@
 
 .Icons-flex {
    display: flex;
+}
+
+.Bt-size1-updateC {
+    width: 4vw;
+    height: 4vh;
 }

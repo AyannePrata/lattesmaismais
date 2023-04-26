@@ -2,7 +2,7 @@ import React from "react";
 import './EntriesMap.css';
 
 function EntriesMap(props) {
-
+    
     var groupIdentified = "";
 
     const entries = props.entries.map((entry) => {
@@ -33,7 +33,7 @@ function EntriesMap(props) {
             return(
                 <div key={`group${entry.id}`}>
                     <h4>{entry.group}</h4>
-                    <p key={entry.id}>
+                    <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}>
                         <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
                         {entry.name}
                     </p>
@@ -41,7 +41,7 @@ function EntriesMap(props) {
             )
         } else {
             return (
-                <p key={entry.id}>
+                <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}>
                     <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
                     {entry.name}
                 </p>

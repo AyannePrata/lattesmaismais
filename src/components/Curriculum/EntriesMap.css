@@ -5,9 +5,11 @@
 
 .Entries-maped p {
     margin-left: 2vw;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .Entries-maped .Icons {
-    margin-left: -2vw;
+    margin-left: -2.5vw;
     padding: 3px;
 }
