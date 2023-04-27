@@ -6,10 +6,14 @@
 .Entries-maped p {
     margin-left: 2vw;
     cursor: pointer;
-    text-decoration: underline;
 }
 
 .Entries-maped .Icons {
     margin-left: -2.5vw;
     padding: 3px;
+}
+
+.Change-color-p {
+    color: #007df7;
+    text-decoration: underline;
 }

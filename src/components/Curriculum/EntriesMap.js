@@ -1,6 +1,14 @@
 import React from "react";
 import './EntriesMap.css';
 
+function handleMouseEnter(e) {
+    e.target.classList.add('Change-color-p');
+}
+
+function handleMouseLeave(e) {
+    e.target.classList.remove('Change-color-p');
+}
+
 function EntriesMap(props) {
     
     var groupIdentified = "";
@@ -33,7 +41,7 @@ function EntriesMap(props) {
             return(
                 <div key={`group${entry.id}`}>
                     <h4>{entry.group}</h4>
-                    <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}>
+                    <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
                         {entry.name}
                     </p>
@@ -41,7 +49,7 @@ function EntriesMap(props) {
             )
         } else {
             return (
-                <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}>
+                <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
                     {entry.name}
                 </p>
