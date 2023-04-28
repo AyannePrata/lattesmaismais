@@ -10,55 +10,101 @@ function handleMouseLeave(e) {
 }
 
 function EntriesMap(props) {
-    
+
+    const iconWithout = props.iconWithoutReceipt;
+    const iconWaiting = props.iconWaiting;
+    const iconChecked = props.iconChecked;
+    const iconInvalid = props.iconInvalid;
+
+    const iconsToLoad = (receipts, entryId) => {
+
+        var waiting = 0;
+        var checked = 0;
+        var invalid = 0;
+
+        for (const rec of receipts) {
+
+            switch (rec.status) {
+                case "WAITING_VALIDATION":
+                    waiting++;
+                    break;
+
+                case "CHECKED_BY_VALIDATOR":
+                    checked++;
+                    break;
+
+                case "INVALID":
+                    invalid++;
+                    break;
+            }
+        }
+
+        var iconsToLoad = [];
+        
+        if(waiting + checked + invalid === 0) {
+            return(
+                <img className="Icons" id={`icon${entryId}`} border="0" src={iconWithout} width="30" height="30" /> 
+            )
+        }else {
+            const icons = [iconWaiting, iconChecked, iconInvalid];
+            const values = [waiting, checked, invalid];
+
+            var countId = 1;
+
+            values.forEach((v, i) => {
+                if(v != 0){
+                    const icon = 
+                        <p className="Icon-and-count" key={`iconKey${entryId}${countId++}`} id={`count${entryId}${countId++}`}>
+                            <img className="Icons" id={`icon${entryId}${countId++}`} border="0" src={icons[i]} width="30" height="30" />
+                            {v}
+                        </p>
+                    
+                    iconsToLoad.push(icon);
+                }
+            })
+
+            return (
+                iconsToLoad
+            )
+        }
+    }
+
     var groupIdentified = "";
 
     const entries = props.entries.map((entry) => {
 
-        var icon = "";
-
-        switch (entry.status) {
-            case "WAITING_VALIDATION":
-                icon = props.iconWaiting;
-                break;
-
-            case "CHECKED_BY_VALIDATOR":
-                icon = props.iconChecked;
-                break;
-                
-            case "INVALID":
-                icon = props.iconInvalid;
-                break;
-        
-            default:
-                icon = props.iconWithoutReceipt;
-                break;
-        }
-        
-        if(groupIdentified != entry.group){
+        if (groupIdentified != entry.group) {
             groupIdentified = entry.group;
-            
-            return(
+
+            return (
                 <div key={`group${entry.id}`}>
                     <h4>{entry.group}</h4>
-                    <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                        <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
-                        {entry.name}
-                    </p>
+                    <div className="Entry-and-icons">
+                        <div className="Up-icon">
+                            {iconsToLoad(entry.receipts, entry.id)}
+                        </div>
+                        <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                            {entry.name}
+                        </p>
+                    </div>
                 </div>
             )
         } else {
             return (
-                <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)}onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    <img className="Icons" id={`icon${entry.id}`} border="0" src={icon} width="30" height="30" />
-                    {entry.name}
-                </p>
+                <div key={entry.id} className="Entry-and-icons">
+                    <div className="Up-icon">
+                        {iconsToLoad(entry.receipts, entry.id)}
+                    </div>
+                    <p id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        {entry.name}
+                    </p>
+                </div>
             )
         }
 
     })
 
-    return(
+    return (
         <div className="Entries-maped">
             {entries}
         </div>

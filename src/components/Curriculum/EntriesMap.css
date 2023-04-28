@@ -4,16 +4,38 @@
 }
 
 .Entries-maped p {
-    margin-left: 2vw;
     cursor: pointer;
 }
 
 .Entries-maped .Icons {
-    margin-left: -2.5vw;
     padding: 3px;
 }
 
 .Change-color-p {
     color: #007df7;
     text-decoration: underline;
+}
+
+.Entry-and-icons {
+    display: flex;
+}
+
+.Icon-and-count {
+    display: flex;
+}
+
+.Up-icon p {
+    cursor: default;
+    position: relative;
+    top: -1vh;
+    left: -0.2vw;
+    font-weight: 700;
+    color: red;
+    margin-bottom: 0.3vh;
+}
+
+.Up-icon img {
+    position: relative;
+    top: 1vh;
+    left: 0.2vw;
 }
