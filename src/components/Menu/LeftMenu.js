@@ -14,21 +14,20 @@ import img6 from '../../assets/images/off.svg';
 class LeftMenu extends React.Component {
 
     componentDidMount() {
-        switch (window.location.href) {
 
-            case 'http://localhost:3000/home':
-                this.impButton.classList.add('Underline');
-                break;
-            case 'http://localhost:3000/scheduling':
-                this.schedulingButton.classList.add('Underline');
-                break;
-            case 'http://localhost:3000/shedulingvalidation':
-                this.doSchedulingButton.classList.add('Underline');
-                break;
-            case 'http://localhost:3000/updateVersions':
-                this.versionsButton.classList.add('Underline');
-                break;
+        const url = window.location.href;
 
+        if(url === "http://localhost:3000/home"){
+            this.impButton.classList.add('Underline');
+
+        }else if(url === "http://localhost:3000/scheduling") {
+            this.schedulingButton.classList.add('Underline');
+
+        }else if(url === "http://localhost:3000/shedulingvalidation") {
+            this.doSchedulingButton.classList.add('Underline');
+
+        }else if(url.includes("3000/updateVersions")) {
+            this.versionsButton.classList.add('Underline');
         }
     }
 
