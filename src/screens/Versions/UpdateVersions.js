@@ -10,10 +10,12 @@ import img10 from '../../assets/images/Proven.svg';
 import img11 from '../../assets/images/Invalidated.svg';
 import img12 from '../../assets/images/Save.svg';
 import img13 from '../../assets/images/createNewCurriculum.svg';
+import img14 from '../../assets/images/recyclebinEmpty.svg'
 
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 import LeftMenu from '../../components/Menu/LeftMenu';
+import CardReceipt from '../../components/Curriculum/CardReceipt';
 
 class Versions extends React.Component {
 
@@ -25,7 +27,8 @@ class Versions extends React.Component {
         status: "",
         description: "",
         version: "",
-        entryList: []
+        entryList: [],
+        receiptList: []
     }
 
     constructor() {
@@ -56,12 +59,12 @@ class Versions extends React.Component {
                 console.log(error.response);
             });
     }
-    //TODO construir lógica de carregamento de cards de comprovantes.
+    
     showReceipts = (receipts) => {
-        console.log(receipts);
+        this.setState({receiptList: receipts});
     }
 
-    //TODO alterar a hora do botão de voltar para a tela de listagem de currículos
+    //TODO botão de voltar deve ir para tela de listagem de currículos
     render() {
 
         return (
@@ -103,7 +106,7 @@ class Versions extends React.Component {
                 </div>
 
                 <div className='Entry-Receipts'>
-
+                    <CardReceipt receipts={this.state.receiptList} iconWaiting={img9} iconChecked={img10} iconInvalid={img11} iconReciclebin={img14} />
                 </div>
 
                 <div className='Bottom-icons'>

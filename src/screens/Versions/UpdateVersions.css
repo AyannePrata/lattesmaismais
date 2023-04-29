@@ -56,16 +56,6 @@
     padding-left: 1vw;
 }
 
-.Entry-Receipts {
-    border: solid;
-    border-color: black;
-    position: relative;
-    top: 9vh;
-    left: 4.5vw;
-    width: 40vw;
-    height: 52vh;
-}
-
 .Bottom-icons {
     display: flex;
     justify-content: space-around;
@@ -87,4 +77,13 @@
 .Bt-size1-updateC {
     width: 4vw;
     height: 4vh;
+}
+
+.Entry-Receipts {
+    position: relative;
+    top: 9vh;
+    left: 4.5vw;
+    width: 40vw;
+    height: 52vh;
+    display: block;
 }
