@@ -2,13 +2,12 @@ import React from "react";
 import './CardReceipt.css';
 import { Button } from "reactstrap";
 
+import iconWaiting from '../../assets/images/Waiting.svg';
+import iconChecked from '../../assets/images/Proven.svg';
+import iconInvalid from '../../assets/images/Invalidated.svg';
+import iconRecyclebin from '../../assets/images/recyclebinEmpty.svg';
+
 function CardReceipt(props) {
-
-    const iconWaiting = props.iconWaiting;
-    const iconChecked = props.iconChecked;
-    const iconInvalid = props.iconInvalid;
-
-    const iconRecyclebin = props.iconReciclebin;
 
     const receiptsToCard = props.receipts.map((rec) => {
 
@@ -30,7 +29,7 @@ function CardReceipt(props) {
                     icon = iconInvalid;
                     break;
             }
-            //TODO
+            
             return(
                 <div key={`recUni${rec.id}`} className="Receipt-unique">
                     <img className="Icons Icon-Entry" border="0" src={icon} />

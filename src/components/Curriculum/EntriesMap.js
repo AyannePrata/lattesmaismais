@@ -1,6 +1,11 @@
 import React from "react";
 import './EntriesMap.css';
 
+import iconWithout from '../../assets/images/WithoutProof.svg';
+import iconWaiting from '../../assets/images/Waiting.svg';
+import iconChecked from '../../assets/images/Proven.svg';
+import iconInvalid from '../../assets/images/Invalidated.svg';
+
 function handleMouseEnter(e) {
     e.target.classList.add('Change-color-p');
 }
@@ -10,11 +15,6 @@ function handleMouseLeave(e) {
 }
 
 function EntriesMap(props) {
-
-    const iconWithout = props.iconWithoutReceipt;
-    const iconWaiting = props.iconWaiting;
-    const iconChecked = props.iconChecked;
-    const iconInvalid = props.iconInvalid;
 
     const iconsToLoad = (receipts, entryId) => {
 

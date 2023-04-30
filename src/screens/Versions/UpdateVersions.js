@@ -77,7 +77,6 @@ class Versions extends React.Component {
     }
 
     verifyReceipts = () => {
-
         const numbReceipts = this.state.receiptList.length;
         
         if (numbReceipts === 5) {
@@ -138,7 +137,7 @@ class Versions extends React.Component {
                 </div>
 
                 <div className="boxExperiences">
-                    <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} iconWithoutReceipt={img8} iconWaiting={img9} iconChecked={img10} iconInvalid={img11}></EntriesMap>
+                    <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} ></EntriesMap>
                 </div>
 
                 <div className='Entry-Receipts'>
