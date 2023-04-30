@@ -18,7 +18,8 @@ function FileUpload(props) {
                     if(e.target.files[0] != null){
                         sendAttribute(e.target.files[0])
                     }
-                }}/>
+                }}
+            />
             <Button color="primary" size="lg" className="Button-up"
                onClick={() => inputRef.current.click()}>
                 <img className="Button-icon" border="0" src={img1} width="50" height="50" />

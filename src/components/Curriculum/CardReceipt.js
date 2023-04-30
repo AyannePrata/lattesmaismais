@@ -37,8 +37,7 @@ function CardReceipt(props) {
                     <b id={`nameRec${rec.id}`}> {rec.name} </b>
                     <b id={`extRec${rec.id}`}> {rec.extension} </b>
                     <b id={`commRec${rec.id}`}> {rec.commentary === null ? "---" : rec.commentary} </b>
-                    {/**TODO criar função do onCLick do botão */}
-                    <Button id={`btRec${rec.id}`} onClick={() => {console.log("Criar onClick do botão")}} color="danger" size="sm" >
+                    <Button id={`btRec${rec.id}`} onClick={() => {props.deleteMethod(rec.id)}} color="danger" size="sm" >
                         <img className="Icons Icon-Entry" src={iconRecyclebin} />
                     </Button>
                 </div>
@@ -47,8 +46,7 @@ function CardReceipt(props) {
             return(
                 <div key={`recUni${rec.id}`} className="Receipt-unique">
                     <a href={rec.url} target="_blank"> Link para comprovação eletrônica </a>
-                    {/**TODO criar função do onCLick do botão */}
-                    <Button id={`btRec${rec.id}`} onClick={() => {console.log("Criar onClick do botão")}} color="danger" size="sm" >
+                    <Button id={`btRec${rec.id}`} onClick={() => {props.deleteMethod(rec.id)}} color="danger" size="sm" >
                         <img className="Icons Icon-Entry" src={iconRecyclebin} />
                     </Button>
                 </div>

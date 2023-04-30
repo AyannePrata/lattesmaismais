@@ -59,9 +59,45 @@ class Versions extends React.Component {
                 console.log(error.response);
             });
     }
-    
-    showReceipts = (receipts) => {
-        this.setState({receiptList: receipts});
+
+    showReceipts = async (receipts) => {
+        await this.setReceipList(receipts);
+        this.verifyReceipts();
+    }
+
+    setReceipList = async (value) => {
+        this.setState({receiptList: value});
+    }
+
+    deleteReceipOfList = async (id) => {
+        var array = this.state.receiptList;
+        array = array.filter(rec => rec.id != id);
+        await this.setReceipList(array);
+        this.verifyReceipts();
+    }
+
+    verifyReceipts = () => {
+
+        const numbReceipts = this.state.receiptList.length;
+        
+        if (numbReceipts === 5) {
+            this.buttAuthValidator.disabled = true;
+            this.buttAuthEletronic.disabled = true;
+        } else if (numbReceipts > 1) {
+            this.buttAuthValidator.disabled = false;
+            this.buttAuthEletronic.disabled = true;
+        } else if (numbReceipts === 1) {
+            this.buttAuthValidator.disabled = false;
+            this.buttAuthEletronic.disabled = true;
+
+            if(this.state.receiptList[0].url != null) {
+                this.buttAuthValidator.disabled = true;
+            }
+        } else {
+            this.buttAuthValidator.disabled = false;
+            this.buttAuthEletronic.disabled = false;
+            alert("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
+        }
     }
 
     //TODO botão de voltar deve ir para tela de listagem de currículos
@@ -69,7 +105,7 @@ class Versions extends React.Component {
 
         return (
             <div className='Fields F-update'>
-                <LeftMenu/>
+                <LeftMenu />
                 <div className='Name-and-entries'>
                     <h2 id='nameCurriculumOwner'>{this.state.ownerName}</h2>
                     <h4 id='countEntry'>(Entradas identificadas: {this.state.entryCount})</h4>
@@ -93,10 +129,10 @@ class Versions extends React.Component {
                 </div>
 
                 <div className='Validation-update-curriculum'>
-                    <Button color="primary" size="lg" className="Validator-authentication">
+                    <Button color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element} >
                         (+) Auten. Validador
                     </Button>
-                    <Button color="primary" size="lg" className="Electronic-authentication">
+                    <Button color="primary" size="lg" className="Electronic-authentication" innerRef={element => this.buttAuthEletronic = element} >
                         (+) Auten. Eletrônica
                     </Button>
                 </div>
@@ -106,7 +142,7 @@ class Versions extends React.Component {
                 </div>
 
                 <div className='Entry-Receipts'>
-                    <CardReceipt receipts={this.state.receiptList} iconWaiting={img9} iconChecked={img10} iconInvalid={img11} iconReciclebin={img14} />
+                    <CardReceipt receipts={this.state.receiptList} deleteMethod={this.deleteReceipOfList} iconWaiting={img9} iconChecked={img10} iconInvalid={img11} iconReciclebin={img14} />
                 </div>
 
                 <div className='Bottom-icons'>

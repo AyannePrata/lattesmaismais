@@ -87,3 +87,8 @@
     height: 52vh;
     display: block;
 }
+
+.Validation-update-curriculum .btn:disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}
