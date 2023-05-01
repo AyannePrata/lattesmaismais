@@ -140,3 +140,8 @@
     justify-content: space-around;
     margin-top: 9vh;
 }
+
+.Buttons-confirm-cancel-receipt .btn:disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}

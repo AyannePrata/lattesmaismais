@@ -31,9 +31,13 @@ class Versions extends React.Component {
         version: "",
         entryList: [],
 
+        //TODO criar método que destaca entrada ativa no momento// activeEntry: null,
         receiptList: [],
-        newReceits: [],
-        renderPopupImportReceipt: false
+
+        renderPopupImportReceipt: false,
+        currentReceiptFile:null,
+        currentReceiptFileName: "***",
+        currentReceiptCommentary:null,
     }
 
     constructor() {
@@ -44,6 +48,8 @@ class Versions extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.findById(id);
+        this.buttAuthValidator.disabled = true;
+        this.buttAuthEletronic.disabled = true;
     }
 
     findById = (curriculumId) => {
@@ -66,19 +72,32 @@ class Versions extends React.Component {
     }
 
     showReceipts = async (receipts) => {
-        await this.setReceipList(receipts);
+        await this.setReceiptList(receipts);
+        this.buttAuthValidator.disabled = false;
+        this.buttAuthEletronic.disabled = false;
         this.verifyReceipts();
     }
 
-    setReceipList = async (value) => {
+    setReceiptList = async (value) => {
         this.setState({ receiptList: value });
     }
-
+    //TODO rever lógica
     deleteReceipOfList = async (id) => {
         var array = this.state.receiptList;
         array = array.filter(rec => rec.id != id);
-        await this.setReceipList(array);
+        await this.deleteOfEntry(array);
+        // atualiza a lista em tela
+        await this.setReceiptList(this.state.receiptList);
         this.verifyReceipts();
+    }
+
+    deleteOfEntry = async (array) => {
+        const numbReceipts = this.state.receiptList.length;
+        this.state.receiptList.splice(0,numbReceipts);
+
+        for(const rec of array) {
+            this.state.receiptList.push(rec);
+        }
     }
 
     verifyReceipts = () => {
@@ -104,10 +123,43 @@ class Versions extends React.Component {
         }
     }
 
-    addReceipt = (file) => {
+    setCurrentFile = (file) => {
         if (file != null) {
-            console.log(file);
+            this.setState({
+                currentReceiptFileName: file.name,
+                currentReceiptFile: file
+            })
         }
+    }
+
+    cancelUploadReceipt = () => {
+        this.setState({
+            renderPopupImportReceipt: false,
+            currentReceiptFile: null,
+            currentReceiptFileName: "***",
+            currentReceiptCommentary: null,
+        });
+    }
+
+    addNewReceipt = async () => {
+        const type = this.state.currentReceiptFile.type;
+        const indexBarr = type.indexOf("/");
+
+        const receipt = {
+            id: `new${this.state.receiptList.length}`,
+            name: this.state.currentReceiptFileName,
+            extension: type.substring(indexBarr + 1, type.length),
+            commentary: this.state.currentReceiptCommentary,
+            status: "WAITING_VALIDATION",
+            url: null
+        };
+        this.state.receiptList.push(receipt);
+    }
+
+    addReceiptAndUpdateListCard = async () => {
+        await this.addNewReceipt();
+        this.verifyReceipts();
+        this.cancelUploadReceipt();
     }
 
     //TODO botão de voltar deve ir para tela de listagem de currículos
@@ -152,9 +204,10 @@ class Versions extends React.Component {
                     <h2 className='Center'>Autenticação - Validador</h2>
                     <div className='In-line'>
                         <h3>Arquivo:</h3>
-                        <input type='text' disabled={true} className='Input-arquive' placeholder='Clique em enviar'/>
+                        <input type='text' disabled={true} className='Input-arquive' placeholder={this.state.currentReceiptFileName}/>
 
-                        <input type='file' accept='.jpeg, .jpg, .png, .pdf' className='Input-hiden' ref={element => this.fileup01 = element}/>
+                        <input type='file' accept='.jpeg, .jpg, .png, .pdf' className='Input-hiden' ref={element => this.fileup01 = element}
+                            onChange={(e) => this.setCurrentFile(e.target.files[0])}/>
                         <Button color="primary" size="sm" className="Bt-import-Receipt" onClick={() => this.fileup01.click()} >
                             <img className="Icon" border="0" src={iconUpReceipt} />
                             <b>ENVIAR</b>
@@ -162,13 +215,13 @@ class Versions extends React.Component {
                     </div>
                     <div className='In-line'>
                         <h3>Comentário:</h3>
-                        <input type='text' className='Input-commentary' placeholder='(opcional)'/>
+                        <input type='text' className='Input-commentary' placeholder='(opcional)' onChange={(e) => this.setState({currentReceiptCommentary: e.target.value})}/>
                     </div>
                     <div className='Buttons-confirm-cancel-receipt'>
-                        <Button color="primary" size="lg" >
+                        <Button color="primary" size="lg" disabled={this.state.currentReceiptFileName === "***"} onClick={() => this.addReceiptAndUpdateListCard()}>
                             <b>ADICIONAR COMP</b>
                         </Button>
-                        <Button color="danger" size="lg" onClick={() => this.setState({renderPopupImportReceipt: false})}>
+                        <Button color="danger" size="lg" onClick={() => this.cancelUploadReceipt()}>
                             <b>CANCEL</b>
                         </Button>
                     </div>

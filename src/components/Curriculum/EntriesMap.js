@@ -43,7 +43,7 @@ function EntriesMap(props) {
         
         if(waiting + checked + invalid === 0) {
             return(
-                <img className="Icons" id={`icon${entryId}`} border="0" src={iconWithout} width="30" height="30" /> 
+                <img className="Icons WithoutReceipt" id={`icon${entryId}`} border="0" src={iconWithout} width="30" height="30" /> 
             )
         }else {
             const icons = [iconWaiting, iconChecked, iconInvalid];
