@@ -10,6 +10,10 @@ export default class VersionsService extends ApiService {
         return this.post('', object);
     }
 
+    update(object) {
+        return this.put('/update', object);
+    }
+
     delete(id) {
         return super.delete(`/${id}`);
     }

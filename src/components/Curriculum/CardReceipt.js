@@ -11,41 +11,42 @@ function CardReceipt(props) {
 
     const receiptsToCard = props.receipts.map((rec) => {
 
-        if(rec.url === null) {
+        var icon = "";
 
-            var icon = "";
-    
-            switch (rec.status) {
-    
-                case "WAITING_VALIDATION":
-                    icon = iconWaiting;
-                    break;
-    
-                case "CHECKED_BY_VALIDATOR":
-                    icon = iconChecked;
-                    break;
-    
-                case "INVALID":
-                    icon = iconInvalid;
-                    break;
-            }
-            
-            return(
+        switch (rec.status) {
+
+            case "WAITING_VALIDATION":
+                icon = iconWaiting;
+                break;
+
+            case "CHECKED_BY_VALIDATOR":
+                icon = iconChecked;
+                break;
+
+            case "INVALID":
+                icon = iconInvalid;
+                break;
+        }
+
+        if (rec.url === null) {
+            return (
                 <div key={`recUni${rec.id}`} className="Receipt-unique">
                     <img className="Icons Icon-Entry" border="0" src={icon} />
                     <b id={`nameRec${rec.id}`}> {rec.name} </b>
                     <b id={`extRec${rec.id}`}> {rec.extension} </b>
                     <b id={`commRec${rec.id}`}> {rec.commentary === null ? "---" : rec.commentary} </b>
-                    <Button id={`btRec${rec.id}`} onClick={() => {props.deleteMethod(rec.id)}} color="danger" size="sm" >
+                    <Button id={`btRec${rec.id}`} onClick={() => { props.deleteMethod(rec.id) }} color="danger" size="sm" >
                         <img className="Icons Icon-Entry" src={iconRecyclebin} />
                     </Button>
                 </div>
             )
-        }else {
-            return(
+        } else {
+            return (
                 <div key={`recUni${rec.id}`} className="Receipt-unique">
+                    <img className="Icons Icon-Entry" border="0" src={icon} />
+                    <b id={`commRec${rec.id}`}> {rec.commentary === null ? "---" : rec.commentary} </b>
                     <a href={rec.url} target="_blank"> Link para comprovação eletrônica </a>
-                    <Button id={`btRec${rec.id}`} onClick={() => {props.deleteMethod(rec.id)}} color="danger" size="sm" >
+                    <Button id={`btRec${rec.id}`} onClick={() => { props.deleteMethod(rec.id) }} color="danger" size="sm" >
                         <img className="Icons Icon-Entry" src={iconRecyclebin} />
                     </Button>
                 </div>
@@ -53,7 +54,7 @@ function CardReceipt(props) {
         }
     })
 
-    return(
+    return (
         <div className="Receipts-of-current-entry">
             {receiptsToCard}
         </div>
