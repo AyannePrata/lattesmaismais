@@ -92,3 +92,51 @@
     background-color: #acacac;
     border-color: #eeeeee;
 }
+
+.Validation-update-curriculum input {
+    display: none;
+}
+
+.Popup-content-2 .Center {
+    text-align: center;
+    margin-bottom: 6vh;
+}
+
+.Popup-content-2 .Input-hiden {
+    display: none;
+}
+
+.Popup-content-2 .In-line {
+    display: flex;
+    margin-bottom: 4vh;
+}
+
+.Popup-content-2 .Input-arquive {
+    margin-left: 3.5vw;
+    width: 15vw;
+}
+
+.Popup-content-2 .Input-commentary {
+    margin-left: 1vw;
+    width: 15vw;
+}
+
+.Popup-content-2 .Bt-import-Receipt {
+    margin-left: 2vw;
+}
+
+.Popup-content-2 .Icon {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.In-line b {
+    font-size: x-large;
+    vertical-align: middle;
+}
+
+.Buttons-confirm-cancel-receipt {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 9vh;
+}

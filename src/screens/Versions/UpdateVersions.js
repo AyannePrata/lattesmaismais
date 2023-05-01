@@ -10,12 +10,14 @@ import img10 from '../../assets/images/Proven.svg';
 import img11 from '../../assets/images/Invalidated.svg';
 import img12 from '../../assets/images/Save.svg';
 import img13 from '../../assets/images/createNewCurriculum.svg';
-import img14 from '../../assets/images/recyclebinEmpty.svg'
+import img14 from '../../assets/images/recyclebinEmpty.svg';
+import iconUpReceipt from '../../assets/images/uploadReceipt.svg'
 
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 import LeftMenu from '../../components/Menu/LeftMenu';
 import CardReceipt from '../../components/Curriculum/CardReceipt';
+import PopupSpace from '../../components/FormGroup/PopupSpace';
 
 class Versions extends React.Component {
 
@@ -28,7 +30,10 @@ class Versions extends React.Component {
         description: "",
         version: "",
         entryList: [],
-        receiptList: []
+
+        receiptList: [],
+        newReceits: [],
+        renderPopupImportReceipt: false
     }
 
     constructor() {
@@ -66,7 +71,7 @@ class Versions extends React.Component {
     }
 
     setReceipList = async (value) => {
-        this.setState({receiptList: value});
+        this.setState({ receiptList: value });
     }
 
     deleteReceipOfList = async (id) => {
@@ -78,7 +83,7 @@ class Versions extends React.Component {
 
     verifyReceipts = () => {
         const numbReceipts = this.state.receiptList.length;
-        
+
         if (numbReceipts === 5) {
             this.buttAuthValidator.disabled = true;
             this.buttAuthEletronic.disabled = true;
@@ -89,13 +94,19 @@ class Versions extends React.Component {
             this.buttAuthValidator.disabled = false;
             this.buttAuthEletronic.disabled = true;
 
-            if(this.state.receiptList[0].url != null) {
+            if (this.state.receiptList[0].url != null) {
                 this.buttAuthValidator.disabled = true;
             }
         } else {
             this.buttAuthValidator.disabled = false;
             this.buttAuthEletronic.disabled = false;
             alert("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
+        }
+    }
+
+    addReceipt = (file) => {
+        if (file != null) {
+            console.log(file);
         }
     }
 
@@ -128,13 +139,40 @@ class Versions extends React.Component {
                 </div>
 
                 <div className='Validation-update-curriculum'>
-                    <Button color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element} >
+                    <Button color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element}
+                        onClick={() => this.setState({ renderPopupImportReceipt: true })} >
                         (+) Auten. Validador
                     </Button>
                     <Button color="primary" size="lg" className="Electronic-authentication" innerRef={element => this.buttAuthEletronic = element} >
                         (+) Auten. Eletrônica
                     </Button>
                 </div>
+
+                <PopupSpace render={this.state.renderPopupImportReceipt}>
+                    <h2 className='Center'>Autenticação - Validador</h2>
+                    <div className='In-line'>
+                        <h3>Arquivo:</h3>
+                        <input type='text' disabled={true} className='Input-arquive' placeholder='Clique em enviar'/>
+
+                        <input type='file' accept='.jpeg, .jpg, .png, .pdf' className='Input-hiden' ref={element => this.fileup01 = element}/>
+                        <Button color="primary" size="sm" className="Bt-import-Receipt" onClick={() => this.fileup01.click()} >
+                            <img className="Icon" border="0" src={iconUpReceipt} />
+                            <b>ENVIAR</b>
+                        </Button>
+                    </div>
+                    <div className='In-line'>
+                        <h3>Comentário:</h3>
+                        <input type='text' className='Input-commentary' placeholder='(opcional)'/>
+                    </div>
+                    <div className='Buttons-confirm-cancel-receipt'>
+                        <Button color="primary" size="lg" >
+                            <b>ADICIONAR COMP</b>
+                        </Button>
+                        <Button color="danger" size="lg" onClick={() => this.setState({renderPopupImportReceipt: false})}>
+                            <b>CANCEL</b>
+                        </Button>
+                    </div>
+                </PopupSpace>
 
                 <div className="boxExperiences">
                     <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} ></EntriesMap>
