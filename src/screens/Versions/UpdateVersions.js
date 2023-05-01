@@ -38,6 +38,7 @@ class Versions extends React.Component {
         currentReceiptFile:null,
         currentReceiptFileName: "***",
         currentReceiptCommentary:null,
+        newReceiptsFiles: [],
     }
 
     constructor() {
@@ -81,8 +82,11 @@ class Versions extends React.Component {
     setReceiptList = async (value) => {
         this.setState({ receiptList: value });
     }
-    //TODO rever lógica
+    
     deleteReceipOfList = async (id) => {
+        if(`${id}`.includes("new")){
+            this.removeFromNewReceips(id);
+        }
         var array = this.state.receiptList;
         array = array.filter(rec => rec.id != id);
         await this.deleteOfEntry(array);
@@ -98,6 +102,11 @@ class Versions extends React.Component {
         for(const rec of array) {
             this.state.receiptList.push(rec);
         }
+    }
+
+    removeFromNewReceips = (id) => {
+        const currentArray = this.state.newReceiptsFiles;
+        this.setState({newReceiptsFiles: currentArray.filter(file => file.id != id)});
     }
 
     verifyReceipts = () => {
@@ -146,7 +155,7 @@ class Versions extends React.Component {
         const indexBarr = type.indexOf("/");
 
         const receipt = {
-            id: `new${this.state.receiptList.length}`,
+            id: `new${this.state.newReceiptsFiles.length}`,
             name: this.state.currentReceiptFileName,
             extension: type.substring(indexBarr + 1, type.length),
             commentary: this.state.currentReceiptCommentary,
@@ -154,12 +163,21 @@ class Versions extends React.Component {
             url: null
         };
         this.state.receiptList.push(receipt);
+
+        this.state.currentReceiptFile.id=(receipt.id);
+        this.state.newReceiptsFiles.push(this.state.currentReceiptFile);
     }
 
     addReceiptAndUpdateListCard = async () => {
         await this.addNewReceipt();
         this.verifyReceipts();
         this.cancelUploadReceipt();
+    }
+    //TODO
+    updateCurriculum = async () => {
+        for(const entry of this.state.entryList) {
+            
+        }
     }
 
     //TODO botão de voltar deve ir para tela de listagem de currículos
@@ -182,11 +200,11 @@ class Versions extends React.Component {
                     <Button onClick={this.home} color="primary" size="lg" className="Bt-space-between">
                         <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>
-                    <Button color="primary" size="lg" className="Bt-space-between">
-                        <img id="ico-Save" className="Button-Save Bt-size1-updateC" border="0" src={img12} />
+                    <Button color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()}>
+                        <img className="Button-Save Bt-size1-updateC Current-version" border="0" src={img12} />
                     </Button>
                     <Button color="primary" size="lg" className="Save Save-new-version">
-                        <img id="ico-Save" className="Button-Save Bt-size1-updateC" border="0" src={img13} />
+                        <img className="Button-Save Bt-size1-updateC New-version" border="0" src={img13} />
                     </Button>
                 </div>
 
