@@ -2,6 +2,7 @@ import React from 'react';
 import './UpdateVersions.css';
 import VersionService from '../../services/VersionsService';
 import FileUploadService from '../../services/FileUploadService';
+import FileUploadWithoutClassCreationService from '../../services/FileUploadWithoutClassCreationService';
 import ReceiptWithUrlService from '../../services/ReceiptWithUrlService';
 import EntriesMap from '../../components/Curriculum/EntriesMap';
 
@@ -47,12 +48,16 @@ class UpdateVersions extends React.Component {
 
         renderPopupInformUrl: false,
         currentLink: "",
+
+        renderPopupCommentaryVersion: false,
+        commentaryToNewVersion: "",
     }
 
     constructor() {
         super();
         this.service = new VersionService();
         this.fileUploadService = new FileUploadService();
+        this.onlyFileUpload = new FileUploadWithoutClassCreationService();
         this.receiptWithUrlService = new ReceiptWithUrlService();
     }
 
@@ -164,30 +169,32 @@ class UpdateVersions extends React.Component {
 
     countReceiptAdd = () => {
         const currentValue = this.state.countNewReceipts;
-        this.setState({countNewReceipts: currentValue + 1});
+        this.setState({ countNewReceipts: currentValue + 1 });
         return currentValue;
     }
 
     countReceiptRemove = () => {
-        this.setState({countNewReceipts: this.state.countNewReceipts - 1});
+        this.setState({ countNewReceipts: this.state.countNewReceipts - 1 });
     }
 
     addNewReceipt = async () => {
         var receipt;
 
-        if(this.state.currentLink === "") {
-            const type = this.state.currentReceiptFile.type;
-            const indexBarr = type.indexOf("/");
-            
+        if (this.state.currentLink === "") {
+            const nameFile = this.state.currentReceiptFile.name;
+            const indexDot = nameFile.indexOf(".");
+
             receipt = {
                 id: `new${this.countReceiptAdd()}`,
-                name: this.state.currentReceiptFileName,
-                extension: type.substring(indexBarr + 1, type.length),
+                name: nameFile.substring(0, indexDot),
+                extension: nameFile.substring(indexDot),
                 commentary: this.state.currentReceiptCommentary,
                 status: "WAITING_VALIDATION",
-                url: null
+                url: null,
+
+                lastModified: `${this.state.currentReceiptFile.lastModified}`,
             };
-            
+
             this.state.currentReceiptFile.id = (receipt.id);
             this.state.newReceiptsFiles.push(this.state.currentReceiptFile);
         } else {
@@ -209,22 +216,8 @@ class UpdateVersions extends React.Component {
     }
 
     updateCurriculum = async () => {
-        for (const entry of this.state.entryList) {
+        await this.saveNewReceiptsAndSetId();
 
-            for (const receipt of entry.receipts) {
-
-                if (`${receipt.id}`.includes("new")) {
-                    var idRec;
-
-                    if(receipt.url === null) {
-                        idRec = await this.sendFileToUserFolder(receipt);
-                    } else {
-                        idRec = await this.receiptWithUrlService.create(receipt).then(response => {return response.data});
-                    }
-                    receipt.id = idRec;
-                }
-            }
-        }
         this.service.update({
             id: this.state.id,
             ownerId: this.state.ownerId,
@@ -239,6 +232,25 @@ class UpdateVersions extends React.Component {
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    saveNewReceiptsAndSetId = async () => {
+        for (const entry of this.state.entryList) {
+
+            for (const receipt of entry.receipts) {
+
+                if (`${receipt.id}`.includes("new")) {
+                    var idRec;
+
+                    if (receipt.url === null) {
+                        idRec = await this.sendFileToUserFolder(receipt);
+                    } else {
+                        idRec = await this.receiptWithUrlService.create(receipt).then(response => { return response.data });
+                    }
+                    receipt.id = idRec;
+                }
+            }
+        }
     }
 
     sendFileToUserFolder = async (receipt) => {
@@ -273,6 +285,82 @@ class UpdateVersions extends React.Component {
         this.cancelLinkAuth();
     }
 
+    cancelSaveNewVersion = () => {
+        this.setState({
+            renderPopupCommentaryVersion: false,
+            commentaryToNewVersion: ""
+        })
+    }
+
+    saveNewVersion = async () => {
+
+        await this.removeIdOfNewReceips();
+
+        var idNewVersion = "";
+
+        await this.service.create({
+            id: this.state.id,
+            ownerId: this.state.ownerId,
+            lastModification: this.state.lastModification,
+            description: this.state.commentaryToNewVersion,
+            entryCount: this.state.entryCount,
+            entryList: this.state.entryList
+        }).then((response) => {
+            idNewVersion = response.data.id;
+            // envia novos arquivos ao DB caso existam
+            if (this.state.newReceiptsFiles.length > 0) {
+                this.onlySendNewFiles(response.data.entryList);
+            }
+        })
+        
+        this.cancelSaveNewVersion();
+        alert("Nova versão salva com sucesso! Atualizando página para edição da nova versão!");
+        this.props.history.push(`/updateversions/${idNewVersion}`);
+        window.location.reload();
+    }
+
+    removeIdOfNewReceips = async () => {
+        for(const entry of this.state.entryList) {
+
+            for(const rec of entry.receipts) {
+
+                if(`${rec.id}`.includes("new")) {
+                    rec.id = null;
+                }
+            }
+        }
+    }
+
+    onlySendNewFiles = async (entryListSaved) => {
+        console.log(this.state.newReceiptsFiles[0]);
+        // busca a referência de cada arquivo novo a ser salvo
+        for (const file of this.state.newReceiptsFiles) {
+            // verifica cada entrada já salva no DB
+            for (const entry of entryListSaved) {
+                var wasFinded = false;
+                // caso encontre, envia e passa para o próximo arquivo a ser enviado
+                for (const rec of entry.receipts) {
+                    
+                    if (rec.lastModified == file.lastModified && `${rec.name}${rec.extension}` === file.name) {
+                        const data = new FormData();
+                        data.append('file', file);
+                        data.append('userId', this.state.ownerId);
+                        data.append('userCommentary', 'not used, but @valid stop the request whithout this');
+                        data.append('nameOnDB', rec.id + rec.extension);
+
+                        await this.onlyFileUpload.create(data);
+
+                        wasFinded = true;
+                        break;
+                    }
+                }
+                if(wasFinded) {
+                    break;
+                }
+            }
+        }
+    }
+
     //TODO botão de voltar deve ir para tela de listagem de currículos
     render() {
 
@@ -289,14 +377,14 @@ class UpdateVersions extends React.Component {
                 </div>
 
                 <div className='Save-return-buttons'>
-                    {/** TODO */}
-                    <Button onClick={this.home} color="primary" size="lg" className="Bt-space-between">
+                    {/** //TODO */}
+                    <Button id='buttonComeBack' onClick={this.home} color="primary" size="lg" className="Bt-space-between">
                         <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>
-                    <Button color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()}>
+                    <Button id='buttonUpdate' color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()}>
                         <img className="Button-Save Bt-size1-updateC Current-version" border="0" src={img12} />
                     </Button>
-                    <Button color="primary" size="lg" className="Save Save-new-version">
+                    <Button id='buttonNewVersion' color="primary" size="lg" className="Save Save-new-version" onClick={() => this.setState({ renderPopupCommentaryVersion: true })}>
                         <img className="Button-Save Bt-size1-updateC New-version" border="0" src={img13} />
                     </Button>
                 </div>
@@ -344,16 +432,36 @@ class UpdateVersions extends React.Component {
                     <h2 className='Center'>Autenticação - Eletrônica</h2>
                     <div className='InputsLink'>
                         <h3>Informe o link:</h3>
-                        <textarea className='Paragraph-field' autoFocus={true} onChange={e => this.setState({currentLink: e.target.value.trim()})} />
+                        <textarea className='Paragraph-field' autoFocus={true} onChange={e => this.setState({ currentLink: e.target.value.trim() })} />
                         <br />
                         <h3>Comentário:</h3>
-                        <input type='text' className='Commentary' placeholder='(opcional)' onChange={e => this.setState({currentReceiptCommentary: e.target.value.trim()})} />
+                        <input type='text' className='Commentary' placeholder='(opcional)' onChange={e => this.setState({ currentReceiptCommentary: e.target.value.trim() })} />
                     </div>
                     <div className='Buttons-link'>
                         <Button color="primary" size="lg" disabled={this.state.currentLink === ""} onClick={() => this.addLinkReceipt()}>
                             <b>ADICIONAR COMP</b>
                         </Button>
                         <Button color="danger" size="lg" onClick={() => this.cancelLinkAuth()}>
+                            <b>CANCELAR</b>
+                        </Button>
+                    </div>
+                </PopupSpace>
+
+                {/* ADD COMMENTARY TO SAVE NEW VERSION */}
+                <PopupSpace render={this.state.renderPopupCommentaryVersion}>
+                    <h2 className='Center'>Salvar nova versão do currículo</h2>
+                    <div className='InputsLink'>
+                        <h3>Adicione um comentário:</h3>
+                        <input type='text' className='Commentary' placeholder='(requisitado)' onChange={e => this.setState({ commentaryToNewVersion: e.target.value.trim() })} />
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div className='Buttons-link'>
+                        <Button color="primary" size="lg" disabled={this.state.commentaryToNewVersion === ""} onClick={() => this.saveNewVersion()}>
+                            <b>SALVAR</b>
+                        </Button>
+                        <Button color="danger" size="lg" onClick={() => this.cancelSaveNewVersion()}>
                             <b>CANCELAR</b>
                         </Button>
                     </div>
