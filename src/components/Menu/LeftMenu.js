@@ -9,9 +9,14 @@ import img4 from '../../assets/images/history.svg';
 import img5 from '../../assets/images/export.svg';
 import img6 from '../../assets/images/off.svg';
 
-
+import AuthenticationApiService from "../../services/AuthenticationApiService";
 
 class LeftMenu extends React.Component {
+
+    constructor() {
+        super();
+        this.authentService = new AuthenticationApiService();
+    }
 
     componentDidMount() {
 
@@ -65,6 +70,8 @@ class LeftMenu extends React.Component {
             <div className="ScheduleValidation01">
                 <h1 onClick={this.home}>Lattes</h1>
                 <h2>+ +</h2>
+                {/* //TODO descomentar baixo quando usar autenticação e remover linha subsequente*/}
+                {/* <h5 id="name-owner">{this.authentService.getLoggedUser().name}</h5> */}
                 <h5 id="name-owner">DANILO DE SOUSA COSTA</h5>
                 <div className="AllButtons">
                     <button type="importresume" ref={(button) => { this.impButton = button }}

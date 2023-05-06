@@ -83,7 +83,7 @@ function EntriesMap(props) {
                         <div className="Up-icon">
                             {iconsToLoad(entry.receipts, entry.id)}
                         </div>
-                        <p key={entry.id} id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        <p key={entry.id} id={entry.id} onClick={elem => props.loadReceipts(entry.receipts, elem.target)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             {entry.name}
                         </p>
                     </div>
@@ -95,7 +95,7 @@ function EntriesMap(props) {
                     <div className="Up-icon">
                         {iconsToLoad(entry.receipts, entry.id)}
                     </div>
-                    <p id={entry.id} onClick={() => props.loadReceipts(entry.receipts)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    <p id={entry.id} onClick={elem => props.loadReceipts(entry.receipts, elem.target)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         {entry.name}
                     </p>
                 </div>

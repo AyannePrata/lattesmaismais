@@ -35,7 +35,7 @@ class UpdateVersions extends React.Component {
         entryList: [],
         lastModification: "",
 
-        //TODO criar método que destaca entrada ativa no momento// activeEntry: null,
+        activeEntry: null,
         receiptList: [],
 
         renderPopupImportReceipt: false,
@@ -51,6 +51,8 @@ class UpdateVersions extends React.Component {
 
         renderPopupCommentaryVersion: false,
         commentaryToNewVersion: "",
+
+        haveAllOriginalReceipts: true,
     }
 
     constructor() {
@@ -66,6 +68,7 @@ class UpdateVersions extends React.Component {
         this.findById(id);
         this.buttAuthValidator.disabled = true;
         this.buttAuthEletronic.disabled = true;
+        this.buttUpdate.disabled = true;
     }
 
     findById = (curriculumId) => {
@@ -88,10 +91,11 @@ class UpdateVersions extends React.Component {
             });
     }
 
-    showReceipts = async (receipts) => {
+    showReceipts = async (receipts, element) => {
         await this.setReceiptList(receipts);
         this.buttAuthValidator.disabled = false;
         this.buttAuthEletronic.disabled = false;
+        this.emphasis(element);
         this.verifyReceipts();
     }
 
@@ -99,11 +103,28 @@ class UpdateVersions extends React.Component {
         this.setState({ receiptList: value });
     }
 
-    deleteReceipOfList = async (id) => {
-        if (`${id}`.includes("new")) {
-            this.removeFromNewReceips(id);
-            this.countReceiptRemove();
+    emphasis = (element) => {
+        if(this.state.activeEntry != null) {
+            this.state.activeEntry.classList.remove('Emphasis');
         }
+
+        element.classList.add('Emphasis');
+        this.setState({activeEntry: element});
+    }
+
+    deleteReceipOfList = async (id) => {
+        
+        if (`${id}`.includes("new")) {
+            await this.removeFromNewReceips(id);
+            this.countReceiptRemove();
+            if(this.state.newReceiptsFiles.length === 0 && this.state.haveAllOriginalReceipts) {
+                this.buttUpdate.disabled = true;
+            }
+        } else {
+            this.setState({haveAllOriginalReceipts: false});
+            this.buttUpdate.disabled = false;
+        }
+
         var array = this.state.receiptList;
         array = array.filter(rec => rec.id != id);
         await this.deleteOfEntry(array);
@@ -121,7 +142,7 @@ class UpdateVersions extends React.Component {
         }
     }
 
-    removeFromNewReceips = (id) => {
+    removeFromNewReceips = async (id) => {
         const currentArray = this.state.newReceiptsFiles;
         this.setState({ newReceiptsFiles: currentArray.filter(file => file.id != id) });
     }
@@ -213,6 +234,7 @@ class UpdateVersions extends React.Component {
         await this.addNewReceipt();
         this.verifyReceipts();
         this.cancelUploadReceipt();
+        this.buttUpdate.disabled = false;
     }
 
     updateCurriculum = async () => {
@@ -226,7 +248,7 @@ class UpdateVersions extends React.Component {
             entryCount: this.state.entryCount,
             entryList: this.state.entryList,
         }).then(response => {
-            //TODO criar alerta
+            //TODO criar alertas
             alert("Alterações salvas com sucesso! Atualizando página!");
             window.location.reload();
         }).catch(error => {
@@ -294,7 +316,9 @@ class UpdateVersions extends React.Component {
 
     saveNewVersion = async () => {
 
-        await this.removeIdOfNewReceips();
+        if(this.state.newReceiptsFiles.length > 0) {
+            await this.removeIdOfNewReceips();
+        }
 
         var idNewVersion = "";
 
@@ -361,7 +385,6 @@ class UpdateVersions extends React.Component {
         }
     }
 
-    //TODO botão de voltar deve ir para tela de listagem de currículos
     render() {
 
         return (
@@ -377,23 +400,23 @@ class UpdateVersions extends React.Component {
                 </div>
 
                 <div className='Save-return-buttons'>
-                    {/** //TODO */}
-                    <Button id='buttonComeBack' onClick={this.home} color="primary" size="lg" className="Bt-space-between">
+                    {/* //TODO  mudar botão comeback para direcionar para tela de listagem de versões */}
+                    <Button id='buttonComeBack' onClick={this.home} color="primary" size="lg" className="Bt-space-between" title='listagem de versões'>
                         <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>
-                    <Button id='buttonUpdate' color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()}>
+                    <Button id='buttonUpdate' color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()} innerRef={elem => this.buttUpdate = elem} title='salvar versão atual'>
                         <img className="Button-Save Bt-size1-updateC Current-version" border="0" src={img12} />
                     </Button>
-                    <Button id='buttonNewVersion' color="primary" size="lg" className="Save Save-new-version" onClick={() => this.setState({ renderPopupCommentaryVersion: true })}>
+                    <Button id='buttonNewVersion' color="primary" size="lg" className="Save Save-new-version" onClick={() => this.setState({ renderPopupCommentaryVersion: true })} title='salvar nova versão'>
                         <img className="Button-Save Bt-size1-updateC New-version" border="0" src={img13} />
                     </Button>
                 </div>
                 <div className='Validation-update-curriculum'>
-                    <Button color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element}
+                    <Button id='butonAuthValidator' color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element}
                         onClick={() => this.setState({ renderPopupImportReceipt: true })} >
                         (+) Auten. Validador
                     </Button>
-                    <Button color="primary" size="lg" className="Electronic-authentication" innerRef={element => this.buttAuthEletronic = element}
+                    <Button id='buttonAuthEletronic' color="primary" size="lg" className="Electronic-authentication" innerRef={element => this.buttAuthEletronic = element}
                         onClick={() => this.setState({ renderPopupInformUrl: true })} >
                         (+) Auten. Eletrônica
                     </Button>
@@ -408,7 +431,7 @@ class UpdateVersions extends React.Component {
 
                         <input type='file' accept='.jpeg, .jpg, .png, .pdf' className='Input-hiden' ref={element => this.fileup01 = element}
                             onChange={(e) => this.setCurrentFile(e.target.files[0])} />
-                        <Button color="primary" size="sm" className="Bt-import-Receipt" onClick={() => this.fileup01.click()} >
+                        <Button id='buttonSendFisicalReceipt' color="primary" size="sm" className="Bt-import-Receipt" onClick={() => this.fileup01.click()} >
                             <img className="Icon" border="0" src={iconUpReceipt} />
                             <b>ENVIAR</b>
                         </Button>
@@ -418,10 +441,10 @@ class UpdateVersions extends React.Component {
                         <input type='text' className='Input-commentary' placeholder='(opcional)' onChange={(e) => this.setState({ currentReceiptCommentary: e.target.value })} />
                     </div>
                     <div className='Buttons-confirm-cancel-receipt'>
-                        <Button color="primary" size="lg" disabled={this.state.currentReceiptFileName === "***"} onClick={() => this.addReceiptAndUpdateListCard()}>
+                        <Button id='buttonAddFisicalReceipt' color="primary" size="lg" disabled={this.state.currentReceiptFileName === "***"} onClick={() => this.addReceiptAndUpdateListCard()}>
                             <b>ADICIONAR COMP</b>
                         </Button>
-                        <Button color="danger" size="lg" onClick={() => this.cancelUploadReceipt()}>
+                        <Button id='buttonCancelSendFisicalReceipt' color="danger" size="lg" onClick={() => this.cancelUploadReceipt()}>
                             <b>CANCELAR</b>
                         </Button>
                     </div>
@@ -432,16 +455,16 @@ class UpdateVersions extends React.Component {
                     <h2 className='Center'>Autenticação - Eletrônica</h2>
                     <div className='InputsLink'>
                         <h3>Informe o link:</h3>
-                        <textarea className='Paragraph-field' autoFocus={true} onChange={e => this.setState({ currentLink: e.target.value.trim() })} />
+                        <textarea className='Paragraph-field' onFocus={true} onChange={e => this.setState({ currentLink: e.target.value.trim() })} />
                         <br />
                         <h3>Comentário:</h3>
                         <input type='text' className='Commentary' placeholder='(opcional)' onChange={e => this.setState({ currentReceiptCommentary: e.target.value.trim() })} />
                     </div>
                     <div className='Buttons-link'>
-                        <Button color="primary" size="lg" disabled={this.state.currentLink === ""} onClick={() => this.addLinkReceipt()}>
+                        <Button id='buttonAddReceiptLink' color="primary" size="lg" disabled={this.state.currentLink === ""} onClick={() => this.addLinkReceipt()}>
                             <b>ADICIONAR COMP</b>
                         </Button>
-                        <Button color="danger" size="lg" onClick={() => this.cancelLinkAuth()}>
+                        <Button id='buttonCancelAddReceiptLink' color="danger" size="lg" onClick={() => this.cancelLinkAuth()}>
                             <b>CANCELAR</b>
                         </Button>
                     </div>
@@ -452,16 +475,16 @@ class UpdateVersions extends React.Component {
                     <h2 className='Center'>Salvar nova versão do currículo</h2>
                     <div className='InputsLink'>
                         <h3>Adicione um comentário:</h3>
-                        <input type='text' className='Commentary' placeholder='(requisitado)' onChange={e => this.setState({ commentaryToNewVersion: e.target.value.trim() })} />
+                        <input type='text' className='Commentary' autoFocus={true} placeholder='(requisitado)' onChange={e => this.setState({ commentaryToNewVersion: e.target.value.trim() })} />
                     </div>
                     <br />
                     <br />
                     <br />
                     <div className='Buttons-link'>
-                        <Button color="primary" size="lg" disabled={this.state.commentaryToNewVersion === ""} onClick={() => this.saveNewVersion()}>
+                        <Button id='buttonSaveNewVersion' color="primary" size="lg" disabled={this.state.commentaryToNewVersion === ""} onClick={() => this.saveNewVersion()}>
                             <b>SALVAR</b>
                         </Button>
-                        <Button color="danger" size="lg" onClick={() => this.cancelSaveNewVersion()}>
+                        <Button id='buttonCancelSaveNewVersion' color="danger" size="lg" onClick={() => this.cancelSaveNewVersion()}>
                             <b>CANCELAR</b>
                         </Button>
                     </div>

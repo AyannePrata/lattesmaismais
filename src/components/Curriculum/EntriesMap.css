@@ -18,6 +18,7 @@
 
 .Entry-and-icons {
     display: flex;
+    margin-bottom: 2vh;
 }
 
 .Icon-and-count {

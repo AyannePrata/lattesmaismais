@@ -175,3 +175,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.boxExperiences .Emphasis {
+    color: #36ca3f;
+}
