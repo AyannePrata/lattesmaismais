@@ -69,6 +69,19 @@ class UpdateVersions extends React.Component {
         this.buttAuthValidator.disabled = true;
         this.buttAuthEletronic.disabled = true;
         this.buttUpdate.disabled = true;
+
+        window.onbeforeunload = (event) => {
+            // verify reload condition
+            if(!this.state.haveAllOriginalReceipts || this.state.newReceiptsFiles.length > 0) {
+                const e = event || window.event;
+                // Cancel the event
+                e.preventDefault();
+                if (e) {
+                  e.returnValue = ''; // Legacy method for cross browser support
+                }
+                return ''; // Legacy method for cross browser support
+            }
+        };
     }
 
     findById = (curriculumId) => {
