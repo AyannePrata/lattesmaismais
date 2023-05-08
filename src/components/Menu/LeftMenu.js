@@ -31,7 +31,7 @@ class LeftMenu extends React.Component {
         }else if(url === "http://localhost:3000/shedulingvalidation") {
             this.doSchedulingButton.classList.add('Underline');
 
-        }else if(url.includes("3000/updateVersions")) {
+        }else if(url.toLowerCase().includes("3000/updateversions")) {
             this.versionsButton.classList.add('Underline');
         }
     }

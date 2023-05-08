@@ -7,7 +7,7 @@ export default class ReceiptWithUrlService extends ApiService {
         super('/receipt')
     }
 
-    create(object) {
-        return this.post("",object);
+    create(params) {
+        return this.post("",params);
     }
 }

@@ -72,12 +72,12 @@ class UpdateVersions extends React.Component {
 
         window.onbeforeunload = (event) => {
             // verify reload condition
-            if(!this.state.haveAllOriginalReceipts || this.state.newReceiptsFiles.length > 0) {
+            if (!this.state.haveAllOriginalReceipts || this.state.countNewReceipts > 0 ) {
                 const e = event || window.event;
                 // Cancel the event
                 e.preventDefault();
                 if (e) {
-                  e.returnValue = ''; // Legacy method for cross browser support
+                    e.returnValue = ''; // Legacy method for cross browser support
                 }
                 return ''; // Legacy method for cross browser support
             }
@@ -117,24 +117,29 @@ class UpdateVersions extends React.Component {
     }
 
     emphasis = (element) => {
-        if(this.state.activeEntry != null) {
+        if (this.state.activeEntry != null) {
             this.state.activeEntry.classList.remove('Emphasis');
         }
 
         element.classList.add('Emphasis');
-        this.setState({activeEntry: element});
+        this.setState({ activeEntry: element });
     }
 
-    deleteReceipOfList = async (id) => {
-        
+    deleteReceipOfList = async (id, isFisicalFile) => {
+
         if (`${id}`.includes("new")) {
-            await this.removeFromNewReceips(id);
-            this.countReceiptRemove();
-            if(this.state.newReceiptsFiles.length === 0 && this.state.haveAllOriginalReceipts) {
+
+            if(isFisicalFile) {
+                await this.removeFromNewReceips(id);
+            }
+            
+            this.countNewReceiptRemove();
+
+            if (this.state.countNewReceipts === 0 && this.state.haveAllOriginalReceipts) {
                 this.buttUpdate.disabled = true;
             }
         } else {
-            this.setState({haveAllOriginalReceipts: false});
+            this.setState({ haveAllOriginalReceipts: false });
             this.buttUpdate.disabled = false;
         }
 
@@ -156,8 +161,7 @@ class UpdateVersions extends React.Component {
     }
 
     removeFromNewReceips = async (id) => {
-        const currentArray = this.state.newReceiptsFiles;
-        this.setState({ newReceiptsFiles: currentArray.filter(file => file.id != id) });
+        this.setState({ newReceiptsFiles: this.state.newReceiptsFiles.filter(file => file.id != id) });
     }
 
     verifyReceipts = () => {
@@ -201,13 +205,11 @@ class UpdateVersions extends React.Component {
         });
     }
 
-    countReceiptAdd = () => {
-        const currentValue = this.state.countNewReceipts;
-        this.setState({ countNewReceipts: currentValue + 1 });
-        return currentValue;
+    countNewReceiptAdd = () => {
+        return this.setState({ countNewReceipts: this.state.countNewReceipts + 1 });
     }
 
-    countReceiptRemove = () => {
+    countNewReceiptRemove = () => {
         this.setState({ countNewReceipts: this.state.countNewReceipts - 1 });
     }
 
@@ -219,7 +221,7 @@ class UpdateVersions extends React.Component {
             const indexDot = nameFile.indexOf(".");
 
             receipt = {
-                id: `new${this.countReceiptAdd()}`,
+                id: `new${this.countNewReceiptAdd()}`,
                 name: nameFile.substring(0, indexDot),
                 extension: nameFile.substring(indexDot),
                 commentary: this.state.currentReceiptCommentary,
@@ -233,7 +235,7 @@ class UpdateVersions extends React.Component {
             this.state.newReceiptsFiles.push(this.state.currentReceiptFile);
         } else {
             receipt = {
-                id: `new${this.countReceiptAdd()}`,
+                id: `new${this.countNewReceiptAdd()}`,
                 commentary: this.state.currentReceiptCommentary,
                 status: "WAITING_VALIDATION",
                 url: this.state.currentLink
@@ -263,6 +265,7 @@ class UpdateVersions extends React.Component {
         }).then(response => {
             //TODO criar alertas
             alert("Alterações salvas com sucesso! Atualizando página!");
+            this.setState({ countNewReceipts: 0, haveAllOriginalReceipts: true });
             window.location.reload();
         }).catch(error => {
             console.log(error);
@@ -329,7 +332,7 @@ class UpdateVersions extends React.Component {
 
     saveNewVersion = async () => {
 
-        if(this.state.newReceiptsFiles.length > 0) {
+        if(this.state.countNewReceipts > 0) {
             await this.removeIdOfNewReceips();
         }
 
@@ -349,19 +352,19 @@ class UpdateVersions extends React.Component {
                 this.onlySendNewFiles(response.data.entryList);
             }
         })
-        
-        this.cancelSaveNewVersion();
+
         alert("Nova versão salva com sucesso! Atualizando página para edição da nova versão!");
+        this.setState({ countNewReceipts: 0, haveAllOriginalReceipts: true });
         this.props.history.push(`/updateversions/${idNewVersion}`);
         window.location.reload();
     }
 
     removeIdOfNewReceips = async () => {
-        for(const entry of this.state.entryList) {
+        for (const entry of this.state.entryList) {
 
-            for(const rec of entry.receipts) {
+            for (const rec of entry.receipts) {
 
-                if(`${rec.id}`.includes("new")) {
+                if (`${rec.id}`.includes("new")) {
                     rec.id = null;
                 }
             }
@@ -377,7 +380,7 @@ class UpdateVersions extends React.Component {
                 var wasFinded = false;
                 // caso encontre, envia e passa para o próximo arquivo a ser enviado
                 for (const rec of entry.receipts) {
-                    
+
                     if (rec.lastModified == file.lastModified && `${rec.name}${rec.extension}` === file.name) {
                         const data = new FormData();
                         data.append('file', file);
@@ -391,7 +394,7 @@ class UpdateVersions extends React.Component {
                         break;
                     }
                 }
-                if(wasFinded) {
+                if (wasFinded) {
                     break;
                 }
             }
@@ -468,7 +471,7 @@ class UpdateVersions extends React.Component {
                     <h2 className='Center'>Autenticação - Eletrônica</h2>
                     <div className='InputsLink'>
                         <h3>Informe o link:</h3>
-                        <textarea className='Paragraph-field' onFocus={true} onChange={e => this.setState({ currentLink: e.target.value.trim() })} />
+                        <textarea className='Paragraph-field' autoFocus={true} onChange={e => this.setState({ currentLink: e.target.value.trim() })} />
                         <br />
                         <h3>Comentário:</h3>
                         <input type='text' className='Commentary' placeholder='(opcional)' onChange={e => this.setState({ currentReceiptCommentary: e.target.value.trim() })} />
