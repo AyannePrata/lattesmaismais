@@ -14,9 +14,10 @@ class Home extends React.Component {
         this.service = new HomeService();
     }
 
-    schedulings = () => {
-        this.props.history.push("/scheduling");
+    updateVersions = () => {
+        this.props.history.push("/updateVersions/1");
     }
+
     home = () => {
         this.props.history.push("/home");
     }
@@ -42,8 +43,6 @@ class Home extends React.Component {
                 <div className='Text-Home'>
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
                     <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>
-                    <p>OU</p>
-                    <p id='p-final'>- Escolha uma versão no histórico de "Versões"</p>
                     
                 </div>
                 <FileUpload accept=".xml" toSendAttribute={this.sendFile}/>
@@ -55,7 +54,7 @@ class Home extends React.Component {
                              <h3>DANILO DE SOUSA COSTA</h3>
                              <h4>Confirma?</h4>
                             
-                             <Button onClick={this.schedulings} color="primary" size="lg" className="Confirmation">
+                             <Button onClick={this.updateVersions} color="primary" size="lg" className="Confirmation">
                                 Sim, sou eu
                             </Button>
                             <Button onClick={this.home} color="danger" size="lg" className="ImportAnother">

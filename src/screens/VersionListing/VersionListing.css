@@ -1,0 +1,97 @@
+.Versions-Screen .box {
+    position: absolute;
+    left: 597px;
+    top: 5vh;
+    width: 69vw;
+    height: 13vh;
+    background: #D9D9D9;
+}
+
+
+.box h1 {
+    position: absolute;
+    font-family: 'Arial';
+    font-size: 38px;
+    left: 25px;
+    top: 2vh;
+    width: 69vw;
+    height: 15vh;
+    color: #087ae4;
+
+}
+
+
+.box h2 {
+    position: absolute;
+    font-family: 'Arial';
+    font-size: 23px;
+    font-style: normal;
+    left: 25px;
+    top: 7vh;
+    width: 29vw;
+    height: 5vh;
+    color: #302e2e;
+
+}
+
+
+.box h3 {
+    position: absolute;
+    font-family: 'Arial';
+    font-size: 25px;
+    font-style: normal;
+    left: 600px;
+    top: 4vh;
+    width: 29vw;
+    height: 5vh;
+    color: #302e2e;
+
+}
+
+
+.box h4 {
+    position: absolute;
+    font-family: 'Arial';
+    font-size: 20px;
+    font-style: normal;
+    left: 590px;
+    top: 7vh;
+    width: 29vw;
+    height: 5vh;
+    color: #302e2e;
+
+
+}
+
+
+.box .b1 {
+    width: 133px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #087ae4;
+    border: #087ae4;
+    left: 990px;
+    top: 5vh;
+    cursor: pointer;  
+
+
+}
+
+
+.b1 .Button-edit {
+  color: #FFFFFF;
+ 
+}
+
+
+.box .b2 {
+    width: 133px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #c90f0f;
+    border: #c90f0f;
+    left: 1150px;
+    top: 5vh;
+    cursor: pointer;  
+
+}

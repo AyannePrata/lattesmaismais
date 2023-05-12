@@ -7,6 +7,7 @@ import UpdateVersions from "../screens/Versions/UpdateVersions";
 import Login from "../screens/Login/Login";
 import Register from "../screens/Register/Register";
 import Home from "../screens/Home/Home";
+import VersionListing from "../screens/VersionListing/VersionListing";
 
 function RestrictedRoute( {component: Component, show, ...props} ) {
     return(
@@ -31,10 +32,11 @@ function AppRoutes(props) {
           <Switch>
             <Route component = { Login } path="/" exact/>
             <Route component = { Register } path="/register/" />
-            <RestrictedRoute show={props.isAuthenticated} component = { Home } path="/home/" />
+            <RestrictedRoute show={props.isAuthenticated}component = { Home } path="/home/" />
             <Route component = { UpdateVersions } path="/updateversions/:id" />
             <RestrictedRoute show={props.isAuthenticated} component = { Schedules } path="/scheduling/" />
             <RestrictedRoute show={props.isAuthenticated} component = { ScheduleValidation } path="/shedulingvalidation" />
+            <RestrictedRoute show={props.isAuthenticated} component = { VersionListing } path="/VersionListing" />
            </Switch> 
         </BrowserRouter>
 
