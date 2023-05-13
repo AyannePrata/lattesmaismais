@@ -6,12 +6,19 @@ import FileUpload from '../../components/FormGroup/FileUpload';
 import HomeService from '../../services/HomeService';
 
 import LeftMenu from '../../components/Menu/LeftMenu';
+import PopupSpace from '../../components/FormGroup/PopupSpace';
 
 class Home extends React.Component {
-    
+
     constructor() {
         super();
         this.service = new HomeService();
+    }
+
+    state = {
+        curriculumIdentity: "",
+        renderCurriculumConfirmation: false,
+        file: null,
     }
 
     updateVersions = () => {
@@ -22,53 +29,72 @@ class Home extends React.Component {
         this.props.history.push("/home");
     }
 
-    sendFile = async (file) => {
+    sendFile = async () => {
+        this.setState({renderCurriculumConfirmation: false});
         // com o arquivo do campo input, passamos para um formData que é o tipo usado para multipart
         const data = new FormData();
-        data.append('file', file);
+        data.append('file', this.state.file);
         data.append('userId', 1); // "1" para exemplo. //TODO implementar lógica de pegar o ID do usuário
 
         this.service.postWithHeaders(data)
-            .then(response => {
-                this.props.history.push(`/updateversions/${response.data}`);
-            }).catch(erro => {
-                console.log(erro.response);
-            });
+        .then(response => {
+            this.props.history.push(`/updateversions/${response.data}`);
+        }).catch(erro => {
+            console.log(erro.response);
+        });
+    }
+
+    VerifyIdentity = (file) => {
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (e) => {
+            const stringXml = e.target.result;
+            var parser = new DOMParser();
+            var docXml = parser.parseFromString(stringXml, "text/xml");
+
+            const owner = docXml.querySelector("DADOS-GERAIS").attributes.getNamedItem("NOME-COMPLETO").value;
+            if(owner === null || owner === undefined) {
+                alert("Currículo inválido! Reveja o arquivo enviado!");
+            } else {
+                this.setState({
+                    owner: owner,
+                    renderCurriculumConfirmation: true,
+                    file: file,
+                });
+            }
+        }
+    }
+
+    cancelImportCurriculum = () => {
+        this.setState({
+            owner: "",
+            renderCurriculumConfirmation: false,
+            file: null,
+        })
     }
 
     render() {
         return (
             <div className='Principal Fields'>
-                <LeftMenu/>
+                <LeftMenu />
                 <div className='Text-Home'>
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
                     <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>
-                    
                 </div>
-                <FileUpload accept=".xml" toSendAttribute={this.sendFile}/>
+                <FileUpload accept=".xml" toSendAttribute={this.VerifyIdentity} />
 
-                <div className='Popup-confirmation'>
-                    <div className='Popup'>
-                        <div className='Popup-content' >
-                            <h2>Confirmação de Identidade do Currículo Importado</h2>
-                             <h3>DANILO DE SOUSA COSTA</h3>
-                             <h4>Confirma?</h4>
-                            
-                             <Button onClick={this.updateVersions} color="primary" size="lg" className="Confirmation">
-                                Sim, sou eu
-                            </Button>
-                            <Button onClick={this.home} color="danger" size="lg" className="ImportAnother">
-                                Cancelar
-                            </Button>
-
-
-                         </div>
-
-    
-
+                <PopupSpace render={this.state.renderCurriculumConfirmation} className="Popup-home">
+                    <h2 className='Center' >Confirmação de identidade do currículo importado</h2>
+                    <br/>
+                    <h2 className='Center NameOwner' >{this.state.owner}</h2>
+                    <br/>
+                    <br/>
+                    <h2 className='Center'>Confirma?</h2>
+                    <div className='Buttons-home-confimation'>
+                        <Button color='primary' size='lg' onClick={() => this.sendFile()}>Sim, sou eu!</Button>
+                        <Button color='danger' size='lg' onClick={() => this.cancelImportCurriculum()}>Não, cancelar!</Button>
                     </div>
-                </div>
-               
+                </PopupSpace>
             </div>
         )
     }

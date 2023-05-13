@@ -13,7 +13,8 @@ function FileUpload(props) {
 
     return (
         <div className="File-upload">
-            <input type="file" accept={props.accept} ref={inputRef}
+            {/* uso de onClick e onChange para permitir que um mesmo arquivo seja enviado após este ter sido cancelado */}
+            <input type="file" accept={props.accept} ref={inputRef} onClick={(e) => e.target.value = ""}
                 onChange={e => {
                     if(e.target.files[0] != null){
                         sendAttribute(e.target.files[0])
