@@ -21,6 +21,7 @@ import { withRouter } from 'react-router';
 import LeftMenu from '../../components/Menu/LeftMenu';
 import CardReceipt from '../../components/Curriculum/CardReceipt';
 import PopupSpace from '../../components/FormGroup/PopupSpace';
+import LoadingComp from '../../components/Extra/LoadingComp';
 
 class UpdateVersions extends React.Component {
 
