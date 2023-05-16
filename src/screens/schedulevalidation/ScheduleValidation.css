@@ -4,21 +4,47 @@
 }
 
 .header {
-    display: inline-block;
+    display: flex;
     margin-right: 0vw;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.b7{
-    width: 233px;
-    height: 40px;
-    color: #FFFFFF;
-    background: #087ae4;
-    border: #087ae4;
-    margin: 0px 24px;
-    cursor: pointer;
+.Fields .Validation {
+    margin-right: 2vw;
+    height: 88vh;
 }
 
-.FormG{
+.TablesDiv {
+    display: flex;
+    justify-content: space-between;
+    --bs-table-striped-bg: #dfdddd;
+    font-weight: 700;
+}
+
+.TablesDiv .CurrTable {
+    text-align: left;
+    width: 30vw;
+}
+
+.TablesDiv .ValidatorTable {
+    text-align: left;
+    width: 15vw;
+}
+
+.TablesDiv .DateAndHour {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.TablesDiv .overFlow-y {
+    overflow-y: scroll;
+    height: 70vh
+}
+
+.header .ButtonScheduling {
     width: 18vw;
+    box-shadow: 0 10px 0 #003c86;
+    font-weight: 700;
 }
