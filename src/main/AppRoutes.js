@@ -34,9 +34,9 @@ function AppRoutes(props) {
             <Route component = { Register } path="/register/" />
             <Route component = { Home } path="/home/" />
             <Route component = { UpdateVersions } path="/updateversions/:id" />
-            <RestrictedRoute show={props.isAuthenticated} component = { Schedules } path="/scheduling/" />
+            <Route component = { Schedules } path="/scheduling/" />
             <Route component = { ScheduleValidation } path="/shedulingvalidation" />
-            <RestrictedRoute show={props.isAuthenticated} component = { VersionListing } path="/VersionListing" />
+            <Route component = { VersionListing } path="/VersionListing" />
            </Switch> 
         </BrowserRouter>
 
