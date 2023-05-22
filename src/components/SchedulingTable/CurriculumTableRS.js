@@ -12,7 +12,7 @@ function CurriculumTableRS(props) {
                 <td>{curriculum.description}</td>
                 <td>{`Alterado em: ${modificationDate}`}</td>
                 <td>
-                    <input type="radio" name="group1"/>
+                    <input type="radio" name="group1" onClick={() => props.versionSelected(curriculum)}/>
                 </td>
             </tr>
         )

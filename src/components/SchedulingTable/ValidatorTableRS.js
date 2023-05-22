@@ -9,7 +9,7 @@ function ValidatorTableRS(props) {
             <tr key={validator.id}>
                 <td>{validator.name}</td>
                 <td>
-                    <input type="radio" name="group2"/>
+                    <input type="radio" name="group2" onClick={() => props.validatorSelected(validator)} />
                 </td>
             </tr>
         )
