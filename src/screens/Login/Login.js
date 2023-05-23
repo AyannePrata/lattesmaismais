@@ -34,7 +34,7 @@ class Login extends React.Component {
             });
             return false;
         }
-        //TODO reorganizar mensagens mostradas em casos de sucessoe  erro
+        //TODO reorganizar mensagens mostradas em casos de sucesso e erro
         const context = this.context;
         context.login(
             this.state.email,

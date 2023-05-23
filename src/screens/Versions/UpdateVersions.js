@@ -420,7 +420,6 @@ class UpdateVersions extends React.Component {
                 </div>
 
                 <div className='Save-return-buttons'>
-                    {/* //TODO  mudar botão comeback para direcionar para tela de listagem de versões */}
                     <Button id='buttonComeBack' onClick={() => this.props.history.push("/versionlisting")} color="primary" size="lg" className="Bt-space-between" title='listagem de versões'>
                         <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>

@@ -3,7 +3,9 @@ import './Home.css';
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 import FileUpload from '../../components/FormGroup/FileUpload';
+
 import HomeService from '../../services/HomeService';
+import AuthenticationApiService from '../../services/AuthenticationApiService';
 
 import LeftMenu from '../../components/Menu/LeftMenu';
 import PopupSpace from '../../components/FormGroup/PopupSpace';
@@ -13,6 +15,7 @@ class Home extends React.Component {
     constructor() {
         super();
         this.service = new HomeService();
+        this.authentication = new AuthenticationApiService();
     }
 
     state = {
@@ -34,7 +37,7 @@ class Home extends React.Component {
         // com o arquivo do campo input, passamos para um formData que é o tipo usado para multipart
         const data = new FormData();
         data.append('file', this.state.file);
-        data.append('userId', 1); // "1" para exemplo. //TODO implementar lógica de pegar o ID do usuário
+        data.append('userId', this.authentication.getLoggedUser().id);
 
         this.service.postWithHeaders(data)
         .then(response => {

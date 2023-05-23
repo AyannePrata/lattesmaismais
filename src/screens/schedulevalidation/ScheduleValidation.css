@@ -48,3 +48,12 @@
     box-shadow: 0 10px 0 #003c86;
     font-weight: 700;
 }
+
+.header .btn:disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}
+
+.header .Change-box-shadow {
+    box-shadow: 0 10px 0 #2c2c2c;
+}

@@ -4,6 +4,7 @@ import './ScheduleValidation.css';
 import SchedulingService from "../../services/SchedulingService";
 import VersionsService from '../../services/VersionsService';
 import UserApiService from '../../services/UserApiService';
+import AuthenticationApiService from '../../services/AuthenticationApiService';
 
 import { withRouter } from 'react-router';
 
@@ -17,9 +18,9 @@ class ScheduleValidation extends React.Component {
 
     state = {
         curriculumSelected: null,
-        validator: null,
-        date: null,
-        time: null,
+        validatorSelected: null,
+        dateSelected: null,
+        timeSelected: null,
 
         curriculumList: [],
         validatorList: [],
@@ -30,11 +31,15 @@ class ScheduleValidation extends React.Component {
         this.schedulingService = new SchedulingService();
         this.curriculumService = new VersionsService();
         this.userService = new UserApiService();
+        this.authentication = new AuthenticationApiService();
     }
     
     componentDidMount() {
-        //TODO pegar id altomaticamente do User logado
-        this.curriculumService.findAllByUserId(100)
+
+        this.buttonSolSched.disabled = true;
+        this.buttonSolSched.classList.add("Change-box-shadow");
+
+        this.curriculumService.findAllByUserId(this.authentication.getLoggedUser().id)
         .then(response => {
             this.setState({curriculumList: response.data});
         }).catch(error => {
@@ -49,40 +54,51 @@ class ScheduleValidation extends React.Component {
         })
     }
 
-    inputVersionSelected = (value) => {
-        this.setState({curriculumSelected: value});
+    inputVersionSelected = (version) => {
+        this.setState({curriculumSelected: version}, () => this.verifyFields());
     }
 
     inputValidatorSelected = (validator) => {
-        this.setState({validator: validator});
+        this.setState({validatorSelected: validator}, () => this.verifyFields());
     }
 
     inputDateSelected = (date) => {
-        this.setState({date: date});
+        this.setState({dateSelected: date}, () => this.verifyFields());
     }
 
     inputTimeSelected = (time) => {
-        this.setState({time: time});
+        this.setState({timeSelected: time}, () => this.verifyFields());
     }
 
     post = () => {
         
         this.schedulingService.create(
             {
-                date: this.state.date,
-                time: this.state.time,
+                date: this.state.dateSelected,
+                time: this.state.timeSelected,
                 address: "Rua Ainda Falta Colocar Atributo em User Validador",
                 version: this.state.curriculumSelected.version,
-                validatorId: this.state.validator.id,
-                //TODO pegar automaticamente ID do USER logado
-                requesterId: 100,
+                validatorId: this.state.validatorSelected.id,
+                requesterId: this.authentication.getLoggedUser().id,
             }
         ).then(response => {
-            // Adicionar mensagem de sucesso
-            console.log("Cadastrado com sucesso!!");
+            alert("Agendamento solicitado!");
         }).catch(error => {
+            alert("Algo deu errado na solicitação!");
             console.log(error.response);
         });
+    }
+
+    verifyFields = () => {
+        const curriculum = this.state.curriculumSelected;
+        const validator = this.state.validatorSelected;
+        const date = this.state.dateSelected;
+        const time = this.state.timeSelected;
+
+        if(curriculum !== null && validator !== null && date !== null && time !== null) {
+            this.buttonSolSched.disabled = false;
+            this.buttonSolSched.classList.remove("Change-box-shadow");
+        }
     }
 
     render() {
@@ -93,7 +109,7 @@ class ScheduleValidation extends React.Component {
                     <div className='Validation'>
                         <div className='header'>
                             <h3>Selecione uma versão do currículo, o validador, o horário e a data</h3>
-                            <Button onClick={() => this.post()} color='primary' size='lg' className='ButtonScheduling'> Solicitar Agendamento </Button>
+                            <Button onClick={() => this.post()} innerRef={elem => this.buttonSolSched = elem} color='primary' size='lg' className='ButtonScheduling'> Solicitar Agendamento </Button>
                         </div>
                         <br/>
                         <br/>
