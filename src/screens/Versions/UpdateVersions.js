@@ -35,6 +35,7 @@ class UpdateVersions extends React.Component {
         version: "",
         entryList: [],
         lastModification: "",
+        version: "",
 
         activeEntry: null,
         receiptList: [],
@@ -99,6 +100,7 @@ class UpdateVersions extends React.Component {
                     version: curriculum.version,
                     entryList: curriculum.entryList,
                     lastModification: curriculum.lastModification,
+                    version: curriculum.version,
                 });
             }).catch(error => {
                 console.log(error.response);
@@ -345,7 +347,8 @@ class UpdateVersions extends React.Component {
             lastModification: this.state.lastModification,
             description: this.state.commentaryToNewVersion,
             entryCount: this.state.entryCount,
-            entryList: this.state.entryList
+            entryList: this.state.entryList,
+            version: this.state.version,
         }).then((response) => {
             idNewVersion = response.data.id;
             // envia novos arquivos ao DB caso existam
@@ -418,7 +421,7 @@ class UpdateVersions extends React.Component {
 
                 <div className='Save-return-buttons'>
                     {/* //TODO  mudar botão comeback para direcionar para tela de listagem de versões */}
-                    <Button id='buttonComeBack' onClick={this.home} color="primary" size="lg" className="Bt-space-between" title='listagem de versões'>
+                    <Button id='buttonComeBack' onClick={() => this.props.history.push("/versionlisting")} color="primary" size="lg" className="Bt-space-between" title='listagem de versões'>
                         <img id="ico-comeBack" className="Button-ComeBack Bt-size1-updateC" border="0" src={img7} />
                     </Button>
                     <Button id='buttonUpdate' color="primary" size="lg" className="Bt-space-between" onClick={() => this.updateCurriculum()} innerRef={elem => this.buttUpdate = elem} title='salvar versão atual'>

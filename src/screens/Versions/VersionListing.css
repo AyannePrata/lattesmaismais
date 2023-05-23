@@ -1,0 +1,12 @@
+.All-curriculum-cards {
+    margin-right: 1vw;
+}
+
+.All-curriculum-cards .Card-curriculum {
+    margin-bottom: 1.5vh;
+}
+
+.Buttons-exclude-popup {
+    display: flex;
+    justify-content: space-around;
+}

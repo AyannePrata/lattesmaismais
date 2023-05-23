@@ -31,7 +31,7 @@ class LeftMenu extends React.Component {
         }else if(url === "http://localhost:3000/shedulingvalidation") {
             this.doSchedulingButton.classList.add('Underline');
 
-        }else if(url.toLowerCase().includes("3000/updateversions")) {
+        }else if(url.toLowerCase().includes("3000/updateversions") || url == "http://localhost:3000/versionlisting") {
             this.versionsButton.classList.add('Underline');
         }
     }
@@ -53,8 +53,7 @@ class LeftMenu extends React.Component {
     }
 
     versionsPage = () => {
-        // this.props.history.push("/versions"); // Habilitar após testes e amostra da 1ª itereação
-        this.props.history.push("/updateVersions/1"); //teste - excluir linha após teste mostrado na 1ª iteração
+        this.props.history.push("/versionlisting");
     }
 
     exportPage = () => {

@@ -7,7 +7,7 @@ import UpdateVersions from "../screens/Versions/UpdateVersions";
 import Login from "../screens/Login/Login";
 import Register from "../screens/Register/Register";
 import Home from "../screens/Home/Home";
-import VersionListing from "../screens/VersionListing/VersionListing";
+import VersionListing from "../screens/Versions/VersionListing";
 
 function RestrictedRoute( {component: Component, show, ...props} ) {
     return(
@@ -36,7 +36,7 @@ function AppRoutes(props) {
             <Route component = { UpdateVersions } path="/updateversions/:id" />
             <Route component = { Schedules } path="/scheduling/" />
             <Route component = { ScheduleValidation } path="/shedulingvalidation" />
-            <Route component = { VersionListing } path="/VersionListing" />
+            <Route component = { VersionListing } path="/versionlisting" />
            </Switch> 
         </BrowserRouter>
 

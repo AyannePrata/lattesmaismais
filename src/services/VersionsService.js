@@ -15,7 +15,7 @@ export default class VersionsService extends ApiService {
     }
 
     delete(id) {
-        return super.delete(`/${id}`);
+        return super.delete(`/delete/${id}`);
     }
 
     findById(id) {
@@ -23,5 +23,8 @@ export default class VersionsService extends ApiService {
     }
     findAll(){
         return this.getAll();
+    }
+    findAllByUserId(id){
+        return this.getAllById("/findall", id);
     }
 }

@@ -54,6 +54,10 @@ export default class ApiService {
         return httpClient.get(this.endpoint);
     }
 
+    getAllById(url, id) {
+        return httpClient.get(this.builderUrl(`${url}/${id}`));
+    }
+
     getWithFilter(url) {
        url = this.builderUrl(url);
        return httpClient.get(url);
