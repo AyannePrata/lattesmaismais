@@ -21,4 +21,8 @@ export default class UserApiService extends ApiService{
         return this.get(`${params}`);
     }
 
+    findAllByRole(role){
+        return this.get(`/byrole/${role}`);
+    }
+
 };

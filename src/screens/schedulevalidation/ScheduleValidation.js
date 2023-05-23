@@ -1,8 +1,10 @@
 import React from 'react';
 import './ScheduleValidation.css';
 
-import FormGroup from "../../components/FormGroup/FormGroup";
 import SchedulingService from "../../services/SchedulingService";
+import VersionsService from '../../services/VersionsService';
+import UserApiService from '../../services/UserApiService';
+
 import { withRouter } from 'react-router';
 
 import LeftMenu from '../../components/Menu/LeftMenu';
@@ -19,52 +21,32 @@ class ScheduleValidation extends React.Component {
         date: null,
         time: null,
 
-        curriculumList: [
-            {
-                id: 1,
-                description: "Currículo inicial",
-                version: "V_120323_130001",
-                lastModification: "18/09/2023 - 09:34:02",
-            },
-            {
-                id: 2,
-                description: "Currículo para mandar para IF",
-                version: "V_140323_130022",
-                lastModification: "19/09/2023 - 09:30:22",
-            },
-            {
-                id: 3,
-                description: "Currículo para vaga na empresa TAL",
-                version: "V_130323_130033",
-                lastModification: "20/09/2023 - 09:44:12",
-            },
-        ],
-        validatorList: [
-            {
-                id: 1,
-                name: "Danilo de Sousa Costa",
-                email: "dansousac2@gmail.com",
-            },
-            {
-                id: 2,
-                name: "Ayanne Prata",
-                email: "ayanneP@gmail.com",
-            },
-            {
-                id: 3,
-                name: "Keilla Felipe Vitória",
-                email: "keillaV@gmail.com",
-            },
-        ],
+        curriculumList: [],
+        validatorList: [],
     }
 
     constructor() {
         super();
-        this.service = new SchedulingService();
+        this.schedulingService = new SchedulingService();
+        this.curriculumService = new VersionsService();
+        this.userService = new UserApiService();
     }
-    //TODO pegar automaticamente o id do user logado
+    
     componentDidMount() {
+        //TODO pegar id altomaticamente do User logado
+        this.curriculumService.findAllByUserId(100)
+        .then(response => {
+            this.setState({curriculumList: response.data});
+        }).catch(error => {
+            console.log(error);
+        });
 
+        this.userService.findAllByRole("VALIDATOR")
+        .then(response => {
+            this.setState({validatorList: response.data});
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     inputVersionSelected = (value) => {
@@ -85,7 +67,7 @@ class ScheduleValidation extends React.Component {
 
     post = () => {
         
-        this.service.create(
+        this.schedulingService.create(
             {
                 date: this.state.date,
                 time: this.state.time,
