@@ -61,7 +61,13 @@ class LeftMenu extends React.Component {
     }
 
     logout = () => {
-
+        this.authentService.logout()
+        .then(() => {
+            this.props.history.push("/");
+        }).catch(error => {
+            alert("(!) A sessão não pode ser encerrada (!)")
+            console.log(error);
+        })
     }
 
     render() {
