@@ -15,6 +15,11 @@ import AuthenticationApiService from "../../services/AuthenticationApiService";
 
 class LeftMenu extends React.Component {
 
+    state = {
+       isValidator: false,
+       haveNewSolicitations: false,
+    }
+
     constructor() {
         super();
         this.authentService = new AuthenticationApiService();
@@ -104,13 +109,13 @@ class LeftMenu extends React.Component {
                         <img id="ico-menu-05" className="Button-icon" border="0" src={img5} width="50" height="50" />
                         Exportar
                     </button>
-                    {/* TODO colocar verificação de renderização */}
-                    <div className="Size-SolSched">
-                        <button id="buttonSSV" className="b6" onClick={() => console.log("tela agendamento")} hidden={false}>
+                    {/* TODO criar funções */}
+                    <div className="Size-SolSched" hidden={this.state.isValidator}>
+                        <button id="buttonSSV" className="b6" onClick={() => console.log("tela agendamento")} >
                             <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
                             Solicitações de Agendamento
                         </button>
-                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={false} title="Você possui novas solicitações!" />
+                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={this.haveNewSolicitations} title="Você possui novas solicitações!" />
                     </div>
                     <button className="b6" onClick={this.logout}>
                         <img id="ico-menu-06" className="Button-icon" border="0" src={img6} width="40" height="40" />
