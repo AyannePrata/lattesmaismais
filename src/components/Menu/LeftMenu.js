@@ -8,6 +8,8 @@ import img3 from '../../assets/images/clipboard.svg';
 import img4 from '../../assets/images/history.svg';
 import img5 from '../../assets/images/export.svg';
 import img6 from '../../assets/images/off.svg';
+import iconSolSched from '../../assets/images/SolicitedScheduling.svg';
+import iconHaveSol from '../../assets/images/haveSolicitaions.svg';
 
 import AuthenticationApiService from "../../services/AuthenticationApiService";
 
@@ -22,16 +24,16 @@ class LeftMenu extends React.Component {
 
         const url = window.location.href;
 
-        if(url === "http://localhost:3000/home"){
+        if (url === "http://localhost:3000/home") {
             this.impButton.classList.add('Underline');
 
-        }else if(url === "http://localhost:3000/scheduling") {
+        } else if (url === "http://localhost:3000/scheduling") {
             this.schedulingButton.classList.add('Underline');
 
-        }else if(url === "http://localhost:3000/shedulingvalidation") {
+        } else if (url === "http://localhost:3000/shedulingvalidation") {
             this.doSchedulingButton.classList.add('Underline');
 
-        }else if(url.toLowerCase().includes("3000/updateversions") || url == "http://localhost:3000/versionlisting") {
+        } else if (url.toLowerCase().includes("3000/updateversions") || url == "http://localhost:3000/versionlisting") {
             this.versionsButton.classList.add('Underline');
         }
     }
@@ -57,17 +59,17 @@ class LeftMenu extends React.Component {
     }
 
     exportPage = () => {
-       
+
     }
 
     logout = () => {
         this.authentService.logout()
-        .then(() => {
-            this.props.history.push("/");
-        }).catch(error => {
-            alert("(!) A sessão não pode ser encerrada (!)")
-            console.log(error);
-        })
+            .then(() => {
+                this.props.history.push("/");
+            }).catch(error => {
+                alert("(!) A sessão não pode ser encerrada (!)")
+                console.log(error);
+            })
     }
 
     render() {
@@ -77,33 +79,40 @@ class LeftMenu extends React.Component {
                 <h2>+ +</h2>
                 <h5 id="name-owner">{this.authentService.getLoggedUser().name}</h5>
                 <div className="AllButtons">
-                    <button type="importresume" ref={(button) => { this.impButton = button }}
+                    <button ref={(button) => { this.impButton = button }}
                         className="b1" onClick={this.impCurPage}>
                         <img id="ico-menu-01" className="Button-icon" border="0" src={img1} width="50" height="50" />
                         Importar currículo
                     </button>
-                    <button type="schedulevalidation" ref={(button) => { this.doSchedulingButton = button }}
+                    <button ref={(button) => { this.doSchedulingButton = button }}
                         className="b2" onClick={this.toSchedValidation}>
                         <img id="ico-menu-02" className="Button-icon" border="0" src={img2} width="40" height="40" />
                         Agendar validação
                     </button>
-                    <button type="Schedulings" ref={(button) => { this.schedulingButton = button }}
+                    <button ref={(button) => { this.schedulingButton = button }}
                         className="b3" onClick={this.schedulings}>
                         <img id="ico-menu-03" className="Button-icon" border="0" src={img3} width="50" height="50" />
                         Agendamentos
                     </button>
-                    <button type="versions" ref={(button) => { this.versionsButton = button }}
+                    <button ref={(button) => { this.versionsButton = button }}
                         className="b4" onClick={this.versionsPage}>
                         <img id="ico-menu-04" className="Button-icon" border="0" src={img4} width="40" height="40" />
-                        Versões 
+                        Versões
                     </button>
-                    <button type="export" ref={(button) => { this.exportButton = button }}
+                    <button ref={(button) => { this.exportButton = button }}
                         className="b5" onClick={this.exportPage}>
                         <img id="ico-menu-05" className="Button-icon" border="0" src={img5} width="50" height="50" />
                         Exportar
                     </button>
-                    <button type="goout" ref={(button) => { this.exitButton = button }}
-                        className="b6" onClick={this.logout}>
+                    {/* TODO colocar verificação de renderização */}
+                    <div className="Size-SolSched">
+                        <button id="buttonSSV" className="b6" onClick={() => console.log("tela agendamento")} hidden={false}>
+                            <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
+                            Solicitações de Agendamento
+                        </button>
+                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={false} title="Você possui novas solicitações!" />
+                    </div>
+                    <button className="b6" onClick={this.logout}>
                         <img id="ico-menu-06" className="Button-icon" border="0" src={img6} width="40" height="40" />
                         Sair
                     </button>

@@ -91,7 +91,7 @@
     font-family: sans-serif;
     font-size: 21px;
     font-weight: 700;
-    width: 315px;
+    width: 430px;
 }
 
 .AllButtons{
@@ -127,6 +127,11 @@
     margin-bottom: 2px;
 }
 
+#ico-menu-07 {
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
 #name-owner {
     background-color: whitesmoke;
     width: 14vw;
@@ -137,4 +142,18 @@
     margin-left: 2vw;
     margin-bottom: 0;
     font-weight: 700;
+}
+
+#icoHaveSol {
+    position: relative;
+    left: 5vw;
+    margin-top: -19vh;
+}
+
+#buttonSSV {
+    margin-top: 3vh;
+}
+
+.Size-SolSched {
+    height: 11vh;
 }
