@@ -1,5 +1,6 @@
 import ApiService, {LOGGED_USER, TOKEN} from "./ApiService";
 import StorageService from "./StorageService";
+import { ROLE, TIMESTAMP, SOLICITATIONLIST } from "../components/Menu/LeftMenu";
 
 export default class AuthenticationApiService extends ApiService {
 
@@ -40,6 +41,9 @@ export default class AuthenticationApiService extends ApiService {
             .then(() => {
                 this.storageService.removeItem(LOGGED_USER);
                 this.storageService.removeItem(TOKEN);
+                this.storageService.removeItem(ROLE);
+                this.storageService.removeItem(TIMESTAMP);
+                this.storageService.removeItem(SOLICITATIONLIST);
             })
         )
     }

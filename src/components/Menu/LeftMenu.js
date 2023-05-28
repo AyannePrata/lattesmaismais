@@ -12,17 +12,31 @@ import iconSolSched from '../../assets/images/SolicitedScheduling.svg';
 import iconHaveSol from '../../assets/images/haveSolicitaions.svg';
 
 import AuthenticationApiService from "../../services/AuthenticationApiService";
+import SchedulingService from "../../services/SchedulingService";
+import StorageService from "../../services/StorageService";
+
+export const ROLE = "user_role";
+export const TIMESTAMP = "timestamp";
+export const SOLICITATIONLIST = "solicitationlist";
+/** 
+ * constante usada para carregar solicitações de agendamento no tempo determinado
+ * 300000 ms = 5min
+*/ 
+const msToVerifySolicitations = 300000;
 
 class LeftMenu extends React.Component {
 
     state = {
        isValidator: false,
-       haveNewSolicitations: false,
+       haveSolicitationsToResolve: false,
+       solicitationList: [],
     }
 
     constructor() {
         super();
         this.authentService = new AuthenticationApiService();
+        this.schedulingService = new SchedulingService();
+        this.storageService = new StorageService();
     }
 
     componentDidMount() {
@@ -40,6 +54,62 @@ class LeftMenu extends React.Component {
 
         } else if (url.toLowerCase().includes("3000/updateversions") || url == "http://localhost:3000/versionlisting") {
             this.versionsButton.classList.add('Underline');
+        }
+        
+        this.verifyRoles();
+    }
+
+    verifyRoles = async() => {
+        if(this.authentService.getLoggedUser().validatorAddress != null) {
+            
+            this.setState({isValidator: true});
+
+            if(this.getInDb()) {
+                await this.schedulingService.findAllByUserId(this.authentService.getLoggedUser().id, true)
+                .then(response => {
+                    this.setState({
+                        solicitationList: response.data,
+                    });
+                    this.storageService.setItem(ROLE, 1);
+                    this.storageService.setItem(TIMESTAMP, new Date());
+                    this.storageService.setItem(SOLICITATIONLIST, response.data);
+                }).catch(error => {
+                    alert("Ocorreu um erro ao tentar carregar lista de solicitações de validação!");
+                    console.log(error);
+                });
+
+                this.verifySolicitations();
+            } else {
+                this.setState({
+                    solicitationList: this.storageService.getItem(SOLICITATIONLIST),
+                }, () => this.verifySolicitations())
+            }
+        }
+    }
+
+    /**
+     * se não houver registro no localStorage ou se tiverem passados 5min desde a última aualização,
+     * deve retornar TRUE
+     */
+    getInDb = () => {
+        if(this.storageService.getItem(ROLE) == undefined) {
+            return true;
+        } else {
+            const timeSaved = new Date(this.storageService.getItem(TIMESTAMP));
+            // verifica se passaram-se determinados minutos desde a última verificação
+            if(new Date().getTime() > timeSaved.getTime() + msToVerifySolicitations) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    verifySolicitations = () => {
+        for(const solicitation of this.state.solicitationList) {
+            if(solicitation.status === "OPEN") {
+                this.setState({haveSolicitationsToResolve: true});
+                return;
+            }
         }
     }
 
@@ -109,13 +179,12 @@ class LeftMenu extends React.Component {
                         <img id="ico-menu-05" className="Button-icon" border="0" src={img5} width="50" height="50" />
                         Exportar
                     </button>
-                    {/* TODO criar funções */}
-                    <div className="Size-SolSched" hidden={this.state.isValidator}>
+                    <div className="Size-SolSched" hidden={!this.state.isValidator}>
                         <button id="buttonSSV" className="b6" onClick={() => console.log("tela agendamento")} >
                             <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
                             Solicitações de Agendamento
                         </button>
-                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={this.haveNewSolicitations} title="Você possui novas solicitações!" />
+                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={!this.state.haveSolicitationsToResolve} title="Você possui solicitações abertas!" />
                     </div>
                     <button className="b6" onClick={this.logout}>
                         <img id="ico-menu-06" className="Button-icon" border="0" src={img6} width="40" height="40" />

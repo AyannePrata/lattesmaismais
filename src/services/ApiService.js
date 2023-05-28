@@ -4,6 +4,7 @@ import StorageService from "./StorageService";
 
 export const LOGGED_USER = 'loggedUser';
 export const TOKEN = 'token';
+//TODO remover constante não utilizada(?)
 const baseURL = process.env.REACT_APP_API_URL;
 
 export const httpClient = axios.create ({

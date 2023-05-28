@@ -17,7 +17,12 @@ export default class SchedulingService extends ApiService {
     findById(id) {
         return this.get(`/${id}`);
     }
+
     findAll(){
         return this.getAll();
+    }
+
+    findAllByUserId(id, isValidator) {
+        return this.get(`/findallbyuserid?id=${id}&isValidator=${isValidator}`);
     }
 }
