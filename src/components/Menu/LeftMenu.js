@@ -18,6 +18,7 @@ import StorageService from "../../services/StorageService";
 export const ROLE = "user_role";
 export const TIMESTAMP = "timestamp";
 export const SOLICITATIONLIST = "solicitationlist";
+export const FORCEGETSOLICITATIONS = "forcegetsolicitations";
 /** 
  * constante usada para carregar solicitações de agendamento no tempo determinado
  * 300000 ms = 5min
@@ -54,6 +55,9 @@ class LeftMenu extends React.Component {
 
         } else if (url.toLowerCase().includes("3000/updateversions") || url == "http://localhost:3000/versionlisting") {
             this.versionsButton.classList.add('Underline');
+        
+        } else if (url === "http://localhost:3000/solicitedschedule") {
+            this.solicitationButton.classList.add('Underline');
         }
         
         this.verifyRoles();
@@ -92,7 +96,8 @@ class LeftMenu extends React.Component {
      * deve retornar TRUE
      */
     getInDb = () => {
-        if(this.storageService.getItem(ROLE) == undefined) {
+        if(this.storageService.getItem(ROLE) == undefined || this.storageService.getItem(FORCEGETSOLICITATIONS)) {
+            this.storageService.setItem(FORCEGETSOLICITATIONS, false);
             return true;
         } else {
             const timeSaved = new Date(this.storageService.getItem(TIMESTAMP));
@@ -137,6 +142,10 @@ class LeftMenu extends React.Component {
 
     }
 
+    solicitedSchedule = () => {
+        this.props.history.push("/solicitedschedule");
+    }
+
     logout = () => {
         this.authentService.logout()
             .then(() => {
@@ -179,8 +188,8 @@ class LeftMenu extends React.Component {
                         <img id="ico-menu-05" className="Button-icon" border="0" src={img5} width="50" height="50" />
                         Exportar
                     </button>
-                    <div className="Size-SolSched" hidden={!this.state.isValidator}>
-                        <button id="buttonSSV" className="b6" onClick={() => console.log("tela agendamento")} >
+                    <div className="Size-SolSched"  hidden={!this.state.isValidator}>
+                        <button id="buttonSSV" className="b6" onClick={() => this.solicitedSchedule()} ref={button => this.solicitationButton = button}>
                             <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
                             Solicitações de Agendamento
                         </button>

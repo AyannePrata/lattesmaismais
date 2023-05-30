@@ -1,0 +1,23 @@
+.All-scheduling-cards {
+    margin-right: 2vw;
+    display: grid;
+    justify-items: center;
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+.Card-solicitation {
+    background-color: #d9d9d9;
+    border: solid gray 1px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    height: 12vh;
+    margin-bottom: 2vh;
+}
+
+#buttRefuse {
+    margin-left: 2vw;
+}

@@ -11,7 +11,7 @@ export default class SchedulingService extends ApiService {
     }
 
     delete(id) {
-        return super.delete(`/${id}`);
+        return this.delete(`/${id}`);
     }
 
     findById(id) {
@@ -24,5 +24,9 @@ export default class SchedulingService extends ApiService {
 
     findAllByUserId(id, isValidator) {
         return this.get(`/findallbyuserid?id=${id}&isValidator=${isValidator}`);
+    }
+
+    update(object) {
+        return this.put('', object);
     }
 }

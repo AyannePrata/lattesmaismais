@@ -1,0 +1,27 @@
+.Basic-margin {
+    margin-left: 1vw;
+}
+
+.Input-commentary-listSol {
+    background-color: ivory;
+    border: none;
+    width: 29vw;
+}
+
+.ListSolicit .Buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ListSolicit .Buttons-popup {
+    margin-top: 16vh;
+}
+
+.ListSolicit .btn-lg {
+    width: 8vw;
+}
+
+.ListSolicit .btn.disabled, .btn:disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}
