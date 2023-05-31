@@ -16,7 +16,7 @@ function dateFormatter(date) {
     return `${array[2]}/${array[1]}/${array[0]}`;
 }
 
-function buttonsOrText(methAccept, methDecline, solicitation) {
+function buttonsOrText(methAccept, methDecline, solicitation, editOption, methEdit) {
 
     let element;
 
@@ -38,11 +38,20 @@ function buttonsOrText(methAccept, methDecline, solicitation) {
             decision = "Resolvida";
         }
 
-        element = (
-            <div className="Solicitation-resolved">
-                <h3>Solicitação: {decision}</h3>
-            </div>
-        );
+        if(editOption) {
+            element = (
+                <div className="Edit">
+                    <Button onClick={() => methEdit(solicitation)} color="success" size="lg" > Avaliar </Button>
+                </div>
+            );
+        } else {
+            element = (
+                <div className="Solicitation-resolved">
+                    <h3>Solicitação: {decision}</h3>
+                </div>
+            );
+        }
+
     }
 
     return element;
@@ -79,7 +88,7 @@ function SchedulingCard(props) {
                             <h3>{solicitation.version}</h3>
                         </div>
                         {/* dependendo do status da solicitação, são gerados botões ou um aviso sobre decisão tomada */}
-                        {buttonsOrText(props.inAcceptSolicitation, props.inDeclineSolicitation, solicitation)}
+                        {buttonsOrText(props.inAcceptSolicitation, props.inDeclineSolicitation, solicitation, props.editOption, props.methEdit)}
                     </div>
                 )
             }));

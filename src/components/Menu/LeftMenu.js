@@ -10,6 +10,7 @@ import img5 from '../../assets/images/export.svg';
 import img6 from '../../assets/images/off.svg';
 import iconSolSched from '../../assets/images/SolicitedScheduling.svg';
 import iconHaveSol from '../../assets/images/haveSolicitaions.svg';
+import iconReviewCurr from '../../assets/images/curriculum-review.svg';
 
 import AuthenticationApiService from "../../services/AuthenticationApiService";
 import SchedulingService from "../../services/SchedulingService";
@@ -58,6 +59,9 @@ class LeftMenu extends React.Component {
         
         } else if (url === "http://localhost:3000/solicitedschedule") {
             this.solicitationButton.classList.add('Underline');
+        
+        } else if(url === "http://localhost:3000/reviewcurriculum" || url.toLowerCase().includes("/receiptanalysis")) {
+            this.reviewButton.classList.add('Underline');
         }
         
         this.verifyRoles();
@@ -146,6 +150,10 @@ class LeftMenu extends React.Component {
         this.props.history.push("/solicitedschedule");
     }
 
+    curriculumReview = () => {
+        this.props.history.push("/reviewcurriculum");
+    }
+
     logout = () => {
         this.authentService.logout()
             .then(() => {
@@ -188,12 +196,20 @@ class LeftMenu extends React.Component {
                         <img id="ico-menu-05" className="Button-icon" border="0" src={img5} width="50" height="50" />
                         Exportar
                     </button>
-                    <div className="Size-SolSched"  hidden={!this.state.isValidator}>
-                        <button id="buttonSSV" className="b6" onClick={() => this.solicitedSchedule()} ref={button => this.solicitationButton = button}>
-                            <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
-                            Solicitações de Agendamento
-                        </button>
-                        <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={!this.state.haveSolicitationsToResolve} title="Você possui solicitações abertas!" />
+                    <div className="Validator" hidden={!this.state.isValidator}>
+                        <div className="Size-SolSched">
+                            <button id="buttonSSV" className="b6" onClick={() => this.solicitedSchedule()} ref={button => this.solicitationButton = button}>
+                                <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
+                                Solicitações de Agendamento
+                            </button>
+                            <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={!this.state.haveSolicitationsToResolve} title="Você possui solicitações abertas!" />
+                        </div>
+                        <div className="Size-01">
+                            <button id="buttonCR" className="b6" onClick={() => this.curriculumReview()} ref={button => this.reviewButton = button}>
+                                <img id="ico-menu-08" className="Button-icon" border="0" src={iconReviewCurr} width="45" height="45" />
+                                Analisar Currículos
+                            </button>
+                        </div>
                     </div>
                     <button className="b6" onClick={this.logout}>
                         <img id="ico-menu-06" className="Button-icon" border="0" src={img6} width="40" height="40" />

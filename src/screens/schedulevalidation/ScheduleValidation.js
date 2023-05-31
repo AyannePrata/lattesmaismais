@@ -46,7 +46,7 @@ class ScheduleValidation extends React.Component {
             console.log(error);
         });
 
-        this.userService.findAllByRole("VALIDATOR")
+        this.userService.findAllByRole("role_validator")
         .then(response => {
             this.setState({validatorList: response.data});
         }).catch(error => {

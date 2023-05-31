@@ -21,10 +21,17 @@ export default class VersionsService extends ApiService {
     findById(id) {
         return this.get(`/${id}`);
     }
+
+    findByRequesterIdAndVersionName(id, version) {
+        return this.get(`/ownerandversion?ownerId=${id}&version=${version}`);
+    }
+
     findAll(){
         return this.getAll();
     }
+
     findAllByUserId(id){
         return this.getAllById("/findall", id);
     }
+
 }

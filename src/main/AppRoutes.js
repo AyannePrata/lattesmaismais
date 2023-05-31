@@ -9,6 +9,8 @@ import Register from "../screens/Register/Register";
 import Home from "../screens/Home/Home";
 import VersionListing from "../screens/Versions/VersionListing";
 import ListSolicitedSchedule from "../screens/Schedule/ListSolicitedSchedule";
+import ReviewCurriculum from "../screens/ReviewCurriculum/ReviewCurriculum";
+import ReceiptAnalysis from "../screens/ReviewCurriculum/ReceiptAnalysis";
 
 function RestrictedRoute( {component: Component, show, ...props} ) {
     return(
@@ -39,6 +41,8 @@ function AppRoutes(props) {
             <RestrictedRoute show={props.isAuthenticated} component = { ScheduleValidation } path="/shedulingvalidation" />
             <RestrictedRoute show={props.isAuthenticated} component = { VersionListing } path="/versionlisting" />
             <RestrictedRoute show={props.isAuthenticated} component = { ListSolicitedSchedule } path="/solicitedschedule" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ReviewCurriculum } path="/reviewcurriculum" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ReceiptAnalysis } path="/receiptanalysis/:id/:version" />
            </Switch> 
         </BrowserRouter>
 

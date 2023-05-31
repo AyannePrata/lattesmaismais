@@ -132,6 +132,10 @@
     margin-bottom: 4px;
 }
 
+#ico-menu-08 {
+    margin-right: 6px;
+}
+
 #name-owner {
     background-color: whitesmoke;
     width: 14vw;
@@ -155,5 +159,11 @@
 }
 
 .Size-SolSched {
-    height: 11vh;
+    height: 10vh;
+}
+
+.Size-01 {
+    display: flex;
+    height: 12vh;
+    align-items: center;
 }
