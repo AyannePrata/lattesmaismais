@@ -1,3 +1,29 @@
+.F-analysis {
+    margin-right: 1vw;
+}
+
 .Info-requester {
     margin-top: 3vh;
 }
+
+.Box-line {
+    display: flex;
+}
+
+.Read-receipts {
+    margin-top: 9vh;
+    margin-left: 2vw;
+    width: 63%;
+}
+
+.RecAnaly-popup .Buttons {
+    margin-top: 8vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.F-analysis .btn.disabled, .Save-return-buttons .btn:disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}
+

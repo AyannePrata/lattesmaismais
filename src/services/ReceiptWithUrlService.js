@@ -10,4 +10,8 @@ export default class ReceiptWithUrlService extends ApiService {
     create(params) {
         return this.post("",params);
     }
+
+    updateByValidator(params) {
+        return this.put("/validator", params);
+    }
 }

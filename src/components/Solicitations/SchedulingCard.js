@@ -67,7 +67,13 @@ function SchedulingCard(props) {
     useEffect(() => {
         async function createSolicitationCards() {
 
-            const arrayCards = await Promise.all(storage.getItem(SOLICITATIONLIST).map(async solicitation => {
+            let array = storage.getItem(SOLICITATIONLIST);
+
+            if(props.editOption) {
+                array = array.filter(solicitation => solicitation.status == "ACCEPTED");
+            }
+
+            const arrayCards = await Promise.all(array.map(async solicitation => {
 
                 const user = await userService.find(`/${solicitation.requesterId}`)
                 .then(response => {

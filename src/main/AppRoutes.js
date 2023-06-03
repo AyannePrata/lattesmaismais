@@ -42,7 +42,7 @@ function AppRoutes(props) {
             <RestrictedRoute show={props.isAuthenticated} component = { VersionListing } path="/versionlisting" />
             <RestrictedRoute show={props.isAuthenticated} component = { ListSolicitedSchedule } path="/solicitedschedule" />
             <RestrictedRoute show={props.isAuthenticated} component = { ReviewCurriculum } path="/reviewcurriculum" />
-            <RestrictedRoute show={props.isAuthenticated} component = { ReceiptAnalysis } path="/receiptanalysis/:id/:version" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ReceiptAnalysis } path="/receiptanalysis/:id/:version/:solicitationId" />
            </Switch> 
         </BrowserRouter>
 

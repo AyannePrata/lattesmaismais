@@ -9,33 +9,8 @@ import AuthenticationApiService from "../../services/AuthenticationApiService";
 
 class ReviewCurriculum extends React.Component {
 
-    state = {
-        openedSolicitationList: [],
-    }
-
-    constructor() {
-        super();
-        this.schedService = new SchedulingService();
-        this.authService = new AuthenticationApiService();
-    }
-
-    componentDidMount() {
-        this.find();
-    }
-
-    find = () => {
-        this.schedService.findAllByUserId(this.authService.getLoggedUser().id, true)
-        .then(response => {
-            const array  = (response.data).filter(solicitation => solicitation.status == "ACCEPTED");
-            this.setState({openedSolicitationList: array});
-        }).catch(error => {
-            alert('Houve um erro ao tentar recuperar a lista de solicitações em aberto');
-            console.log(error);
-        })
-    }
-
     openCurriculumToValidate = (solicitation) => {
-        this.props.history.push(`/receiptanalysis/${solicitation.requesterId}/${solicitation.version}`);
+        this.props.history.push(`/receiptanalysis/${solicitation.requesterId}/${solicitation.version}/${solicitation.id}`);
     }
 
     render() {
