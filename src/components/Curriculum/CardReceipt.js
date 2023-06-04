@@ -7,6 +7,7 @@ import iconChecked from '../../assets/images/Proven.svg';
 import iconInvalid from '../../assets/images/Invalidated.svg';
 import iconRecyclebin from '../../assets/images/recyclebinEmpty.svg';
 
+//TODO realizar import de ícones usados ao invés de trazê-los via props
 function CardReceipt(props) {
 
     const receiptsToCard = props.receipts.map((rec) => {
@@ -28,13 +29,13 @@ function CardReceipt(props) {
                 break;
         }
 
-        if (rec.url === null) {
+        if (rec.url == null) {
             return (
                 <div key={`recUni${rec.id}`} className="Receipt-unique">
                     <img className="Icons Icon-Entry" border="0" src={icon} />
                     <b id={`nameRec${rec.id}`}> {rec.name} </b>
                     <b id={`extRec${rec.id}`}> {rec.extension} </b>
-                    <b id={`commRec${rec.id}`}> {rec.commentary === null ? "---" : rec.commentary} </b>
+                    <b id={`commRec${rec.id}`}> {(rec.commentary === "") ? "---" : `"${rec.commentary}"`} </b>
                     <Button id={`btRec${rec.id}`} onClick={() => { props.deleteMethod(rec.id, true) }} color="danger" size="sm" >
                         <img className="Icons Icon-Entry" src={iconRecyclebin} />
                     </Button>

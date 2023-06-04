@@ -43,7 +43,7 @@ class UpdateVersions extends React.Component {
         renderPopupImportReceipt: false,
         currentReceiptFile: null,
         currentReceiptFileName: "***",
-        currentReceiptCommentary: null,
+        currentReceiptCommentary: "",
 
         newReceiptsFiles: [],
         countNewReceipts: 0,
@@ -204,12 +204,15 @@ class UpdateVersions extends React.Component {
             renderPopupImportReceipt: false,
             currentReceiptFile: null,
             currentReceiptFileName: "***",
-            currentReceiptCommentary: null,
+            currentReceiptCommentary: "",
         });
     }
 
     countNewReceiptAdd = () => {
-        return this.setState({ countNewReceipts: this.state.countNewReceipts + 1 });
+        const count = this.state.countNewReceipts + 1;
+        this.setState({countNewReceipts: count});
+
+        return count;
     }
 
     countNewReceiptRemove = () => {
@@ -265,6 +268,7 @@ class UpdateVersions extends React.Component {
             description: this.state.description,
             entryCount: this.state.entryCount,
             entryList: this.state.entryList,
+            version: this.state.version,
         }).then(response => {
             //TODO criar alertas
             alert("Alterações salvas com sucesso! Atualizando página!");
@@ -316,7 +320,7 @@ class UpdateVersions extends React.Component {
         this.setState({
             renderPopupInformUrl: false,
             currentLink: "",
-            currentReceiptCommentary: null,
+            currentReceiptCommentary: "",
         })
     }
 
@@ -457,7 +461,7 @@ class UpdateVersions extends React.Component {
                     </div>
                     <div className='In-line'>
                         <h3>Comentário:</h3>
-                        <input type='text' className='Input-commentary' placeholder='(opcional)' onChange={(e) => this.setState({ currentReceiptCommentary: e.target.value })} />
+                        <input type='text' className='Input-commentary' placeholder='(opcional)' onChange={(e) => this.setState({ currentReceiptCommentary: e.target.value.trim() })} />
                     </div>
                     <div className='Buttons-confirm-cancel-receipt'>
                         <Button id='buttonAddFisicalReceipt' color="primary" size="lg" disabled={this.state.currentReceiptFileName === "***"} onClick={() => this.addReceiptAndUpdateListCard()}>
