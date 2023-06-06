@@ -41,16 +41,14 @@ class Login extends React.Component {
             this.state.password
         ).then(user => {
             if (user) {
-                alert("Login realizado!");
-                //showSuccessMessage(`Usuário ${user.name}, logado!`);
+                showSuccessMessage(`Usuário(a) ${user.name}, logado(a)!`);
                 this.props.history.push('/home');
             } else {
-                alert("Credenciais inválidas");
-                //showErrorMessage('Login inválido!')
+                showErrorMessage('Login inválido!');
             }
         }).catch(error => {
             console.log(error);
-            //showErrorMessage('Erro na autenticação:', error);
+
         })
     }
 

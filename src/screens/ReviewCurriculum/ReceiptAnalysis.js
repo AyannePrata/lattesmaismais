@@ -15,6 +15,8 @@ import ValidatorCommentaryService from "../../services/ValidatorCommentaryServic
 import SchedulingService from "../../services/SchedulingService";
 import StorageService from "../../services/StorageService";
 
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+
 import iconComeBack from '../../assets/images/ComeBack.svg';
 import iconSave from '../../assets/images/Save.svg';
 
@@ -81,7 +83,8 @@ class ReceiptAnalysis extends React.Component {
                 }, () => this.filterEntries());
 
             }).catch(error => {
-                alert('Ocorreu um erro ao carregar o currículo selecionado!');
+                showErrorMessage('Ocorreu um erro ao carregar o currículo selecionado!');
+                //alert('Ocorreu um erro ao carregar o currículo selecionado!');
                 console.log(error);
             })
     }
@@ -198,7 +201,7 @@ class ReceiptAnalysis extends React.Component {
                     ).then(response => {
                         return response.data.id;
                     }).catch(error => {
-                        alert('Ocorreu um erro ao tentar salva o comentário do validador do comprovante invalidado');
+                        showErrorMessage('Ocorreu um erro ao tentar salvar o comentário do validador do comprovante invalidado');
                         console.log(error);
                     });
 
@@ -210,7 +213,7 @@ class ReceiptAnalysis extends React.Component {
                             commentaryId: commentId
                         }
                     ).catch(error => {
-                        alert('Ocorreu um erro ao tentar atualizar o comprovante invalidado');
+                        showErrorMessage('Ocorreu um erro ao tentar atualizar o comprovante invalidado');
                         console.log(error);
                     });
 
@@ -221,7 +224,7 @@ class ReceiptAnalysis extends React.Component {
                             status: ORIGINAL_STATUS_CHECKED,
                         }
                     ).catch(error => {
-                        alert('Ocorreu um erro ao tentar atualizar o comprovante validado');
+                        showErrorMessage("Ocorreu um erro ao tentar atualizar o comprovante validado");
                         console.log(error);
                     });
                 }
@@ -248,7 +251,7 @@ class ReceiptAnalysis extends React.Component {
             this.state.curriculumSelected.status = CURRICULUM_STATUS_CHECKED;
             this.storageService.setItem(FORCEGETSOLICITATIONS, true);
         }).catch(error => {
-            alert('Houve um erro ao tentar atualizar o status da solicitação!');
+            showErrorMessage("Houve um erro ao tentar atualizar o status da solicitação!");
             console.log(error);
         });
 
@@ -260,17 +263,17 @@ class ReceiptAnalysis extends React.Component {
                 response.data.status = CURRICULUM_STATUS_CHECKED;
                 return response.data;
             }).catch(error => {
-                alert('Erro ao tentar recuperar currículo no banco de dados');
+                showErrorMessage("Erro ao tentar recuperar currículo no banco de dados");
                 console.log(error);
             });
 
             this.curriculumService.update(curriculum)
             .then(() => {
                 this.setState({entryList: []});
-                alert('Avaliação concluída! Redirecionando à página de revisão!');
+                showSuccessMessage("Avaliação concluída! Redirecionando à página de revisão!");
                 this.props.history.push("/reviewcurriculum");
             }).catch(error => {
-                alert('Houve um erro ao tentar atualizar o currículo em questão!');
+                showErrorMessage("Houve um erro ao tentar atualizar o currículo em questão!");
                 console.log(error);
             });
         }

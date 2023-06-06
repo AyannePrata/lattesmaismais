@@ -14,6 +14,8 @@ import { Button } from 'reactstrap';
 import CurriculumTableRS from '../../components/SchedulingTable/CurriculumTableRS';
 import ValidatorTableRS from '../../components/SchedulingTable/ValidatorTableRS';
 
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+
 class ScheduleValidation extends React.Component {
 
     state = {
@@ -82,9 +84,9 @@ class ScheduleValidation extends React.Component {
                 requesterId: this.authentication.getLoggedUser().id,
             }
         ).then(response => {
-            alert("Agendamento solicitado!");
+            showSuccessMessage("Agendamento solicitado!");
         }).catch(error => {
-            alert("Algo deu errado na solicitação!");
+            showErrorMessage("Algo deu errado na solicitação!");
             console.log(error.response);
         });
     }

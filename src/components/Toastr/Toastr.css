@@ -1,0 +1,29 @@
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+#toast-container > .toast:before {
+    position: relative;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    margin-left: -1em;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+
+}
+#toast-container .toast{
+    background-color: #1b75bc !important;
+}
+#toast-container> .fa-check , .toast {
+    background-color: #328b17 !important;
+}
+#toast-container> .fa-trash , .toast  {
+    background-color: #be1624 !important;
+}
+
+
+.toast-message{
+    font-family: Arial;
+}

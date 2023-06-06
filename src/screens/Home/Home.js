@@ -3,6 +3,7 @@ import './Home.css';
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 import FileUpload from '../../components/FormGroup/FileUpload';
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 
 import HomeService from '../../services/HomeService';
 import AuthenticationApiService from '../../services/AuthenticationApiService';
@@ -57,7 +58,7 @@ class Home extends React.Component {
 
             const owner = docXml.querySelector("DADOS-GERAIS").attributes.getNamedItem("NOME-COMPLETO").value;
             if(owner === null || owner === undefined) {
-                alert("Currículo inválido! Reveja o arquivo enviado!");
+                showErrorMessage('Currículo inválido! Reveja o arquivo enviado!');
             } else {
                 this.setState({
                     owner: owner,
@@ -79,7 +80,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className='Principal Fields'>
-                <LeftMenu />
+                <LeftMenu/>
                 <div className='Text-Home'>
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
                     <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>

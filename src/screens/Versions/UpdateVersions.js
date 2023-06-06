@@ -23,6 +23,8 @@ import CardReceipt from '../../components/Curriculum/CardReceipt';
 import PopupSpace from '../../components/FormGroup/PopupSpace';
 import LoadingComp from '../../components/Extra/LoadingComp';
 
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+
 class UpdateVersions extends React.Component {
 
     state = {
@@ -186,7 +188,7 @@ class UpdateVersions extends React.Component {
         } else {
             this.buttAuthValidator.disabled = false;
             this.buttAuthEletronic.disabled = false;
-            alert("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
+            showErrorMessage("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
         }
     }
 
@@ -267,7 +269,7 @@ class UpdateVersions extends React.Component {
             entryList: this.state.entryList,
         }).then(response => {
             //TODO criar alertas
-            alert("Alterações salvas com sucesso! Atualizando página!");
+            showSuccessMessage('Alterações salvas com sucesso! Atualizando página!');
             this.setState({ countNewReceipts: 0, haveAllOriginalReceipts: true });
             window.location.reload();
         }).catch(error => {
@@ -357,7 +359,7 @@ class UpdateVersions extends React.Component {
             }
         })
 
-        alert("Nova versão salva com sucesso! Atualizando página para edição da nova versão!");
+        showSuccessMessage("Nova versão salva com sucesso! Atualizando página para edição da nova versão!");
         this.setState({ countNewReceipts: 0, haveAllOriginalReceipts: true });
         this.props.history.push(`/updateversions/${idNewVersion}`);
         window.location.reload();
