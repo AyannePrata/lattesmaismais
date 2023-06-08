@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Button } from 'reactstrap';
 import FormGroup from "../../components/FormGroup/FormGroup";
-import { showErrorMessage } from "../../components/Toastr/Toastr";
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 import './Register.css';
 import UserApiService from '../../services/UserApiService';
 import { AuthContext } from '../../main/SessionProvider';
@@ -44,8 +44,7 @@ class Register extends React.Component {
         //TODO reorganizar mensagens mostradas em casos de erro e sucesso
         if (errors.length > 0) {
             errors.forEach((message, index) => {
-                alert("Credenciais fornecidas contêm erros e não podem ser enviadas!")
-                //showErrorMessage(message)
+                showErrorMessage(message);
             });
             return false;
         }
@@ -55,8 +54,7 @@ class Register extends React.Component {
             email: this.state.email,
             password: this.state.password,
         }).then(response => {
-            alert("Usuário cadastrado!");
-            //showSuccessMessage("Usuário Cadastrado com Sucesso!");
+            showSuccessMessage("Usuário Cadastrado com Sucesso!");
         }).catch(error => {
             console.log(error.response)
         });
@@ -69,7 +67,7 @@ class Register extends React.Component {
             if (user) {
                 this.props.history.push('/home');
             } else {
-                alert("Credenciais inválidas");
+                showErrorMessage('Credenciais inválidas!');   
             }
         }).catch(error => {
             console.log(error);

@@ -7,6 +7,8 @@ import LeftMenu from "../../components/Menu/LeftMenu";
 import SchedulingCard from "../../components/Solicitations/SchedulingCard";
 import PopupSpace from '../../components/FormGroup/PopupSpace';
 
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+
 import SchedulingService from "../../services/SchedulingService";
 import StorageService from "../../services/StorageService";
 
@@ -82,10 +84,10 @@ class ListSolicitedSchedule extends React.Component {
             }
         ).then(() => {
             this.storageService.setItem(FORCEGETSOLICITATIONS, true);
-            alert('Resposta enviada! A página será atualizada.');
+            showSuccessMessage("Resposta enviada! A página será atualizada.");
             window.location.reload();
         }).catch(error => {
-            alert('Ocorreu um erro na solicitação de resposta!');
+            showErrorMessage("Ocorreu um erro na solicitação de resposta!");
             console.log(error);
             this.closePopup();
         });
