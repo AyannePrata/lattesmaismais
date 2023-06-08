@@ -1,8 +1,9 @@
 import React from 'react';
 import './VersionListing.css';
-import VersionsService from '../../services/VersionsService';
-import FormGroup from "../../components/FormGroup/FormGroup";
 import { withRouter } from 'react-router';
+
+import VersionsService from '../../services/VersionsService';
+import AuthenticationApiService from '../../services/AuthenticationApiService';
 
 import CurriculumCard from '../../components/Curriculum/CurriculumCard';
 import LeftMenu from '../../components/Menu/LeftMenu';
@@ -14,6 +15,7 @@ class VersionListing extends React.Component {
     constructor() {
         super();
         this.service = new VersionsService();
+        this.authService = new AuthenticationApiService();
     }
 
     state = {
@@ -32,7 +34,7 @@ class VersionListing extends React.Component {
     }
 
     find = () => {
-        this.service.findAllByUserId(100)
+        this.service.findAllByUserId(this.authService.getLoggedUser().id)
             .then(response => {
                 this.setState({ curriculumList: response.data });
             }).catch(error => {
