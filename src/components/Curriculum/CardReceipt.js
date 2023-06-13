@@ -9,14 +9,27 @@ import iconRecyclebin from '../../assets/images/recyclebinEmpty.svg';
 
 import ReadFileService from '../../services/ReadFileService';
 import AuthenticationApiService from '../../services/AuthenticationApiService'
+import StorageService from "../../services/StorageService";
 
 const readFileService = new ReadFileService();
 const authService = new AuthenticationApiService();
+const storage = new StorageService();
 
 const BASE_HTTP_SERVER = "http://26.95.71.93:8082";
 
-const createLinkToRead = async (id, extension, name) => {
-    const filePathInHttpServer = await readFileService.read(id + extension, authService.getLoggedUser().id)
+const createLinkToRead = async (id, extension, mescled = undefined) => {
+
+    let getBy = id + extension;
+
+    if(mescled) {
+        getBy = mescled;
+    }
+
+    if(storage.getItem(`rec${id}`)) {
+        return storage.getItem(`rec${id}`);
+
+    } else {
+        const filePathInHttpServer = await readFileService.read(getBy, authService.getLoggedUser().id)
         .then(response => {
             const url = response.data;
             // using regex para substituir "\" por "/", com flag "g" (global) de regex para aplicar a todas os matchs
@@ -25,8 +38,11 @@ const createLinkToRead = async (id, extension, name) => {
             alert('Falha ao carregar dados de arquivo solicitado');
             console.log(error);
         });
+        
+        storage.setItem(`rec${id}`, BASE_HTTP_SERVER + filePathInHttpServer);
+        return BASE_HTTP_SERVER + filePathInHttpServer;
+    }
 
-    return BASE_HTTP_SERVER + filePathInHttpServer;
 }
 
 //TODO realizar import de ícones usados ao invés de trazê-los via props
@@ -59,7 +75,14 @@ function CardReceipt(props) {
 
                 if (rec.url == null) {
 
-                    const readLink = await createLinkToRead(rec.id, rec.extension, rec.name);
+                    let readLink;
+                    if(!`${rec.id}`.includes("new")) {
+                        if(rec.heritage) {
+                            readLink = await createLinkToRead("","", rec.heritage);
+                        } else {
+                            readLink = await createLinkToRead(rec.id, rec.extension);
+                        }
+                    }
 
                     return (
                         <div key={`recUni${rec.id}`} className="Receipt-unique">
@@ -93,7 +116,7 @@ function CardReceipt(props) {
         createCard();
 
         // atualiza sempre que alterações forem feitas na lista de receipts passadas como propriedade
-    }, [props.receipts]);
+    }, [props.receipts, props.update]);
 
 
     return (

@@ -13,4 +13,8 @@ export default class StorageService {
         localStorage.removeItem(key);
     }
 
+    removeAllItems(){
+        localStorage.clear();
+    }
+
 }

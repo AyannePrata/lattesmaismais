@@ -57,6 +57,8 @@ class UpdateVersions extends React.Component {
         commentaryToNewVersion: "",
 
         haveAllOriginalReceipts: true,
+
+        updateCards: 0,
     }
 
     constructor() {
@@ -147,22 +149,20 @@ class UpdateVersions extends React.Component {
             this.setState({ haveAllOriginalReceipts: false });
             this.buttUpdate.disabled = false;
         }
-
-        var array = this.state.receiptList;
-        array = array.filter(rec => rec.id != id);
-        await this.deleteOfEntry(array);
-        // atualiza a lista em tela
-        await this.setReceiptList(this.state.receiptList);
+        
+        await this.deleteOfEntry(id);
         this.verifyReceipts();
     }
 
-    deleteOfEntry = async (array) => {
-        const numbReceipts = this.state.receiptList.length;
-        this.state.receiptList.splice(0, numbReceipts);
+    deleteOfEntry = async (id) => {
+        var array = this.state.receiptList.splice(0, this.state.receiptList.length);
+        array = array.filter(rec => rec.id != id);
 
         for (const rec of array) {
             this.state.receiptList.push(rec);
         }
+
+        this.setState({updateCards: this.state.updateCards + 1});
     }
 
     removeFromNewReceips = async (id) => {
@@ -241,6 +241,7 @@ class UpdateVersions extends React.Component {
 
             this.state.currentReceiptFile.id = (receipt.id);
             this.state.newReceiptsFiles.push(this.state.currentReceiptFile);
+
         } else {
             receipt = {
                 id: `new${this.countNewReceiptAdd()}`,
@@ -249,8 +250,8 @@ class UpdateVersions extends React.Component {
                 url: this.state.currentLink
             };
         }
-
         this.state.receiptList.push(receipt);
+        this.setState({updateCards: this.state.updateCards + 1})
     }
 
     addReceiptAndUpdateListCard = async () => {
@@ -272,7 +273,6 @@ class UpdateVersions extends React.Component {
             entryList: this.state.entryList,
             version: this.state.version,
         }).then(response => {
-            //TODO criar alertas
             showSuccessMessage('Alterações salvas com sucesso! Atualizando página!');
             this.setState({ countNewReceipts: 0, haveAllOriginalReceipts: true });
             window.location.reload();
@@ -520,7 +520,7 @@ class UpdateVersions extends React.Component {
                 </div>
 
                 <div className='Entry-Receipts'>
-                    <CardReceipt receipts={this.state.receiptList} deleteMethod={this.deleteReceipOfList} iconWaiting={img9} iconChecked={img10} iconInvalid={img11} iconReciclebin={img14} />
+                    <CardReceipt update={this.state.updateCards} receipts={this.state.receiptList} deleteMethod={this.deleteReceipOfList} iconWaiting={img9} iconChecked={img10} iconInvalid={img11} iconReciclebin={img14} />
                 </div>
 
                 <div className='Bottom-icons'>
