@@ -30,14 +30,14 @@ function buttonsOrText(receipt, methAccept, methDecline, methUndo) {
         if(receipt.status.includes("newDecision")) {
             element = (
                 <div className="Button-undo-action">
-                    <Button color="warning" size="lg" onClick={() => methUndo(receipt)}> Desfazer </Button>
+                    <Button color="warning" size="lg" onClick={() => methUndo(receipt)}> DESFAZER </Button>
                 </div>
             )
 
         } else {
             element = (
                 <div className="Buttons-validator-actions">
-                    <Button color="primary" size="lg" onClick={() => methAccept(receipt)}>Validar</Button>
+                    <Button color="primary" size="lg" onClick={() => methAccept(receipt)}>VALIDAR</Button>
                     <Button className="Btt-space-before" color="danger" size="lg" onClick={() => methDecline(receipt)}>Invalidar</Button>
                 </div>
             );

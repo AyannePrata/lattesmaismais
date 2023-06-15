@@ -6,6 +6,7 @@ import { Button } from "reactstrap";
 import { SOLICITATIONLIST } from "../Menu/LeftMenu";
 import StorageService from "../../services/StorageService";
 import UserApiService from '../../services/UserApiService';
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 
 const storage = new StorageService();
 const userService = new UserApiService();
@@ -23,8 +24,8 @@ function buttonsOrText(methAccept, methDecline, solicitation, editOption, methEd
     if (solicitation.status == "OPEN") {
         element = (
             <div className="Buttons">
-                <Button onClick={() => methAccept(solicitation)} color="primary" size="lg" > Confirmar </Button>
-                <Button onClick={() => methDecline(solicitation)} color="danger" size="lg" id="buttRefuse" > Recusar </Button>
+                <Button onClick={() => methAccept(solicitation)} color="primary" size="lg" > CONFIRMAR </Button>
+                <Button onClick={() => methDecline(solicitation)} color="danger" size="lg" id="buttRefuse" > RECUSAR </Button>
             </div>
         );
 
@@ -41,7 +42,7 @@ function buttonsOrText(methAccept, methDecline, solicitation, editOption, methEd
         if(editOption) {
             element = (
                 <div className="Edit">
-                    <Button onClick={() => methEdit(solicitation)} color="success" size="lg" > Avaliar </Button>
+                    <Button onClick={() => methEdit(solicitation)} color="success" size="lg" > AVALIAR </Button>
                 </div>
             );
         } else {
@@ -79,7 +80,7 @@ function SchedulingCard(props) {
                 .then(response => {
                     return response.data;
                 }).catch(error => {
-                    alert("Erro ao tentar encontrar usuário solicitante!");
+                    showErrorMessage("Erro ao tentar encontrar usuário solicitante!");
                     console.log(error);
                 });
 

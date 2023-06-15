@@ -105,8 +105,8 @@ class ListSolicitedSchedule extends React.Component {
                     <h3 className="Basic-margin">Comentário:</h3>
                     <input type='text' autoFocus={this.state.msgRequired} className='Basic-margin Input-commentary-listSol' placeholder={this.state.ph} onChange={(e) => this.setState({ comment: e.target.value.trim() })} />
                     <div className="Basic-margin Buttons Buttons-popup">
-                        <Button color="primary" disabled={this.state.comment == "" && this.state.msgRequired} size="lg" onClick={() => this.confirmScheduling()}> Agendar </Button>
-                        <Button color="danger" size="lg" onClick={() => this.cancelScheduling()}> Cancelar </Button>
+                        <Button color="primary" disabled={this.state.comment == "" && this.state.msgRequired} size="lg" onClick={() => this.confirmScheduling()}> AGENDAR </Button>
+                        <Button color="danger" size="lg" onClick={() => this.cancelScheduling()}> CANCELAR </Button>
                     </div>
                 </PopupSpace>
             </div>

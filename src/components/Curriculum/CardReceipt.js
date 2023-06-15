@@ -11,6 +11,7 @@ import ReadFileService from '../../services/ReadFileService';
 import AuthenticationApiService from '../../services/AuthenticationApiService'
 import StorageService from "../../services/StorageService";
 import { getAxcessPath } from "../../services/ServerService";
+import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
 
 
 const readFileService = new ReadFileService();
@@ -33,7 +34,7 @@ const createLinkToRead = async (id, extension, mescled = undefined) => {
         .then(response => {
             return getAxcessPath(response.data);
         }).catch(error => {
-            alert('Falha ao carregar dados de arquivo solicitado');
+            showErrorMessage("Falha ao carregar dados de arquivo solicitado");
             console.log(error);
         });
         

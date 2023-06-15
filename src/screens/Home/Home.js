@@ -83,7 +83,7 @@ class Home extends React.Component {
                 <LeftMenu/>
                 <div className='Text-Home'>
                     <p>PARA COMEÇAR VOCÊ PODE:</p>
-                    <p>- Importe um novo currículo XML criado na plataforma Lattes, através do botão "IMPORTAR"</p>
+                    <p>- Importar um novo currículo XML, criado na plataforma Lattes, através do botão "IMPORTAR"</p>
                 </div>
                 <FileUpload accept=".xml" toSendAttribute={this.VerifyIdentity} />
 
@@ -95,8 +95,8 @@ class Home extends React.Component {
                     <br/>
                     <h2 className='Center'>Confirma?</h2>
                     <div className='Buttons-home-confimation'>
-                        <Button color='primary' size='lg' onClick={() => this.sendFile()}>Sim, sou eu!</Button>
-                        <Button color='danger' size='lg' onClick={() => this.cancelImportCurriculum()}>Não, cancelar!</Button>
+                        <Button color='primary' size='lg' onClick={() => this.sendFile()}>SIM, SOU EU!</Button>
+                        <Button color='danger' size='lg' onClick={() => this.cancelImportCurriculum()}>NÃO, CANCELAR!</Button>
                     </div>
                 </PopupSpace>
             </div>

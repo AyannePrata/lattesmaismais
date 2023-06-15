@@ -115,7 +115,7 @@ class ExportPdf extends React.Component {
                         <div className="Button-div">
                             <Button color="primary" size="lg" disabled={this.state.selectedCurriculum === null}
                                 onClick={(() => this.generatePdf())}> 
-                                Gerar PDF 
+                                GERAR PDF 
                             </Button>
                             <a hidden={true} ref={elem => this.linkDowload = elem} href={this.state.linkPdf} download="CurriculoLMM-comp" target="_blank"/>
                         </div>

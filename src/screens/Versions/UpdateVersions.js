@@ -439,11 +439,11 @@ class UpdateVersions extends React.Component {
                 <div className='Validation-update-curriculum'>
                     <Button id='butonAuthValidator' color="primary" size="lg" className="Validator-authentication" innerRef={element => this.buttAuthValidator = element}
                         onClick={() => this.setState({ renderPopupImportReceipt: true })} >
-                        (+) Auten. Validador
+                        (+) AUTEN. VALIDADOR
                     </Button>
                     <Button id='buttonAuthEletronic' color="primary" size="lg" className="Electronic-authentication" innerRef={element => this.buttAuthEletronic = element}
                         onClick={() => this.setState({ renderPopupInformUrl: true })} >
-                        (+) Auten. Eletrônica
+                        (+) AUTEN. ELETRÔNICA
                     </Button>
                 </div>
 

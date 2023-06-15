@@ -99,7 +99,7 @@ class Register extends React.Component {
 
                 <div className='button'>
                     <Button className="RegisterUser" onClick={this.submit}>
-                        Cadastrar
+                        CADASTRAR
                     </Button>
                 </div>
 
