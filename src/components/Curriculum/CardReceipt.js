@@ -10,12 +10,12 @@ import iconRecyclebin from '../../assets/images/recyclebinEmpty.svg';
 import ReadFileService from '../../services/ReadFileService';
 import AuthenticationApiService from '../../services/AuthenticationApiService'
 import StorageService from "../../services/StorageService";
+import { getAxcessPath } from "../../services/ServerService";
+
 
 const readFileService = new ReadFileService();
 const authService = new AuthenticationApiService();
 const storage = new StorageService();
-
-const BASE_HTTP_SERVER = "http://26.95.71.93:8082";
 
 const createLinkToRead = async (id, extension, mescled = undefined) => {
 
@@ -31,16 +31,14 @@ const createLinkToRead = async (id, extension, mescled = undefined) => {
     } else {
         const filePathInHttpServer = await readFileService.read(getBy, authService.getLoggedUser().id)
         .then(response => {
-            const url = response.data;
-            // using regex para substituir "\" por "/", com flag "g" (global) de regex para aplicar a todas os matchs
-            return url.replace(/\\/g, "/")
+            return getAxcessPath(response.data);
         }).catch(error => {
             alert('Falha ao carregar dados de arquivo solicitado');
             console.log(error);
         });
         
-        storage.setItem(`rec${id}`, BASE_HTTP_SERVER + filePathInHttpServer);
-        return BASE_HTTP_SERVER + filePathInHttpServer;
+        storage.setItem(`rec${id}`, filePathInHttpServer);
+        return filePathInHttpServer;
     }
 
 }

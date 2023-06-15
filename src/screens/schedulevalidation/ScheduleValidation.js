@@ -117,7 +117,7 @@ class ScheduleValidation extends React.Component {
                         <br/>
                         <div className='TablesDiv'>
                             <div className='overFlow-y'>
-                                <CurriculumTableRS curriculumns={this.state.curriculumList} versionSelected={this.inputVersionSelected} className="CurrTable" id="curricTable01" />
+                                <CurriculumTableRS curriculums={this.state.curriculumList} versionSelected={this.inputVersionSelected} className="CurrTable" id="curricTable01" />
                             </div>
                             <div className='overFlow-y'>
                                 <ValidatorTableRS validators={this.state.validatorList} validatorSelected={this.inputValidatorSelected} className="ValidatorTable" id="validtb01" />

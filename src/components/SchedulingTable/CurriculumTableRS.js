@@ -3,7 +3,7 @@ import { Table } from "reactstrap";
 
 function CurriculumTableRS(props) {
 
-    const rows = props.curriculumns.map(curriculum => {
+    const rows = props.curriculums.map(curriculum => {
         
         const modificationDate = curriculum.lastModification.substring(0, 10);
 

@@ -62,6 +62,10 @@ class LeftMenu extends React.Component {
         
         } else if(url === "http://localhost:3000/reviewcurriculum" || url.toLowerCase().includes("/receiptanalysis")) {
             this.reviewButton.classList.add('Underline');
+
+        } else if(url === "http://localhost:3000/exportpdf") {
+            this.exportButton.classList.add('Underline');
+
         }
         
         this.verifyRoles();
@@ -143,7 +147,7 @@ class LeftMenu extends React.Component {
     }
 
     exportPage = () => {
-
+        this.props.history.push("/exportpdf");
     }
 
     solicitedSchedule = () => {

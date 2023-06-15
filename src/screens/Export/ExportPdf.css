@@ -1,0 +1,30 @@
+.Border-1 {
+ margin-right: 2vw;   
+}
+
+.Table-div-export {
+    display: flex;
+}
+
+.Table-div-export .table {
+    width: 50vw;
+    height: 8vh;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: larger;
+    border: solid 1px grey;
+}
+
+.Table-div-export .btn-lg {
+    height: 6vh;
+}
+
+.Table-div-export .btn.disabled {
+    background-color: #acacac;
+    border-color: #eeeeee;
+}
+
+.Table-div-export .Button-div {
+   display: grid;
+   margin-left: 3vw;
+}

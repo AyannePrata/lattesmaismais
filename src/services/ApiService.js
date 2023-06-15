@@ -40,12 +40,12 @@ export default class ApiService {
             },
         })
     }
-
+    
     put(url, params) {
         url = this.builderUrl(url);
         return httpClient.put(url, params);
     }
-
+    
     get(url) {
         url = this.builderUrl(url);
         return httpClient.get(url);

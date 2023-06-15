@@ -11,6 +11,7 @@ import VersionListing from "../screens/Versions/VersionListing";
 import ListSolicitedSchedule from "../screens/Schedule/ListSolicitedSchedule";
 import ReviewCurriculum from "../screens/ReviewCurriculum/ReviewCurriculum";
 import ReceiptAnalysis from "../screens/ReviewCurriculum/ReceiptAnalysis";
+import ExportPdf from "../screens/Export/ExportPdf";
 
 function RestrictedRoute( {component: Component, show, ...props} ) {
     return(
@@ -43,6 +44,7 @@ function AppRoutes(props) {
             <RestrictedRoute show={props.isAuthenticated} component = { ListSolicitedSchedule } path="/solicitedschedule" />
             <RestrictedRoute show={props.isAuthenticated} component = { ReviewCurriculum } path="/reviewcurriculum" />
             <RestrictedRoute show={props.isAuthenticated} component = { ReceiptAnalysis } path="/receiptanalysis/:id/:version/:solicitationId" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ExportPdf } path="/exportpdf" />
            </Switch> 
         </BrowserRouter>
 
