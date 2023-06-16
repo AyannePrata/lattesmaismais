@@ -73,7 +73,7 @@ class Login extends React.Component {
                 <div className='button'>
 
                     <Button className="Login" onClick={this.login}>
-                        Login
+                        LOGIN
                     </Button>
 
                 </div>

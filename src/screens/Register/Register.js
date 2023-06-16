@@ -24,13 +24,13 @@ class Register extends React.Component {
         const errors = [];
 
         if (!this.state.name) {
-            errors.push('Pro favor, informe o seu nome!')
+            errors.push('Por favor, informe o seu nome!')
         }
         if (!this.state.email) {
             errors.push('Por favor, informe o seu e-mail!')
         }
         else if (!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)) {
-            errors.push('Email inválido!')
+            errors.push('E-mail inválido!')
         }
         if (!this.state.password) {
             errors.push('Por favor, informe a sua senha!')
