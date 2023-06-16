@@ -1,9 +1,33 @@
 import React from "react";
 import { Table } from "reactstrap";
+import { showErrorMessage } from "../Toastr/Toastr";
+
+function getStatus(status) {
+    switch (status) {
+        case "OPEN":
+            return "aberta";
+        
+        case "ACCEPTED":
+            return "aceita";
+
+        case "DECLINED":
+            return "recusada";
+            
+        case "DONE":
+            return "finalizada";
+    
+        default:
+            showErrorMessage("Encontrada solicitação com status não referenciado");
+            break;
+    }
+}
 
 function SchedTableRS(props) {
 
+    let hiddenButton;
+
     const rows = props.schedulings.map(scheduling => {
+
         return (
             <tr key={scheduling.id}>
                 <td>{scheduling.id}</td>
@@ -13,9 +37,9 @@ function SchedTableRS(props) {
                 <td>{scheduling.time}</td>
                 <td>{scheduling.validatorId}</td>
                 <td>{scheduling.address}</td> 
-                <td>{scheduling.status}</td>
+                <td>{getStatus(scheduling.status)}</td>
                 <td>
-                    <button type="button" title="Cancel" className="btn btn-danger"
+                    <button type="button" title="Cancel" className="btn btn-danger" hidden={scheduling.status === "DONE"}
                         onClick={e => props.delete(scheduling.id)}>
                             Cancelar
                     </button>
@@ -28,7 +52,7 @@ function SchedTableRS(props) {
         <Table striped bordered id={props.id}>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Versão</th>
                     <th>ID do Requisitante</th>
                     <th>Data</th>
@@ -41,12 +65,6 @@ function SchedTableRS(props) {
             </thead>
             <tbody>
                 {rows}
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
             </tbody>
         </Table>
     );
