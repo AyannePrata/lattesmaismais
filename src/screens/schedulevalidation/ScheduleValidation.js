@@ -33,7 +33,7 @@ class ScheduleValidation extends React.Component {
         this.schedulingService = new SchedulingService();
         this.curriculumService = new VersionsService();
         this.userService = new UserApiService();
-        this.authentication = new AuthenticationApiService();
+        this.authService = new AuthenticationApiService();
     }
     
     componentDidMount() {
@@ -41,7 +41,7 @@ class ScheduleValidation extends React.Component {
         this.buttonSolSched.disabled = true;
         this.buttonSolSched.classList.add("Change-box-shadow");
 
-        this.curriculumService.findAllByUserId(this.authentication.getLoggedUser().id)
+        this.curriculumService.findAllByUserId(this.authService.getLoggedUser().id)
         .then(response => {
             this.setState({curriculumList: response.data});
         }).catch(error => {
@@ -50,7 +50,7 @@ class ScheduleValidation extends React.Component {
 
         this.userService.findAllByRole("role_validator")
         .then(response => {
-            this.setState({validatorList: response.data});
+            this.setState({validatorList: response.data.filter(validator => validator.id != this.authService.getLoggedUser().id)});
         }).catch(error => {
             console.log(error);
         })
@@ -81,7 +81,7 @@ class ScheduleValidation extends React.Component {
                 address: "Rua Ainda Falta Colocar Atributo em User Validador",
                 version: this.state.curriculumSelected.version,
                 validatorId: this.state.validatorSelected.id,
-                requesterId: this.authentication.getLoggedUser().id,
+                requesterId: this.authService.getLoggedUser().id,
             }
         ).then(response => {
             showSuccessMessage("Agendamento solicitado!");
