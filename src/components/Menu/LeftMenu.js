@@ -15,6 +15,7 @@ import iconReviewCurr from '../../assets/images/curriculum-review.svg';
 import AuthenticationApiService from "../../services/AuthenticationApiService";
 import SchedulingService from "../../services/SchedulingService";
 import StorageService from "../../services/StorageService";
+import { showErrorMessage } from "../Toastr/Toastr";
 
 export const ROLE = "user_role";
 export const TIMESTAMP = "timestamp";
@@ -86,7 +87,7 @@ class LeftMenu extends React.Component {
                     this.storageService.setItem(TIMESTAMP, new Date());
                     this.storageService.setItem(SOLICITATIONLIST, response.data);
                 }).catch(error => {
-                    alert("Ocorreu um erro ao tentar carregar lista de solicitações de validação!");
+                    showErrorMessage("Ocorreu um erro ao tentar carregar lista de solicitações de validação!");
                     console.log(error);
                 });
 

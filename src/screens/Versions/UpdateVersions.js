@@ -23,7 +23,7 @@ import CardReceipt from '../../components/Curriculum/CardReceipt';
 import PopupSpace from '../../components/FormGroup/PopupSpace';
 import LoadingComp from '../../components/Extra/LoadingComp';
 
-import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+import { showErrorMessage, showSuccessMessage, showWarningMessage } from "../../components/Toastr/Toastr";
 
 class UpdateVersions extends React.Component {
 
@@ -188,7 +188,7 @@ class UpdateVersions extends React.Component {
         } else {
             this.buttAuthValidator.disabled = false;
             this.buttAuthEletronic.disabled = false;
-            showErrorMessage("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
+            showWarningMessage("A entrada ainda não possui comprovantes! Os envie clicando em uma das opções abaixo!");
         }
     }
 

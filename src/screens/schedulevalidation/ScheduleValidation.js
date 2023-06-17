@@ -123,13 +123,13 @@ class ScheduleValidation extends React.Component {
                                 <ValidatorTableRS validators={this.state.validatorList} validatorSelected={this.inputValidatorSelected} className="ValidatorTable" id="validtb01" />
                             </div>
                             <div className='DateAndHour'>
-                                <label htmlFor='date01'>Selecione a data:
+                                <label htmlFor='date01'>Selecione a data
                                 <br/> 
                                 <input type='date' id='date01' onChange={(e) => this.inputDateSelected(e.target.value)} /> 
                                 </label>
                                 <br/>
                                 <br/>
-                                <label htmlFor='hour01'>Selecione o horário:
+                                <label htmlFor='hour01'>Selecione o horário
                                 <br/>
                                 <input type='time' id='hour01' onChange={(e) => this.inputTimeSelected(e.target.value)} />
                                 </label>
