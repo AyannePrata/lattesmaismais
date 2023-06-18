@@ -301,7 +301,7 @@ class ReceiptAnalysis extends React.Component {
                             <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} ></EntriesMap>
                         </div>
                         <div className="Read-receipts">
-                            <CardValidateReceipt receiptList={this.state.receiptList} acceptReceipt={this.validate} declineReceipt={this.invalidate} undoDecision={this.undoDecision} />
+                            <CardValidateReceipt requesterId={this.props.match.params.id} receiptList={this.state.receiptList} acceptReceipt={this.validate} declineReceipt={this.invalidate} undoDecision={this.undoDecision} />
                         </div>
                     </div>
                     <PopupSpace render={this.state.renderPopup} className="RecAnaly-popup">

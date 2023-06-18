@@ -7,42 +7,11 @@ import iconChecked from '../../assets/images/Proven.svg';
 import iconInvalid from '../../assets/images/Invalidated.svg';
 import iconRecyclebin from '../../assets/images/recyclebinEmpty.svg';
 
-import ReadFileService from '../../services/ReadFileService';
-import AuthenticationApiService from '../../services/AuthenticationApiService'
-import StorageService from "../../services/StorageService";
-import { getAxcessPath } from "../../services/ServerService";
+import { createLinkToRead } from "../../services/ServerService";
 import { showErrorMessage, showSuccessMessage } from "../../components/Toastr/Toastr";
+import AuthenticationApiService from "../../services/AuthenticationApiService";
 
-
-const readFileService = new ReadFileService();
 const authService = new AuthenticationApiService();
-const storage = new StorageService();
-
-const createLinkToRead = async (id, extension, mescled = undefined) => {
-
-    let getBy = id + extension;
-
-    if(mescled) {
-        getBy = mescled;
-    }
-
-    if(storage.getItem(`rec${id}`)) {
-        return storage.getItem(`rec${id}`);
-
-    } else {
-        const filePathInHttpServer = await readFileService.read(getBy, authService.getLoggedUser().id)
-        .then(response => {
-            return getAxcessPath(response.data);
-        }).catch(error => {
-            showErrorMessage("Falha ao carregar dados de arquivo solicitado");
-            console.log(error);
-        });
-        
-        storage.setItem(`rec${id}`, filePathInHttpServer);
-        return filePathInHttpServer;
-    }
-
-}
 
 //TODO realizar import de ícones usados ao invés de trazê-los via props
 function CardReceipt(props) {
@@ -77,9 +46,9 @@ function CardReceipt(props) {
                     let readLink;
                     if(!`${rec.id}`.includes("new")) {
                         if(rec.heritage) {
-                            readLink = await createLinkToRead("","", rec.heritage);
+                            readLink = await createLinkToRead(authService.getLoggedUser().id, "","", rec.heritage);
                         } else {
-                            readLink = await createLinkToRead(rec.id, rec.extension);
+                            readLink = await createLinkToRead(authService.getLoggedUser().id, rec.id, rec.extension);
                         }
                     }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './CardValidateReceipt.css';
 
 import { Button } from "reactstrap";
+import { createLinkToRead } from "../../services/ServerService";
 
 import iconValidated from '../../assets/images/Proven.svg';
 import iconInvalidated from '../../assets/images/Invalidated.svg';
@@ -53,21 +54,39 @@ function buttonsOrText(receipt, methAccept, methDecline, methUndo) {
 
 function CardValidateReceipt(props) {
 
-    const receipts = props.receiptList.map(receipt => {
+    const [recList, setRec] = useState([]);
 
-        return (
-            <div key={receipt.id} className="Receipt-card">
-                <img className="Icons Icon-Entry" src={setIcon(receipt.status)}/>
-                <a href="colocarLink" target="_blank">Lik de verificação</a>
-                <b>{receipt.commentary != null ? `"${receipt.commentary}"` : "---"}</b>
-                {buttonsOrText(receipt, props.acceptReceipt, props.declineReceipt, props.undoDecision)}
-            </div>
-        )
-    });
+    useEffect(() => {
+
+        const createCard = async () => {
+            const receipts = await Promise.all(props.receiptList.map( async receipt => {
+                let readLink;
+                if(!`${receipt.id}`.includes("new")) {
+                    if(receipt.heritage) {
+                        readLink = await createLinkToRead(props.requesterId, "","", receipt.heritage);
+                    } else {
+                        readLink = await createLinkToRead(props.requesterId, receipt.id, receipt.extension);
+                    }
+                }
+
+                return (
+                    <div key={receipt.id} className="Receipt-card">
+                        <img className="Icons Icon-Entry" src={setIcon(receipt.status)}/>
+                        <a href={readLink} target="_blank">Lik de verificação</a>
+                        <b>{receipt.commentary != null ? `"${receipt.commentary}"` : "---"}</b>
+                        {buttonsOrText(receipt, props.acceptReceipt, props.declineReceipt, props.undoDecision)}
+                    </div>
+                )
+            }));
+            setRec(receipts);
+        };
+        createCard();
+    }, [props.receiptList, props.update]);
+
 
     return (
         <div className="Receipts-to-analyse">
-            {receipts}
+            {recList}
         </div>
     )
 }
