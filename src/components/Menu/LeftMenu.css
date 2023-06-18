@@ -148,10 +148,16 @@
     font-weight: 700;
 }
 
-#icoHaveSol {
+.QtdSolicitation {
     position: relative;
     left: 5vw;
-    margin-top: -19vh;
+    margin-top: -9.5vh;
+}
+
+#numberQtdSolicitation {
+    position: relative;
+    left: -0.9vw;
+    color: red;
 }
 
 #buttonSSV {

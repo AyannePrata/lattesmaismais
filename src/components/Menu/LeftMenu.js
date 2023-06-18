@@ -23,15 +23,16 @@ export const SOLICITATIONLIST = "solicitationlist";
 export const FORCEGETSOLICITATIONS = "forcegetsolicitations";
 /** 
  * constante usada para carregar solicitações de agendamento no tempo determinado
- * 300000 ms = 5min
+ * 60000 ms = 1min
 */ 
-const msToVerifySolicitations = 300000;
+const msToVerifySolicitations = 60000;
 
 class LeftMenu extends React.Component {
 
     state = {
        isValidator: false,
        haveSolicitationsToResolve: false,
+       qtdSolicitation: 0,
        solicitationList: [],
     }
 
@@ -121,8 +122,10 @@ class LeftMenu extends React.Component {
     verifySolicitations = () => {
         for(const solicitation of this.state.solicitationList) {
             if(solicitation.status === "OPEN") {
-                this.setState({haveSolicitationsToResolve: true});
-                return;
+                if(!this.state.haveSolicitationsToResolve) {
+                    this.setState({haveSolicitationsToResolve: true});
+                }
+                this.setState({qtdSolicitation: this.state.qtdSolicitation + 1});
             }
         }
     }
@@ -207,7 +210,10 @@ class LeftMenu extends React.Component {
                                 <img id="ico-menu-07" className="Button-icon" border="0" src={iconSolSched} width="45" height="45" />
                                 Solicitações de Agendamento
                             </button>
-                            <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" hidden={!this.state.haveSolicitationsToResolve} title="Você possui solicitações abertas!" />
+                            <div className="QtdSolicitation" hidden={!this.state.haveSolicitationsToResolve}>
+                                <img id="icoHaveSol" src={iconHaveSol} border="0" width="25" height="25" title="Você possui solicitações abertas!" />
+                                <b id="numberQtdSolicitation">{this.state.qtdSolicitation}</b>
+                            </div>
                         </div>
                         <div className="Size-01">
                             <button id="buttonCR" className="b6" onClick={() => this.curriculumReview()} ref={button => this.reviewButton = button}>
