@@ -29,7 +29,12 @@
 
 .TablesDiv .ValidatorTable {
     text-align: left;
-    width: 15vw;
+    width: 29vw;
+}
+
+.ValidatorTable input {
+    position: relative;
+    left: 5vw;
 }
 
 .TablesDiv .DateAndHour {
