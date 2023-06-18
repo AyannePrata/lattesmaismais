@@ -5,7 +5,6 @@
 .Input-commentary-listSol {
     background-color: ivory;
     border: none;
-    width: 29vw;
 }
 
 .ListSolicit .Buttons {
@@ -24,4 +23,9 @@
 .ListSolicit .btn.disabled, .btn:disabled {
     background-color: #acacac;
     border-color: #eeeeee;
+}
+
+#titlePopup01 {
+    text-align: left;
+    margin-left:1vw;
 }

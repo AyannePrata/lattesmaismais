@@ -59,7 +59,7 @@ class ListSolicitedSchedule extends React.Component {
 
     declineSolicitation = (solicitation) => {
         this.setState({
-            textPrincipalPopup: "informe o movito de não poder agendar",
+            textPrincipalPopup: "Informe o movito de não poder agendar",
             ph: "obrigatório",
             msgRequired: true,
             solicitationToUpdate: solicitation,
@@ -101,11 +101,11 @@ class ListSolicitedSchedule extends React.Component {
                     <SchedulingCard inAcceptSolicitation={this.acceptSolicitation} inDeclineSolicitation={this.declineSolicitation}/>
                 </div>
                 <PopupSpace render={this.state.renderPopup}>
-                    <h2 className='Center'>{this.state.textPrincipalPopup}</h2>
-                    <h3 className="Basic-margin">Comentário:</h3>
-                    <input type='text' autoFocus={this.state.msgRequired} className='Basic-margin Input-commentary-listSol' placeholder={this.state.ph} onChange={(e) => this.setState({ comment: e.target.value.trim() })} />
+                    <h2 id="titlePopup01" className='Center'>{this.state.textPrincipalPopup}</h2>
+                    <h3 className="Basic-margin">Comentário</h3>
+                    <textarea className="Basic-margin" maxLength={120} autoFocus={this.state.msgRequired} placeholder={this.state.ph} onChange={(e) => this.setState({ comment: e.target.value.trim() })}/>
                     <div className="Basic-margin Buttons Buttons-popup">
-                        <Button color="primary" disabled={this.state.comment == "" && this.state.msgRequired} size="lg" onClick={() => this.confirmScheduling()}> AGENDAR </Button>
+                        <Button color="primary" disabled={this.state.comment == "" && this.state.msgRequired} size="lg" onClick={() => this.confirmScheduling()}> CONFIRMAR </Button>
                         <Button color="danger" size="lg" onClick={() => this.cancelScheduling()}> CANCELAR </Button>
                     </div>
                 </PopupSpace>
