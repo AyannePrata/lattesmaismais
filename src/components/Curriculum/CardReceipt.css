@@ -10,10 +10,7 @@
     height: 8vh;
 }
 /*TODO se a palavra for muito grande não irá quebrar linha, e ficará bugado no front*/
-.Receipt-unique b {
-    width: 8vw;
-    text-align: center;
-}
+
 
 .Icon-Entry {
     border: 0;
