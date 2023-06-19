@@ -43,6 +43,8 @@ class ReceiptAnalysis extends React.Component {
         selectedReceipt: null,
         renderPopup: false,
         commentary: "",
+
+        updateReceipts: 0,
     }
 
     constructor() {
@@ -167,7 +169,7 @@ class ReceiptAnalysis extends React.Component {
     }
 
     refreshEntries = () => {
-        this.setState({ entryList: this.state.entryList });
+        this.setState({updateReceipts: this.state.updateReceipts + 1});
     }
 
     closePopup = () => {
@@ -301,7 +303,7 @@ class ReceiptAnalysis extends React.Component {
                             <EntriesMap entries={this.state.entryList} loadReceipts={this.showReceipts} ></EntriesMap>
                         </div>
                         <div className="Read-receipts">
-                            <CardValidateReceipt requesterId={this.props.match.params.id} receiptList={this.state.receiptList} acceptReceipt={this.validate} declineReceipt={this.invalidate} undoDecision={this.undoDecision} />
+                            <CardValidateReceipt update={this.state.updateReceipts} requesterId={this.props.match.params.id} receiptList={this.state.receiptList} acceptReceipt={this.validate} declineReceipt={this.invalidate} undoDecision={this.undoDecision} />
                         </div>
                     </div>
                     <PopupSpace render={this.state.renderPopup} className="RecAnaly-popup">
