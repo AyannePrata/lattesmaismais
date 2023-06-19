@@ -54,11 +54,19 @@ function CardReceipt(props) {
 
                     return (
                         <div key={`recUni${rec.id}`} className="Receipt-unique">
-                            <img className="Icons Icon-Entry" border="0" src={icon} />
-                            {/* "rel" é usado como uma medida de segurança para evitar ataques de phishing. */}
-                            <a href={readLink} target="_blank" rel="noopener noreferrer"> {rec.name} </a>
-                            <b id={`extRec${rec.id}`}> {rec.extension} </b>
-                            <b id={`commRec${rec.id}`}> {(rec.commentary === "") ? "---" : `"${rec.commentary}"`} </b>
+                            <div className="UR-icon Subdivs-in-receipts">
+                                <img className="Icons Icon-Entry" border="0" src={icon} />
+                            </div>
+                            <div className="UR-link Subdivs-in-receipts">
+                                {/* "rel" é usado como uma medida de segurança para evitar ataques de phishing. */}
+                                <a href={readLink} target="_blank" rel="noopener noreferrer"> {rec.name} </a>
+                            </div>
+                            <div className="UR-extension Subdivs-in-receipts">
+                                <b id={`extRec${rec.id}`}> {rec.extension} </b>
+                            </div>
+                            <div className="UR-comment Subdivs-in-receipts">
+                                <b id={`commRec${rec.id}`}> {(rec.commentary === "") ? "---" : `"${rec.commentary}"`} </b>
+                            </div>
                             <Button id={`btRec${rec.id}`} onClick={() => { props.deleteMethod(rec.id, true) }} color="danger" size="sm" >
                                 <img className="Icons Icon-Entry" src={iconRecyclebin} />
                             </Button>

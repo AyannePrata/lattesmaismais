@@ -20,3 +20,23 @@
     width: 35px;
     height: 35px
 }
+
+.UR-icon {
+    width: 2vw;
+}
+
+.UR-link {
+    width: 8vw;
+}
+
+.UR-extension {
+    width: 2vw;
+}
+
+.UR-comment {
+    width: 12vw;
+}
+
+.Subdivs-in-receipts {
+    text-align: center;
+}
