@@ -61,12 +61,14 @@ function CardValidateReceipt(props) {
         const createCard = async () => {
             const receipts = await Promise.all(props.receiptList.map( async receipt => {
                 let readLink;
-                if(!`${receipt.id}`.includes("new")) {
+                if(!`${receipt.id}`.includes("new") && receipt.url == null) {
                     if(receipt.heritage) {
                         readLink = await createLinkToRead(props.requesterId, "","", receipt.heritage);
                     } else {
                         readLink = await createLinkToRead(props.requesterId, receipt.id, receipt.extension);
                     }
+                } else {
+                    readLink = receipt.url;
                 }
 
                 return (
